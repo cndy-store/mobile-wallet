@@ -7,7 +7,7 @@ import {
   View
 } from 'react-native';
 
-export default class BootupScreen extends React.Component {
+export default class InitialLoadingScreen extends React.Component {
   constructor() {
     super();
     this.loadKeypair();
@@ -21,10 +21,18 @@ export default class BootupScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <ActivityIndicator />
         <StatusBar barStyle="default" />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});

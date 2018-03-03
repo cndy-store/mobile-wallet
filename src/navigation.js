@@ -8,7 +8,7 @@ import {
 import Emoji from './components/Emoji';
 
 import AccountSetupScreen from './screens/AccountSetupScreen';
-import BootupScreen from './screens/BootupScreen';
+import InitialLoadingScreen from './screens/InitialLoadingScreen';
 import ExistingKeyScreen from './screens/ExistingKeyScreen';
 import GenerateKeyScreen from './screens/GenerateKeyScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
@@ -134,12 +134,12 @@ const KeySetupStack = StackNavigator(
 
 const RootStack = SwitchNavigator(
   {
-    Bootup: BootupScreen,
+    InitialLoading: InitialLoadingScreen,
     Main: MainStack,
     KeySetup: KeySetupStack
   },
   {
-    initialRouteName: 'Bootup'
+    initialRouteName: 'InitialLoading'
   }
 );
 

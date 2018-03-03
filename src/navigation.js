@@ -11,76 +11,14 @@ import AccountSetupScreen from './screens/AccountSetupScreen';
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
 import ExistingKeyScreen from './screens/ExistingKeyScreen';
 import GenerateKeyScreen from './screens/GenerateKeyScreen';
+import ReceiveScreen from './screens/ReceiveScreen';
+import SendScreen from './screens/SendScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 
-class SendScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-
-    return {
-      headerTitle: 'Send CNDY',
-      headerLeft: (
-        <Button
-          onPress={() => alert('This is a button!')}
-          title="Info"
-          color="#fff"
-        />
-      ),
-      title: 'Send'
-    };
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Send Screen</Text>
-        <Button
-          title="Go to Receive"
-          onPress={() => this.props.navigation.navigate('Receive')}
-        />
-      </View>
-    );
-  }
-}
-
-class ReceiveScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-
-    return {
-      headerTitle: 'Receive CNDY',
-      headerLeft: (
-        <Button
-          onPress={() => alert('This is a button!')}
-          title="Info"
-          color="#fff"
-        />
-      ),
-      title: 'Receive'
-    };
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Receive Screen</Text>
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
-}
-
-const MainStack = TabNavigator(
+const TabNav = TabNavigator(
   {
-    Send: {
-      screen: SendScreen
-    },
-    Receive: {
-      screen: ReceiveScreen
-    }
+    Send: { screen: SendScreen },
+    Receive: { screen: ReceiveScreen }
   },
   {
     initialRouteName: 'Send',
@@ -110,20 +48,21 @@ const MainStack = TabNavigator(
   }
 );
 
+const MainStack = StackNavigator({
+  MainTabs: {
+    screen: TabNav,
+    navigationOptions: {}
+  }
+});
+
+// TODO? wrap mainstack in drawer?
+
 const KeySetupStack = StackNavigator(
   {
-    Welcome: {
-      screen: WelcomeScreen
-    },
-    ExistingKey: {
-      screen: ExistingKeyScreen
-    },
-    GenerateKey: {
-      screen: GenerateKeyScreen
-    },
-    AccountSetup: {
-      screen: AccountSetupScreen
-    }
+    Welcome: { screen: WelcomeScreen },
+    ExistingKey: { screen: ExistingKeyScreen },
+    GenerateKey: { screen: GenerateKeyScreen },
+    AccountSetup: { screen: AccountSetupScreen }
   },
   {
     initialRouteName: 'Welcome',

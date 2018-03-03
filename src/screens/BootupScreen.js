@@ -1,14 +1,30 @@
 import React from 'react';
-import ViewWithNavigationLink from '../components/ViewWithNavigationLink';
+import {
+  ActivityIndicator,
+  AsyncStorage,
+  StatusBar,
+  StyleSheet,
+  View
+} from 'react-native';
 
 export default class BootupScreen extends React.Component {
+  constructor() {
+    super();
+    this.loadKeypair();
+  }
+
+  loadKeypair = async () => {
+    let keypair = await AsyncStorage.getItem('keypair');
+    keypair = true;
+    this.props.navigation.navigate(keypair ? 'Main' : 'KeySetup');
+  };
+
   render() {
     return (
-        <ViewWithNavigationLink
-          text="Booting Up and deciding what to do..."
-          links={['Welcome']}
-          >
-      </ViewWithNavigationLink>
+      <View>
+        <ActivityIndicator />
+        <StatusBar barStyle="default" />
+      </View>
     );
   }
 }

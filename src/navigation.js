@@ -1,6 +1,11 @@
 import React from 'react';
 import { Button, StyleSheet, View, Text } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import {
+  StackNavigator,
+  SwitchNavigator,
+  TabNavigator
+} from 'react-navigation';
+import Emoji from './components/Emoji';
 
 import AccountSetupScreen from './screens/AccountSetupScreen';
 import BootupScreen from './screens/BootupScreen';
@@ -13,7 +18,15 @@ class SendScreen extends React.Component {
     const { params } = navigation.state;
 
     return {
-      title: 'Send💸'
+      headerTitle: 'Send CNDY',
+      headerLeft: (
+        <Button
+          onPress={() => alert('This is a button!')}
+          title="Info"
+          color="#fff"
+        />
+      ),
+      title: 'Send'
     };
   };
 
@@ -35,7 +48,15 @@ class ReceiveScreen extends React.Component {
     const { params } = navigation.state;
 
     return {
-      title: 'Receive💰'
+      headerTitle: 'Receive CNDY',
+      headerLeft: (
+        <Button
+          onPress={() => alert('This is a button!')}
+          title="Info"
+          color="#fff"
+        />
+      ),
+      title: 'Receive'
     };
   };
 
@@ -63,16 +84,34 @@ const MainStack = TabNavigator(
   },
   {
     initialRouteName: 'Send',
-    /* The header config from HomeScreen is now here */
-    navigationOptions: {}
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let emojiName;
+        if (routeName === 'Send') {
+          emojiName = 'money_with_wings';
+        } else if (routeName === 'Receive') {
+          emojiName = 'moneybag';
+        }
+
+        return (
+          <Text style={{ fontSize: 30 }}>
+            <Emoji name={emojiName} />
+          </Text>
+        );
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray'
+    },
+    animationEnabled: true,
+    swipeEnabled: true
   }
 );
 
-const RootStack = StackNavigator(
+const KeySetupStack = StackNavigator(
   {
-    Bootup: {
-      screen: BootupScreen
-    },
     Welcome: {
       screen: WelcomeScreen
     },
@@ -84,15 +123,23 @@ const RootStack = StackNavigator(
     },
     AccountSetup: {
       screen: AccountSetupScreen
-    },
-    Main: {
-      screen: MainStack
     }
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: 'Welcome',
     mode: 'modal',
     headerMode: 'none'
+  }
+);
+
+const RootStack = SwitchNavigator(
+  {
+    Bootup: BootupScreen,
+    Main: MainStack,
+    KeySetup: KeySetupStack
+  },
+  {
+    initialRouteName: 'Bootup'
   }
 );
 

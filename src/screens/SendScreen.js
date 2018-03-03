@@ -8,7 +8,7 @@ export default class SendScreen extends React.Component {
     return {
       headerTitle: 'Send CNDY',
       headerLeft: (
-        <Button onPress={() => alert('This is a button!')} title="Menu" />
+        <Button onPress={() => navigation.navigate('Settings')} title="|||" />
       ),
       title: 'Send'
     };

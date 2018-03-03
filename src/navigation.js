@@ -13,6 +13,7 @@ import ExistingKeyScreen from './screens/ExistingKeyScreen';
 import GenerateKeyScreen from './screens/GenerateKeyScreen';
 import ReceiveScreen from './screens/ReceiveScreen';
 import SendScreen from './screens/SendScreen';
+import SettingsScreen from './screens/SettingsScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 
 const TabNav = TabNavigator(
@@ -49,13 +50,9 @@ const TabNav = TabNavigator(
 );
 
 const MainStack = StackNavigator({
-  MainTabs: {
-    screen: TabNav,
-    navigationOptions: {}
-  }
+  MainTabs: { screen: TabNav },
+  Settings: { screen: SettingsScreen }
 });
-
-// TODO? wrap mainstack in drawer?
 
 const KeySetupStack = StackNavigator(
   {

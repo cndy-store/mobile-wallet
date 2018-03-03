@@ -9,7 +9,7 @@ export default class ReceiveScreen extends React.Component {
     return {
       headerTitle: 'Receive CNDY',
       headerLeft: (
-        <Button onPress={() => alert('This is a button!')} title="Menu" />
+        <Button onPress={() => navigation.navigate('Settings')} title="|||" />
       ),
       title: 'Receive'
     };

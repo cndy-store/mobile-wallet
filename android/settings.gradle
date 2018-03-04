@@ -1,0 +1,3 @@
+rootProject.name = 'cndywallet'
+
+include ':app'

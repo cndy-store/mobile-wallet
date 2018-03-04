@@ -2,19 +2,16 @@
   "name": "cndy-wallet",
   "version": "0.1.0",
   "private": true,
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "react-native"
   },
   "dependencies": {
-    "expo": "^25.0.0",
     "node-emoji": "^1.8.1",
     "react": "16.2.0",
     "react-native": "0.52.0",
@@ -24,9 +21,10 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "jest-expo": "25.0.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "jest": "^22.4.2",
+    "jest-react-native": "^18.0.0",
     "prettier": "^1.11.1",
-    "react-native-scripts": "1.11.1",
     "react-test-renderer": "16.2.0",
     "redux-devtools-extension": "^2.13.2"
   }

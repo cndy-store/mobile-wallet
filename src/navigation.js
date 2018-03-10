@@ -10,7 +10,7 @@ import Emoji from './components/Emoji';
 import AccountSetupScreen from './screens/AccountSetupScreen';
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
 import ScanSecretScreen from './screens/ScanSecretScreen';
-import GenerateKeyScreen from './screens/GenerateKeyScreen';
+import EnterSecretScreen from './screens/EnterSecretScreen';
 import ReceiveScreen from './screens/ReceiveScreen';
 import SendScreen from './screens/SendScreen';
 import SettingsScreen from './screens/SettingsScreen';
@@ -58,7 +58,7 @@ const KeySetupStack = StackNavigator(
   {
     Welcome: { screen: WelcomeScreen },
     ScanSecret: { screen: ScanSecretScreen },
-    GenerateKey: { screen: GenerateKeyScreen }
+    EnterSecret: { screen: EnterSecretScreen }
   },
   {
     initialRouteName: 'Welcome',

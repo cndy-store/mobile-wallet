@@ -1,13 +1,25 @@
-import React from 'react';
-import ViewWithNavigationLink from '../components/ViewWithNavigationLink';
+import React, { Component } from 'react';
+import { Button, Text, View } from 'react-native';
 
-export default class WelcomeScreen extends React.Component {
+import { Container, Row } from '../components/layout';
+
+export default class WelcomeScreen extends Component {
   render() {
     return (
-      <ViewWithNavigationLink
-        text="Welcome"
-        links={['ScanSecret', 'ExistingKey']}
-      />
+      <Container>
+        <Row>
+          <Text>YoLo</Text>
+        </Row>
+        <Row />
+
+        <Row>
+          <Button
+            color="#ff0000"
+            title={'Manually enter Secret'}
+            onPress={() => this.props.navigation.navigate('EnterSecret')}
+          />
+        </Row>
+      </Container>
     );
   }
 }

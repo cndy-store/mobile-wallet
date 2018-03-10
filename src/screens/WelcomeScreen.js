@@ -4,11 +4,10 @@ import ViewWithNavigationLink from '../components/ViewWithNavigationLink';
 export default class WelcomeScreen extends React.Component {
   render() {
     return (
-        <ViewWithNavigationLink
-          text="Welcome"
-          links={['GenerateKey', 'ExistingKey']}
-          >
-      </ViewWithNavigationLink>
+      <ViewWithNavigationLink
+        text="Welcome"
+        links={['ScanSecret', 'ExistingKey']}
+      />
     );
   }
 }

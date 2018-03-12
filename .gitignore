@@ -52,3 +52,5 @@ buck-out/
 */fastlane/Preview.html
 */fastlane/screenshots
 /.dir-locals.el
+/.credentials_issuer.js
+/.credentials_distributor.js

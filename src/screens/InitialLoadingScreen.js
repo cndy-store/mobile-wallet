@@ -13,7 +13,7 @@ class InitialLoadingScreen extends React.Component {
   loadSecretKey = async () => {
     this.props.loadSecretKey().then(({ secretKey }) => {
       const secretKeyLoaded = !!secretKey;
-      const nextScreen = nextScreen ? 'Main' : 'KeySetup';
+      const nextScreen = secretKeyLoaded ? 'Main' : 'KeySetup';
       this.props.navigation.navigate(nextScreen);
     });
   };

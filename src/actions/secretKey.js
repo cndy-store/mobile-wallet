@@ -63,3 +63,17 @@ export const saveSecretKey = secretKey => {
     }
   };
 };
+
+export const deleteSecretKey = secretKey => {
+  return async dispatch => {
+    dispatch(secretKeyIsSaving(true));
+
+    try {
+      await AsyncStorage.removeItem(STORAGE_KEY, secretKey);
+      dispatch(secretKeyIsSaving(false));
+    } catch (error) {
+      dispatch(secretKeyIsSaving(false));
+      dispatch(secretKeySaveHasErrored({ error }));
+    }
+  };
+};

@@ -1,13 +1,48 @@
 import React from 'react';
-import { Button, View, TextInput } from 'react-native';
+import { connect } from 'react-redux';
+import { Button, Text, View, TextInput } from 'react-native';
 
 import { Container, Row } from '../components/layout';
+import { saveSecretKey } from '../actions/secretKey';
 
-export default class EnterSecretScreen extends React.Component {
+class EnterSecretScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      secret: ''
+    };
+
+    this.handleTextInput = this.handleTextInput.bind(this);
+    this.handleSave = this.handleSave.bind(this);
+  }
+
+  handleTextInput(text) {
+    this.setState({ secret: text });
+  }
+
+  handleSave() {
+    this.props.saveSecretKey(this.state.secret).then(() => {
+      this.props.navigation.navigate('Main');
+    });
+  }
+
+  renderError() {
+    if (!this.props.secretKeySaveError) return null;
+
+    return (
+      <View>
+        <Text>{this.props.secretKeySaveError}</Text>
+      </View>
+    );
+  }
+
   render() {
+    const buttonTitle = this.props.secretKeyIsSaving ? 'Saving...' : 'Save';
+
     return (
       <Container>
         <Row>
+          {this.renderError()}
           <View
             style={{
               borderColor: '#000000',
@@ -19,15 +54,31 @@ export default class EnterSecretScreen extends React.Component {
               numberOfLines={4}
               editable={true}
               maxLength={80}
-              value={'SBNJI3RT2XWRSBTKKYQ6EONG5SVBPQMI62M5YXBFCELNVYFUFAQDW25F'}
+              value={this.state.secret}
+              onChangeText={this.handleTextInput}
             />
           </View>
           <Button
-            title={'Save'}
-            onPress={() => this.props.navigation.navigate('EnterSecret')}
+            disabled={this.props.secretKeyIsSaving}
+            title={buttonTitle}
+            onPress={this.handleSave}
           />
         </Row>
       </Container>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    secretKeyIsSaving: state.secretKeyIsSaving,
+    secretKeySaveError: state.secretKeySaveError
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    saveSecretKey: secretKey => dispatch(saveSecretKey(secretKey))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EnterSecretScreen);

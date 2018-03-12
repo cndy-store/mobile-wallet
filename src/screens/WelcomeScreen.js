@@ -8,9 +8,13 @@ export default class WelcomeScreen extends Component {
     return (
       <Container>
         <Row>
-          <Text>YoLo</Text>
+          <Text>Please setup your Secret</Text>
         </Row>
         <Row />
+
+        <Row>
+          <Button color="#ff0000" title={'Scan QR Code'} onPress={() => {}} />
+        </Row>
 
         <Row>
           <Button

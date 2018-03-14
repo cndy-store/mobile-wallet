@@ -70,6 +70,7 @@ export const deleteSecretKey = secretKey => {
 
     try {
       await AsyncStorage.removeItem(STORAGE_KEY, secretKey);
+      // TODO: remove account from memory
       dispatch(secretKeyIsSaving(false));
     } catch (error) {
       dispatch(secretKeyIsSaving(false));

@@ -50,16 +50,17 @@ describe('loadKeypair', () => {
 
   it('rejects with error if loading fails', () => {
     const store = mockStore();
-    storage.getItem.mockRejectedValueOnce('could not load!');
+    const expectedError = new Error('Could not load');
+    storage.getItem.mockRejectedValueOnce(expectedError);
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
       { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: 'could not load!', type: 'KEYPAIR_ERROR' }
+      { error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store.dispatch(keypair.loadKeypair()).catch(error => {
-      expect(error).toEqual({ error: 'could not load!' });
+      expect(error).toEqual({ error: expectedError });
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -109,33 +110,35 @@ describe('saveKeypair', () => {
 
   it('rejects if secret is not valid', () => {
     const store = mockStore();
+    const expectedError = new Error('Invalid Secret');
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
       { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, error: 'Invalid Secret', type: 'KEYPAIR_ERROR' }
+      { error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store
       .dispatch(keypair.saveKeypair('INVALID SECRET'))
       .catch(error => {
-        expect(error).toEqual({ error: 'Invalid Secret' });
+        expect(error).toEqual({ error: expectedError });
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
 
   it('rejects if saving is not possible', () => {
     const store = mockStore();
-    storage.setItem.mockRejectedValueOnce('could not save!');
+    const expectedError = new Error('Could not save');
+    storage.setItem.mockRejectedValueOnce(expectedError);
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
       { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, error: 'could not save!', type: 'KEYPAIR_ERROR' }
+      { error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store.dispatch(keypair.saveKeypair(secret)).catch(error => {
-      expect(error).toEqual({ error: 'could not save!' });
+      expect(error).toEqual({ error: expectedError });
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -159,16 +162,17 @@ describe('removeKeypair', () => {
 
   it('rejects if removing is not possible', () => {
     const store = mockStore();
-    storage.removeItem.mockRejectedValueOnce('could not remove!');
+    const expectedError = new Error('Could not remove');
+    storage.removeItem.mockRejectedValueOnce(expectedError);
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
       { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, error: 'could not remove!', type: 'KEYPAIR_ERROR' }
+      { error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store.dispatch(keypair.removeKeypair()).catch(error => {
-      expect(error).toEqual({ error: 'could not remove!' });
+      expect(error).toEqual({ error: expectedError });
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

@@ -72,7 +72,7 @@ export const saveKeypair = secret => {
     dispatch(keypairProcessing(true));
 
     if (!isValidSecret(secret)) {
-      const error = 'Invalid Secret';
+      const error = new Error('Invalid Secret');
       dispatch(keypairProcessing(false));
       dispatch(keypairErrored({ error }));
       return Promise.reject({ error });

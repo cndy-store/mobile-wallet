@@ -14,17 +14,21 @@ const secret = 'SDKSKUUZDRTGFODPACA67RZT7ZVRU7H5CCXXJNXZAP7PXKAS75EDIAZB';
 describe('loadKeypair', () => {
   it('resolves to a secret if loading is successful', () => {
     const store = mockStore();
-    storage.getItem.mockResolvedValueOnce('SECRET');
+    storage.getItem.mockResolvedValueOnce(secret);
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
       { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, keypair: 'SECRET', type: 'KEYPAIR_LOAD' }
+      { error: null, type: 'KEYPAIR_LOAD' }
     ];
 
     return store.dispatch(keypair.loadKeypair()).then(result => {
-      expect(result).toEqual({ secret: 'SECRET' });
-      expect(store.getActions()).toEqual(expectedActions);
+      expect(result).toEqual({ secret: secret });
+      const actions = store.getActions();
+      expect(actions[0]).toEqual(expectedActions[0]);
+      expect(actions[1]).toEqual(expectedActions[1]);
+      expect(actions[2]).toEqual(expect.objectContaining(expectedActions[2]));
+      expect(actions[2].keypair.secret()).toEqual(secret);
     });
   });
 
@@ -69,12 +73,16 @@ describe('saveKeypair', () => {
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
       { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, keypair: secret, type: 'KEYPAIR_SAVE' }
+      { error: null, type: 'KEYPAIR_SAVE' }
     ];
 
     return store.dispatch(keypair.saveKeypair(secret)).then(result => {
       expect(result).toEqual({ secret: secret });
-      expect(store.getActions()).toEqual(expectedActions);
+      const actions = store.getActions();
+      expect(actions[0]).toEqual(expectedActions[0]);
+      expect(actions[1]).toEqual(expectedActions[1]);
+      expect(actions[2]).toEqual(expect.objectContaining(expectedActions[2]));
+      expect(actions[2].keypair.secret()).toEqual(secret);
     });
   });
 
@@ -86,12 +94,16 @@ describe('saveKeypair', () => {
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
       { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, keypair: secret, type: 'KEYPAIR_SAVE' }
+      { error: null, type: 'KEYPAIR_SAVE' }
     ];
 
     return store.dispatch(keypair.saveKeypair(paddedSecret)).then(result => {
       expect(result).toEqual({ secret: secret });
-      expect(store.getActions()).toEqual(expectedActions);
+      const actions = store.getActions();
+      expect(actions[0]).toEqual(expectedActions[0]);
+      expect(actions[1]).toEqual(expectedActions[1]);
+      expect(actions[2]).toEqual(expect.objectContaining(expectedActions[2]));
+      expect(actions[2].keypair.secret()).toEqual(secret);
     });
   });
 

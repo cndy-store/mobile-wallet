@@ -1,6 +1,6 @@
 import { getItem, setItem, removeItem } from '../lib/keypairStorage';
 import { StellarSdk } from '../lib/stellar';
-const { StrKey } = StellarSdk;
+const { Keypair, StrKey } = StellarSdk;
 
 const STORAGE_KEY = 'STELLAR_SECRET';
 
@@ -23,17 +23,25 @@ export const keypairErrored = ({ error }) => ({
   error
 });
 
-export const keypairLoadSucceded = ({ secret }) => ({
-  type: KEYPAIR_LOAD,
-  keypair: secret,
-  error: null
-});
+export const keypairLoadSucceded = ({ secret }) => {
+  const keypair = secret ? Keypair.fromSecret(secret) : null;
 
-export const keypairSaveSucceded = ({ secret }) => ({
-  type: KEYPAIR_SAVE,
-  keypair: secret,
-  error: null
-});
+  return {
+    type: KEYPAIR_LOAD,
+    keypair: keypair,
+    error: null
+  };
+};
+
+export const keypairSaveSucceded = ({ secret }) => {
+  const keypair = Keypair.fromSecret(secret);
+
+  return {
+    type: KEYPAIR_SAVE,
+    keypair: keypair,
+    error: null
+  };
+};
 
 export const keypairRemoveSucceded = () => ({
   type: KEYPAIR_REMOVE,

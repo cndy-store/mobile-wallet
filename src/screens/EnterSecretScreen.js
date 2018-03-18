@@ -31,7 +31,7 @@ class EnterSecretScreen extends React.Component {
 
     return (
       <View>
-        <Text>{this.props.error}</Text>
+        <Text>{this.props.error.message}</Text>
       </View>
     );
   }

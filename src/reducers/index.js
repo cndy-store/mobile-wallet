@@ -1,16 +1,6 @@
 import { combineReducers } from 'redux';
-import {
-  secretKeyIsLoading,
-  secretKeyLoadError,
-  secretKeyIsSaving,
-  secretKeySaveError,
-  secretKey
-} from './secretKey';
+import keypair from './keypair';
 
 export default combineReducers({
-  secretKeyIsLoading,
-  secretKeyLoadError,
-  secretKeyIsSaving,
-  secretKeySaveError,
-  secretKey
+  keypair
 });

@@ -3,13 +3,7 @@ import RootStack from './src/navigation';
 import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore';
 
-const store = configureStore({
-  secretKeyIsLoading: false,
-  secretKeyLoadError: null,
-  secretKeyIsSaving: false,
-  secretKeySaveError: null,
-  secretKey: null
-});
+const store = configureStore();
 
 export default class App extends React.Component {
   render() {

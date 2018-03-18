@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Button, Text, View, TextInput } from 'react-native';
 import { Container, Row } from '../components/layout';
-import { deleteSecretKey } from '../actions/secretKey';
+import { removeKeypair } from '../actions/keypair';
 
 class SettingsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,23 +20,23 @@ class SettingsScreen extends React.Component {
   }
 
   handleDeleteSecret() {
-    this.props.deleteSecretKey().then(() => {
+    this.props.removeKeypair().then(() => {
       this.props.navigation.navigate('Welcome');
     });
   }
 
   renderError() {
-    if (!this.props.secretKeySaveError) return null;
+    if (!this.props.error) return null;
 
     return (
       <View>
-        <Text>{this.props.secretKeySaveError}</Text>
+        <Text>{this.props.error}</Text>
       </View>
     );
   }
 
   render() {
-    const buttonTitle = this.props.secretKeyIsSaving ? 'Deleting...' : 'Delete';
+    const buttonTitle = this.props.inProgress ? 'Deleting...' : 'Delete';
 
     return (
       <Container>
@@ -45,7 +45,7 @@ class SettingsScreen extends React.Component {
             <Text>Click here to delete secret</Text>
 
             <Button
-              disabled={this.props.secretKeyIsSaving}
+              disabled={this.props.inProgress}
               title={buttonTitle}
               onPress={this.handleDeleteSecret}
             />
@@ -58,14 +58,14 @@ class SettingsScreen extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    secretKeyIsSaving: state.secretKeyIsSaving,
-    secretKeySaveError: state.secretKeySaveError
+    inProgress: state.keypair.inProgress,
+    error: state.keypair.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteSecretKey: () => dispatch(deleteSecretKey())
+    removeKeypair: () => dispatch(removeKeypair())
   };
 };
 

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Text, View, TextInput } from 'react-native';
 
 import { Container, Row } from '../components/layout';
-import { saveSecretKey } from '../actions/secretKey';
+import { saveKeypair } from '../actions/keypair';
 
 class EnterSecretScreen extends React.Component {
   constructor(props) {
@@ -21,17 +21,17 @@ class EnterSecretScreen extends React.Component {
   }
 
   handleSave() {
-    this.props.saveSecretKey(this.state.secret).then(() => {
+    this.props.saveKeypair(this.state.secret).then(() => {
       this.props.navigation.navigate('Main');
     });
   }
 
   renderError() {
-    if (!this.props.secretKeySaveError) return null;
+    if (!this.props.error) return null;
 
     return (
       <View>
-        <Text>{this.props.secretKeySaveError}</Text>
+        <Text>{this.props.error}</Text>
       </View>
     );
   }
@@ -59,7 +59,7 @@ class EnterSecretScreen extends React.Component {
             />
           </View>
           <Button
-            disabled={this.props.secretKeyIsSaving}
+            disabled={this.props.inProgress}
             title={buttonTitle}
             onPress={this.handleSave}
           />
@@ -70,14 +70,14 @@ class EnterSecretScreen extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    secretKeyIsSaving: state.secretKeyIsSaving,
-    secretKeySaveError: state.secretKeySaveError
+    inProgress: state.keypair.inProgress,
+    error: state.keypair.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveSecretKey: secretKey => dispatch(saveSecretKey(secretKey))
+    saveKeypair: secret => dispatch(saveKeypair(secret))
   };
 };
 

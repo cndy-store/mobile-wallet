@@ -2,18 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 
-import { loadSecretKey } from '../actions/secretKey';
+import { loadKeypair } from '../actions/keypair';
 
 class InitialLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.loadSecretKey();
+    this.loadKeypair();
   }
 
-  loadSecretKey = async () => {
-    this.props.loadSecretKey().then(({ secretKey }) => {
-      const secretKeyLoaded = !!secretKey;
-      const nextScreen = secretKeyLoaded ? 'Main' : 'KeySetup';
+  loadKeypair = async () => {
+    this.props.loadKeypair().then(({ secret }) => {
+      const secretLoaded = !!secret;
+      const nextScreen = secretLoaded ? 'Main' : 'KeySetup';
       this.props.navigation.navigate(nextScreen);
     });
   };
@@ -39,16 +39,12 @@ const styles = StyleSheet.create({
 InitialLoadingScreen.propTypes = {};
 
 const mapStateToProps = state => {
-  return {
-    secretKeyIsLoading: state.secretKeyIsLoading,
-    secretKeyLoadError: state.secretKeyLoadError,
-    secretKey: state.secretKey
-  };
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadSecretKey: () => dispatch(loadSecretKey())
+    loadKeypair: () => dispatch(loadKeypair())
   };
 };
 

@@ -23,25 +23,17 @@ export const keypairErrored = ({ error }) => ({
   error
 });
 
-export const keypairLoadSucceded = ({ secret }) => {
-  const keypair = secret ? Keypair.fromSecret(secret) : null;
+export const keypairLoadSucceded = ({ keypair }) => ({
+  type: KEYPAIR_LOAD,
+  keypair: keypair,
+  error: null
+});
 
-  return {
-    type: KEYPAIR_LOAD,
-    keypair: keypair,
-    error: null
-  };
-};
-
-export const keypairSaveSucceded = ({ secret }) => {
-  const keypair = Keypair.fromSecret(secret);
-
-  return {
-    type: KEYPAIR_SAVE,
-    keypair: keypair,
-    error: null
-  };
-};
+export const keypairSaveSucceded = ({ keypair }) => ({
+  type: KEYPAIR_SAVE,
+  keypair: keypair,
+  error: null
+});
 
 export const keypairRemoveSucceded = () => ({
   type: KEYPAIR_REMOVE,
@@ -54,9 +46,10 @@ export const loadKeypair = () => {
     dispatch(keypairProcessing(true));
     try {
       const secret = await getItem(STORAGE_KEY);
+      const keypair = secret ? Keypair.fromSecret(secret) : null;
       dispatch(keypairProcessing(false));
-      dispatch(keypairLoadSucceded({ secret }));
-      return Promise.resolve({ secret });
+      dispatch(keypairLoadSucceded({ keypair }));
+      return Promise.resolve({ keypair });
     } catch (error) {
       dispatch(keypairProcessing(false));
       dispatch(keypairErrored({ error }));
@@ -80,9 +73,10 @@ export const saveKeypair = secret => {
 
     try {
       await setItem(STORAGE_KEY, secret);
+      const keypair = Keypair.fromSecret(secret);
       dispatch(keypairProcessing(false));
-      dispatch(keypairSaveSucceded({ secret }));
-      return Promise.resolve({ secret });
+      dispatch(keypairSaveSucceded({ keypair }));
+      return Promise.resolve({ keypair });
     } catch (error) {
       dispatch(keypairProcessing(false));
       dispatch(keypairErrored({ error }));

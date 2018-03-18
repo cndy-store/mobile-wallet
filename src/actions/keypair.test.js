@@ -12,7 +12,7 @@ const mockStore = configureMockStore(middlewares);
 const secret = 'SDKSKUUZDRTGFODPACA67RZT7ZVRU7H5CCXXJNXZAP7PXKAS75EDIAZB';
 
 describe('loadKeypair', () => {
-  it('resolves to a secret if loading is successful', () => {
+  it('resolves to a keypair if loading is successful', () => {
     const store = mockStore();
     storage.getItem.mockResolvedValueOnce(secret);
 
@@ -23,7 +23,7 @@ describe('loadKeypair', () => {
     ];
 
     return store.dispatch(keypair.loadKeypair()).then(result => {
-      expect(result).toEqual({ secret: secret });
+      expect(result.keypair.secret()).toEqual(secret);
       const actions = store.getActions();
       expect(actions[0]).toEqual(expectedActions[0]);
       expect(actions[1]).toEqual(expectedActions[1]);
@@ -32,7 +32,7 @@ describe('loadKeypair', () => {
     });
   });
 
-  it('resolves secret to null if loading is successful, but no secret was saved', () => {
+  it('resolves keypair to null if loading is successful, but no secret was saved', () => {
     const store = mockStore();
     storage.getItem.mockResolvedValueOnce(null);
 
@@ -43,7 +43,7 @@ describe('loadKeypair', () => {
     ];
 
     return store.dispatch(keypair.loadKeypair()).then(result => {
-      expect(result).toEqual({ secret: null });
+      expect(result.keypair).toEqual(null);
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -67,7 +67,7 @@ describe('loadKeypair', () => {
 });
 
 describe('saveKeypair', () => {
-  it('resolves to a secret if saving is successful', () => {
+  it('resolves to a keypair if saving is successful', () => {
     const store = mockStore();
     storage.setItem.mockResolvedValueOnce();
 
@@ -78,7 +78,7 @@ describe('saveKeypair', () => {
     ];
 
     return store.dispatch(keypair.saveKeypair(secret)).then(result => {
-      expect(result).toEqual({ secret: secret });
+      expect(result.keypair.secret()).toEqual(secret);
       const actions = store.getActions();
       expect(actions[0]).toEqual(expectedActions[0]);
       expect(actions[1]).toEqual(expectedActions[1]);
@@ -87,7 +87,7 @@ describe('saveKeypair', () => {
     });
   });
 
-  it('resolves to a secret even if there is space padding around', () => {
+  it('resolves to a keypair even if there is space padding around', () => {
     const store = mockStore();
     const paddedSecret = `   ${secret}   `;
     storage.setItem.mockResolvedValueOnce();
@@ -99,7 +99,7 @@ describe('saveKeypair', () => {
     ];
 
     return store.dispatch(keypair.saveKeypair(paddedSecret)).then(result => {
-      expect(result).toEqual({ secret: secret });
+      expect(result.keypair.secret()).toEqual(secret);
       const actions = store.getActions();
       expect(actions[0]).toEqual(expectedActions[0]);
       expect(actions[1]).toEqual(expectedActions[1]);

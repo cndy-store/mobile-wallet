@@ -3,13 +3,12 @@ import thunk from 'redux-thunk';
 
 import * as keypair from './keypair';
 import * as storage from '../lib/keypairStorage';
+import { publicKey, secret } from '../__tests__/fixtures/keypair';
 
 jest.mock('../lib/keypairStorage');
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
-
-const secret = 'SDKSKUUZDRTGFODPACA67RZT7ZVRU7H5CCXXJNXZAP7PXKAS75EDIAZB';
 
 describe('loadKeypair', () => {
   it('resolves to a keypair if loading is successful', () => {

@@ -1,5 +1,5 @@
 {
-  "name": "cndy-wallet",
+  "name": "cndywallet",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,7 @@
     "ios": "react-native run-ios",
     "test": "node node_modules/jest/bin/jest.js",
     "test:watch": "yarn run test --watch",
-    "postinstall": "./scripts/post.sh"
+    "postinstall": "./scripts/postinstall.sh"
   },
   "jest": {
     "preset": "react-native",

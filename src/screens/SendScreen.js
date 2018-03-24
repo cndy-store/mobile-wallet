@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, View, Text } from 'react-native';
+import Modal from 'react-native-modal';
+
 import { sendPayment } from '../lib/stellarAPI';
 import HeaderWithBalance from '../components/HeaderWithBalance';
+import BarCodeScanner from '../components/BarCodeScanner';
+import { decodePublicKey } from '../lib/keypairHelpers';
 
 export class SendScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -16,6 +20,31 @@ export class SendScreen extends Component {
       title: 'Send'
     };
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isModalVisible: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.handleScannedCode = this.handleScannedCode.bind(this);
+  }
+
+  openModal() {
+    this.setState({ isModalVisible: true });
+  }
+
+  closeModal() {
+    this.setState({ isModalVisible: false });
+  }
+
+  handleScannedCode(result) {
+    console.warn(result);
+    this.closeModal();
+  }
 
   testTransaction() {
     const amount = '10.00';
@@ -31,22 +60,32 @@ export class SendScreen extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Send Screen</Text>
-        <Button
-          title="Go to Receive"
-          onPress={() => this.props.navigation.navigate('Receive')}
-        />
+        <Button title="Scan Code" onPress={this.openModal} />
 
         <Text>Send Test Transaction</Text>
         <Button
           title="Send transaction"
           onPress={() => this.testTransaction()}
         />
+        <Modal isVisible={this.state.isModalVisible} style={styles.modal}>
+          <BarCodeScanner
+            onCancel={this.closeModal}
+            onCodeScan={this.handleScannedCode}
+            decoder={decodePublicKey}
+          />
+        </Modal>
       </View>
     );
   }
 }
 
 SendScreen.propTypes = {};
+
+const styles = StyleSheet.create({
+  modal: {
+    margin: 0
+  }
+});
 
 const mapStateToProps = state => {
   return {

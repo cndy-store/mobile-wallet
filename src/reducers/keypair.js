@@ -15,16 +15,22 @@ const defaultState = {
 export default function keypair(state = defaultState, action) {
   switch (action.type) {
     case KEYPAIR_STARTS_PROCESSING:
-      return Object.assign({}, state, { isProcessing: action.isProcessing });
+      return { ...state, isProcessing: action.isProcessing };
     case KEYPAIR_ERROR:
-      return Object.assign({}, state, { error: action.error });
+      return {
+        ...state,
+        error: action.error,
+        isProcessing: action.isProcessing
+      };
     case KEYPAIR_LOAD:
     case KEYPAIR_SAVE:
     case KEYPAIR_REMOVE:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         keypair: action.keypair,
-        error: action.error
-      });
+        error: action.error,
+        isProcessing: action.isProcessing
+      };
     default:
       return state;
   }

@@ -35,7 +35,8 @@ it('handles KEYPAIR_ERROR', () => {
   expect(
     reducer(undefined, {
       type: KEYPAIR_ERROR,
-      error: 'error message'
+      error: 'error message',
+      isProcessing: false
     })
   ).toEqual({
     isProcessing: false,
@@ -49,7 +50,8 @@ it('handles KEYPAIR_LOAD', () => {
     reducer(undefined, {
       type: KEYPAIR_LOAD,
       keypair: 'SECRET',
-      error: null
+      error: null,
+      isProcessing: false
     })
   ).toEqual({
     isProcessing: false,
@@ -63,7 +65,8 @@ it('handles KEYPAIR_SAVE', () => {
     reducer(undefined, {
       type: KEYPAIR_SAVE,
       keypair: 'SECRET',
-      error: null
+      error: null,
+      isProcessing: false
     })
   ).toEqual({
     isProcessing: false,
@@ -77,7 +80,8 @@ it('handles KEYPAIR_REMOVE', () => {
     reducer(undefined, {
       type: KEYPAIR_REMOVE,
       keypair: null,
-      error: null
+      error: null,
+      isProcessing: false
     })
   ).toEqual({
     isProcessing: false,

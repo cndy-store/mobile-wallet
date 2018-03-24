@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 
 import { loadKeypair } from '../actions/keypair';
+import { loadAccount } from '../actions/account';
 
 class InitialLoadingScreen extends React.Component {
   constructor(props) {
@@ -12,8 +13,12 @@ class InitialLoadingScreen extends React.Component {
 
   loadKeypair = async () => {
     this.props.loadKeypair().then(({ keypair }) => {
-      const keypairLoaded = !!keypair;
-      const nextScreen = keypairLoaded ? 'Main' : 'KeySetup';
+      let nextScreen = 'KeySetup';
+      if (keypair) {
+        nextScreen = 'Main';
+        this.props.loadAccount(keypair.publicKey());
+      }
+
       this.props.navigation.navigate(nextScreen);
     });
   };
@@ -44,7 +49,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadKeypair: () => dispatch(loadKeypair())
+    loadKeypair: () => dispatch(loadKeypair()),
+    loadAccount: publicKey => dispatch(loadAccount(publicKey))
   };
 };
 

@@ -23,6 +23,7 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-jest": "^23.0.0-alpha.0",
     "node-emoji": "^1.8.1",
     "react": "16.2.0",
@@ -35,6 +36,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.14.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "jest": "^22.4.2",
     "jest-react-native": "^18.0.0",

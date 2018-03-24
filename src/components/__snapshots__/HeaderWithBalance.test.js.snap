@@ -22,6 +22,28 @@ exports[`renders correctly when a balance is given 1`] = `
 </Text>
 `;
 
+exports[`renders correctly when account data is present, but not for the desired asset 1`] = `
+<Text
+  accessibilityTraits="header"
+  accessible={true}
+  allowFontScaling={true}
+  collapsable={undefined}
+  ellipsizeMode="tail"
+  numberOfLines={1}
+  style={
+    Object {
+      "color": "rgba(0, 0, 0, .9)",
+      "fontSize": 17,
+      "fontWeight": "700",
+      "marginHorizontal": 16,
+      "textAlign": "center",
+    }
+  }
+>
+  ...
+</Text>
+`;
+
 exports[`renders correctly when no balance is given 1`] = `
 <Text
   accessibilityTraits="header"

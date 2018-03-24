@@ -9,6 +9,20 @@ it('renders correctly when no balance is given', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('renders correctly when account data is present, but not for the desired asset', () => {
+  const data = {
+    balances: [
+      {
+        balance: '9999.9999000',
+        asset_type: 'native'
+      }
+    ]
+  };
+
+  const tree = renderer.create(<HeaderWithBalance data={data} />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it('renders correctly when a balance is given', () => {
   const data = {
     balances: [

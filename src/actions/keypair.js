@@ -1,4 +1,5 @@
 import { getItem, setItem, removeItem } from '../lib/keypairStorage';
+import { isValidSecret } from '../lib/keypairHelpers';
 import { StellarSdk } from '../lib/stellar';
 const { Keypair, StrKey } = StellarSdk;
 
@@ -11,7 +12,6 @@ export const KEYPAIR_SAVE = 'KEYPAIR_SAVE';
 export const KEYPAIR_REMOVE = 'KEYPAIR_REMOVE';
 
 const chomp = str => str.replace(/\n|\r| /g, '');
-const isValidSecret = secret => StrKey.isValidEd25519SecretSeed(secret);
 
 export const keypairProcessing = bool => ({
   type: KEYPAIR_STARTS_PROCESSING,

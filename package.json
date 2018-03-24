@@ -25,6 +25,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-jest": "^23.0.0-alpha.0",
+    "bip21": "https://github.com/fabrik42/bip21.git",
     "node-emoji": "^1.8.1",
     "react": "16.2.0",
     "react-native": "0.52.0",

@@ -17,17 +17,15 @@ describe('loadKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, type: 'KEYPAIR_LOAD' }
+      { isProcessing: false, error: null, type: 'KEYPAIR_LOAD' }
     ];
 
     return store.dispatch(keypair.loadKeypair()).then(result => {
       expect(result.keypair.secret()).toEqual(secret);
       const actions = store.getActions();
       expect(actions[0]).toEqual(expectedActions[0]);
-      expect(actions[1]).toEqual(expectedActions[1]);
-      expect(actions[2]).toEqual(expect.objectContaining(expectedActions[2]));
-      expect(actions[2].keypair.secret()).toEqual(secret);
+      expect(actions[1]).toEqual(expect.objectContaining(expectedActions[1]));
+      expect(actions[1].keypair.secret()).toEqual(secret);
     });
   });
 
@@ -37,8 +35,7 @@ describe('loadKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, keypair: null, type: 'KEYPAIR_LOAD' }
+      { isProcessing: false, error: null, keypair: null, type: 'KEYPAIR_LOAD' }
     ];
 
     return store.dispatch(keypair.loadKeypair()).then(result => {
@@ -54,8 +51,7 @@ describe('loadKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: expectedError, type: 'KEYPAIR_ERROR' }
+      { isProcessing: false, error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store.dispatch(keypair.loadKeypair()).catch(error => {
@@ -72,17 +68,15 @@ describe('saveKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, type: 'KEYPAIR_SAVE' }
+      { isProcessing: false, error: null, type: 'KEYPAIR_SAVE' }
     ];
 
     return store.dispatch(keypair.saveKeypair(secret)).then(result => {
       expect(result.keypair.secret()).toEqual(secret);
       const actions = store.getActions();
       expect(actions[0]).toEqual(expectedActions[0]);
-      expect(actions[1]).toEqual(expectedActions[1]);
-      expect(actions[2]).toEqual(expect.objectContaining(expectedActions[2]));
-      expect(actions[2].keypair.secret()).toEqual(secret);
+      expect(actions[1]).toEqual(expect.objectContaining(expectedActions[1]));
+      expect(actions[1].keypair.secret()).toEqual(secret);
     });
   });
 
@@ -93,17 +87,15 @@ describe('saveKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, type: 'KEYPAIR_SAVE' }
+      { isProcessing: false, error: null, type: 'KEYPAIR_SAVE' }
     ];
 
     return store.dispatch(keypair.saveKeypair(paddedSecret)).then(result => {
       expect(result.keypair.secret()).toEqual(secret);
       const actions = store.getActions();
       expect(actions[0]).toEqual(expectedActions[0]);
-      expect(actions[1]).toEqual(expectedActions[1]);
-      expect(actions[2]).toEqual(expect.objectContaining(expectedActions[2]));
-      expect(actions[2].keypair.secret()).toEqual(secret);
+      expect(actions[1]).toEqual(expect.objectContaining(expectedActions[1]));
+      expect(actions[1].keypair.secret()).toEqual(secret);
     });
   });
 
@@ -113,8 +105,7 @@ describe('saveKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: expectedError, type: 'KEYPAIR_ERROR' }
+      { isProcessing: false, error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store
@@ -132,8 +123,7 @@ describe('saveKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: expectedError, type: 'KEYPAIR_ERROR' }
+      { isProcessing: false, error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store.dispatch(keypair.saveKeypair(secret)).catch(error => {
@@ -150,8 +140,12 @@ describe('removeKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: null, keypair: null, type: 'KEYPAIR_REMOVE' }
+      {
+        isProcessing: false,
+        error: null,
+        keypair: null,
+        type: 'KEYPAIR_REMOVE'
+      }
     ];
 
     return store.dispatch(keypair.removeKeypair()).then(() => {
@@ -166,8 +160,7 @@ describe('removeKeypair', () => {
 
     const expectedActions = [
       { isProcessing: true, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { isProcessing: false, type: 'KEYPAIR_STARTS_PROCESSING' },
-      { error: expectedError, type: 'KEYPAIR_ERROR' }
+      { isProcessing: false, error: expectedError, type: 'KEYPAIR_ERROR' }
     ];
 
     return store.dispatch(keypair.removeKeypair()).catch(error => {

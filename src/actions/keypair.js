@@ -20,25 +20,29 @@ export const keypairProcessing = bool => ({
 
 export const keypairErrored = ({ error }) => ({
   type: KEYPAIR_ERROR,
-  error
+  error,
+  isProcessing: false
 });
 
 export const keypairLoadSucceded = ({ keypair }) => ({
   type: KEYPAIR_LOAD,
   keypair: keypair,
-  error: null
+  error: null,
+  isProcessing: false
 });
 
 export const keypairSaveSucceded = ({ keypair }) => ({
   type: KEYPAIR_SAVE,
   keypair: keypair,
-  error: null
+  error: null,
+  isProcessing: false
 });
 
 export const keypairRemoveSucceded = () => ({
   type: KEYPAIR_REMOVE,
   keypair: null,
-  error: null
+  error: null,
+  isProcessing: false
 });
 
 export const loadKeypair = () => {
@@ -47,11 +51,9 @@ export const loadKeypair = () => {
     try {
       const secret = await getItem(STORAGE_KEY);
       const keypair = secret ? Keypair.fromSecret(secret) : null;
-      dispatch(keypairProcessing(false));
       dispatch(keypairLoadSucceded({ keypair }));
       return Promise.resolve({ keypair });
     } catch (error) {
-      dispatch(keypairProcessing(false));
       dispatch(keypairErrored({ error }));
       return Promise.reject({ error });
     }
@@ -66,7 +68,6 @@ export const saveKeypair = secret => {
 
     if (!isValidSecret(secret)) {
       const error = new Error('Invalid Secret');
-      dispatch(keypairProcessing(false));
       dispatch(keypairErrored({ error }));
       return Promise.reject({ error });
     }
@@ -74,11 +75,9 @@ export const saveKeypair = secret => {
     try {
       await setItem(STORAGE_KEY, secret);
       const keypair = Keypair.fromSecret(secret);
-      dispatch(keypairProcessing(false));
       dispatch(keypairSaveSucceded({ keypair }));
       return Promise.resolve({ keypair });
     } catch (error) {
-      dispatch(keypairProcessing(false));
       dispatch(keypairErrored({ error }));
       return Promise.reject({ error });
     }
@@ -91,11 +90,9 @@ export const removeKeypair = () => {
 
     try {
       await removeItem(STORAGE_KEY);
-      dispatch(keypairProcessing(false));
       dispatch(keypairRemoveSucceded());
       return Promise.resolve();
     } catch (error) {
-      dispatch(keypairProcessing(false));
       dispatch(keypairErrored({ error }));
       return Promise.reject({ error });
     }

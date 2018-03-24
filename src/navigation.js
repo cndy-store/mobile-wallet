@@ -22,7 +22,7 @@ const TabNav = TabNavigator(
     Receive: { screen: ReceiveScreen }
   },
   {
-    initialRouteName: 'Send',
+    initialRouteName: 'Receive',
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;

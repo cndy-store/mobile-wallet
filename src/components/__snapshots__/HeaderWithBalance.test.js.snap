@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly when a balance is given 1`] = `
+<Text
+  accessibilityTraits="header"
+  accessible={true}
+  allowFontScaling={true}
+  collapsable={undefined}
+  ellipsizeMode="tail"
+  numberOfLines={1}
+  style={
+    Object {
+      "color": "rgba(0, 0, 0, .9)",
+      "fontSize": 17,
+      "fontWeight": "700",
+      "marginHorizontal": 16,
+      "textAlign": "center",
+    }
+  }
+>
+  930.0000000 🍭
+</Text>
+`;
+
+exports[`renders correctly when no balance is given 1`] = `
+<Text
+  accessibilityTraits="header"
+  accessible={true}
+  allowFontScaling={true}
+  collapsable={undefined}
+  ellipsizeMode="tail"
+  numberOfLines={1}
+  style={
+    Object {
+      "color": "rgba(0, 0, 0, .9)",
+      "fontSize": 17,
+      "fontWeight": "700",
+      "marginHorizontal": 16,
+      "textAlign": "center",
+    }
+  }
+>
+  ...
+</Text>
+`;

@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Button, StyleSheet, View, Text } from 'react-native';
 import { sendPayment } from '../lib/stellarAPI';
+import HeaderWithBalance from '../components/HeaderWithBalance';
 
 export class SendScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state;
 
     return {
-      headerTitle: 'Send CNDY',
+      headerTitle: <HeaderWithBalance />,
       headerLeft: (
         <Button onPress={() => navigation.navigate('Settings')} title="|||" />
       ),

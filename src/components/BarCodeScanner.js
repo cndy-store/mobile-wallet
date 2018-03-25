@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import { Button, StatusBar, StyleSheet, View, Text } from 'react-native';
 import Dimensions from 'Dimensions';
 import Camera from 'react-native-camera';
-const { width, height } = Dimensions.get('window');
+import CameraNotAuthorized from '../components/CameraNotAuthorized';
+import CameraAuthorizationPending from '../components/CameraAuthorizationPending';
 
-const DEBUG_LAYOUT = false;
+const { width, height } = Dimensions.get('window');
 
 export class BarCodeScanner extends React.Component {
   constructor(props) {
@@ -53,20 +54,18 @@ export class BarCodeScanner extends React.Component {
   }
 
   renderCamera() {
-    if (DEBUG_LAYOUT) {
-      return <View style={[styles.camera]} />;
-    } else {
-      return (
-        <Camera
-          style={styles.camera}
-          type={Camera.constants.Type.back}
-          barCodeTypes={[Camera.constants.BarCodeType.qr]}
-          onBarCodeRead={this.handleBarCodeRead}
-          permissionDialogTitle="Sample title"
-          permissionDialogMessage="Sample dialog message"
-        />
-      );
-    }
+    return (
+      <Camera
+        style={styles.camera}
+        type={Camera.constants.Type.back}
+        barCodeTypes={[Camera.constants.BarCodeType.qr]}
+        onBarCodeRead={this.handleBarCodeRead}
+        permissionDialogTitle="Allow Camera Access"
+        permissionDialogMessage="We need it to scan QR codes"
+        notAuthorizedView={<CameraNotAuthorized />}
+        pendingAuthorizationView={<CameraAuthorizationPending />}
+      />
+    );
   }
 
   renderError() {
@@ -104,25 +103,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignContent: 'center',
-    backgroundColor: '#00ff00',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
     height
   },
   camera: {
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    backgroundColor: '#0000ff',
     width
   },
   overlay: {
     flex: 1,
     position: 'absolute',
-    backgroundColor: 'rgba(0,0,0,0.4)',
+    backgroundColor: 'rgba(255,255,255, 0.5)',
     padding: 16,
     right: 0,
     left: 0,

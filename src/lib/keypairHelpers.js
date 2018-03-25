@@ -11,8 +11,7 @@ const isValidSecret = secret => StrKey.isValidEd25519SecretSeed(secret);
 
 const encodePublicKey = (publicKey, options = {}) => {
   if (!isValidPublicKey(publicKey)) return null;
-  options.scheme = scheme;
-  return bip21.encode(publicKey, options);
+  return bip21.encode(publicKey, options, scheme);
 };
 
 const decodePublicKey = url => {
@@ -34,8 +33,7 @@ const decodePublicKey = url => {
 
 const encodeSecret = (secret, options = {}) => {
   if (!isValidSecret(secret)) return null;
-  options.scheme = secretScheme;
-  return bip21.encode(secret, options);
+  return bip21.encode(secret, options, secretScheme);
 };
 
 const decodeSecret = url => {

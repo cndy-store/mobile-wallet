@@ -37,7 +37,7 @@ class EnterSecretScreen extends React.Component {
   }
 
   render() {
-    const buttonTitle = this.props.secretKeyIsSaving ? 'Saving...' : 'Save';
+    const buttonTitle = this.props.inProgress ? 'Saving...' : 'Save';
 
     return (
       <Container>

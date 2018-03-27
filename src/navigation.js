@@ -7,7 +7,6 @@ import {
 } from 'react-navigation';
 import Emoji from './components/Emoji';
 
-import AccountSetupScreen from './screens/AccountSetupScreen';
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
 import ScanSecretScreen from './screens/ScanSecretScreen';
 import EnterSecretScreen from './screens/EnterSecretScreen';

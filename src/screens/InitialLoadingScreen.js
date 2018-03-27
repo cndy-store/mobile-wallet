@@ -5,7 +5,7 @@ import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 import { loadKeypair } from '../actions/keypair';
 import { loadAccount } from '../actions/account';
 
-class InitialLoadingScreen extends React.Component {
+export class InitialLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
     this.loadKeypair();

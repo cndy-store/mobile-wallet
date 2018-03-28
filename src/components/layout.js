@@ -16,15 +16,13 @@ const styles = StyleSheet.create({
 
 class Container extends Component {
   render() {
-    const style = StyleSheet.flatten([styles.container, this.props.style]);
-    return <View style={style} {...this.props} />;
+    return <View style={styles.container} {...this.props} />;
   }
 }
 
 class Row extends Component {
   render() {
-    const style = StyleSheet.flatten([styles.row, this.props.style]);
-    return <View style={style} {...this.props} />;
+    return <View style={styles.row} {...this.props} />;
   }
 }
 

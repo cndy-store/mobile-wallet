@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container adds additional props 1`] = `
+<View
+  hello="world"
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "padding": 20,
+    }
+  }
+/>
+`;
+
+exports[`Container renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "padding": 20,
+    }
+  }
+/>
+`;
+
+exports[`Row adds additional props 1`] = `
+<View
+  hello="world"
+  style={
+    Object {
+      "alignSelf": "stretch",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;
+
+exports[`Row renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "stretch",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+/>
+`;

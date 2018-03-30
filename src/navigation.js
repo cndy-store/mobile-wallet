@@ -42,6 +42,7 @@ const TabNav = TabNavigator(
       activeTintColor: 'tomato',
       inactiveTintColor: 'gray'
     },
+    lazy: false,
     animationEnabled: true,
     swipeEnabled: true
   }

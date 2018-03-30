@@ -46,6 +46,7 @@ export class BarCodeScanner extends Component {
 
     if (!decoded) {
       this.setState({ error: 'Not a valid QR code' });
+      this.clearTimeouts();
       this.errorTimeout = setTimeout(() => this.clearErrors(), 1000);
     } else {
       this.foundCode = true;

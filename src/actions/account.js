@@ -28,8 +28,7 @@ export const loadAccount = publicKey => {
     dispatch(accountProcessing(true));
     try {
       const response = await api.loadAccount(publicKey);
-      const account = response.account;
-      const data = response.data;
+      const { account, data } = response;
       dispatch(accountLoadSucceded({ account, data }));
       return Promise.resolve({ account, data });
     } catch (error) {

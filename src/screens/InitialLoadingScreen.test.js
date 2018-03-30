@@ -23,7 +23,7 @@ it('renders correctly', () => {
 });
 
 it('calls the loadKeypair function', () => {
-  const tree = renderer.create(
+  renderer.create(
     <InitialLoadingScreen
       navigation={navigation}
       loadKeypair={loadKeypair}
@@ -37,7 +37,7 @@ it('calls the loadKeypair function', () => {
 it('opens the KeySetup screen when no key was found', done => {
   loadKeypair.mockResolvedValueOnce({ keypair: null });
 
-  const tree = renderer.create(
+  renderer.create(
     <InitialLoadingScreen
       navigation={navigation}
       loadKeypair={loadKeypair}
@@ -55,7 +55,7 @@ it('opens the Main screen and load account when a key was found', done => {
   const fakeKeypair = { publicKey: jest.fn() };
   loadKeypair.mockResolvedValueOnce({ keypair: fakeKeypair });
 
-  const tree = renderer.create(
+  renderer.create(
     <InitialLoadingScreen
       navigation={navigation}
       loadKeypair={loadKeypair}

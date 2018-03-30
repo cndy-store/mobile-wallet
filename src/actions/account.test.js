@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import * as account from './account';
 import * as api from '../lib/stellarAPI';
-import { publicKey, secret } from '../__tests__/fixtures/keypair';
+import { publicKey } from '../__tests__/fixtures/keypair';
 
 jest.mock('../lib/stellarAPI');
 

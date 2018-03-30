@@ -1,5 +1,6 @@
 import axios from 'axios';
 import StellarSdk from '../vendor/stellar-base-0.7.7';
+
 StellarSdk.Network.useTestNetwork();
 
 const assetCode = 'CNDY';

@@ -1,8 +1,7 @@
-import { asset, StellarSdk } from '../lib/stellar';
 import bip21 from 'bip21';
+import { asset, StellarSdk } from '../lib/stellar';
 
 const { StrKey } = StellarSdk;
-
 const scheme = asset.getCode().toLowerCase();
 const secretScheme = `${scheme}secret`;
 

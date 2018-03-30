@@ -1,7 +1,6 @@
 import React from 'react';
-import CameraNotAuthorized from './CameraNotAuthorized.js';
-
 import renderer from 'react-test-renderer';
+import CameraNotAuthorized from './CameraNotAuthorized';
 
 it('renders correctly', () => {
   const tree = renderer.create(<CameraNotAuthorized />).toJSON();

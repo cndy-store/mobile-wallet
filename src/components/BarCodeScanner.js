@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Button, StatusBar, StyleSheet, View, Text } from 'react-native';
 import Dimensions from 'Dimensions';
 import Camera from 'react-native-camera';
@@ -7,7 +8,7 @@ import CameraAuthorizationPending from '../components/CameraAuthorizationPending
 
 const { width, height } = Dimensions.get('window');
 
-export class BarCodeScanner extends React.Component {
+export class BarCodeScanner extends Component {
   constructor(props) {
     super(props);
 
@@ -140,6 +141,10 @@ const styles = StyleSheet.create({
   }
 });
 
-BarCodeScanner.propTypes = {};
+BarCodeScanner.propTypes = {
+  onCancel: PropTypes.func.isRequired,
+  onCodeScan: PropTypes.func.isRequired,
+  decoder: PropTypes.func.isRequired
+};
 
 export default BarCodeScanner;

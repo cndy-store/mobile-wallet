@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import * as keypair from './keypair';
 import * as storage from '../lib/keypairStorage';
-import { publicKey, secret } from '../__tests__/fixtures/keypair';
+import { secret } from '../__tests__/fixtures/keypair';
 
 jest.mock('../lib/keypairStorage');
 

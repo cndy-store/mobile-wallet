@@ -1,8 +1,7 @@
 import React from 'react';
+import renderer from 'react-test-renderer';
 import { asset } from '../lib/stellar';
 import { HeaderWithBalance } from './HeaderWithBalance';
-
-import renderer from 'react-test-renderer';
 
 it('renders correctly when no balance is given', () => {
   const tree = renderer.create(<HeaderWithBalance />).toJSON();

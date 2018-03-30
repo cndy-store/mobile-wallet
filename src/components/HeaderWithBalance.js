@@ -1,19 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Text } from 'react-native';
 import { HeaderTitle } from 'react-navigation';
 import { asset } from '../lib/stellar';
 
 const defaultText = '...';
 
-export class HeaderWithBalance extends React.Component {
+export class HeaderWithBalance extends Component {
   getBalance() {
     if (!this.props.data) return null;
 
     const assetToShow = this.props.data.balances.find(
       item =>
-        item.asset_code == asset.getCode() &&
-        item.asset_issuer == asset.getIssuer()
+        item.asset_code === asset.getCode() &&
+        item.asset_issuer === asset.getIssuer()
     );
 
     if (!assetToShow) return null;
@@ -30,16 +30,20 @@ export class HeaderWithBalance extends React.Component {
   }
 }
 
-HeaderWithBalance.propTypes = {};
-
-const mapStateToProps = state => {
-  return {
-    data: state.account.data
-  };
+HeaderWithBalance.defaultProps = {
+  data: null
 };
 
-const mapDispatchToProps = dispatch => {
-  return {};
+HeaderWithBalance.propTypes = {
+  data: PropTypes.shape({
+    balances: PropTypes.array.isRequired
+  })
 };
+
+const mapStateToProps = state => ({
+  data: state.account.data
+});
+
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderWithBalance);

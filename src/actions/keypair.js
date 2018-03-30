@@ -1,8 +1,8 @@
 import { getItem, setItem, removeItem } from '../lib/keypairStorage';
 import { isValidSecret } from '../lib/keypairHelpers';
 import { StellarSdk } from '../lib/stellar';
-const { Keypair, StrKey } = StellarSdk;
 
+const { Keypair } = StellarSdk;
 const STORAGE_KEY = 'STELLAR_SECRET';
 
 export const KEYPAIR_STARTS_PROCESSING = 'KEYPAIR_STARTS_PROCESSING';
@@ -26,14 +26,14 @@ export const keypairErrored = ({ error }) => ({
 
 export const keypairLoadSucceded = ({ keypair }) => ({
   type: KEYPAIR_LOAD,
-  keypair: keypair,
+  keypair,
   error: null,
   isProcessing: false
 });
 
 export const keypairSaveSucceded = ({ keypair }) => ({
   type: KEYPAIR_SAVE,
-  keypair: keypair,
+  keypair,
   error: null,
   isProcessing: false
 });
@@ -60,8 +60,8 @@ export const loadKeypair = () => {
   };
 };
 
-export const saveKeypair = secret => {
-  secret = chomp(secret);
+export const saveKeypair = secretString => {
+  const secret = chomp(secretString);
 
   return async dispatch => {
     dispatch(keypairProcessing(true));

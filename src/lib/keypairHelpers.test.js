@@ -1,4 +1,3 @@
-import { asset } from '../lib/stellar';
 import * as helpers from './keypairHelpers';
 import { publicKey, secret } from '../__tests__/fixtures/keypair';
 

@@ -1,11 +1,12 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 
 import { loadKeypair } from '../actions/keypair';
 import { loadAccount } from '../actions/account';
 
-export class InitialLoadingScreen extends React.Component {
+export class InitialLoadingScreen extends Component {
   constructor(props) {
     super(props);
     this.loadKeypair();
@@ -41,18 +42,20 @@ const styles = StyleSheet.create({
   }
 });
 
-InitialLoadingScreen.propTypes = {};
-
-const mapStateToProps = state => {
-  return {};
+InitialLoadingScreen.propTypes = {
+  loadKeypair: PropTypes.func.isRequired,
+  loadAccount: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  })
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loadKeypair: () => dispatch(loadKeypair()),
-    loadAccount: publicKey => dispatch(loadAccount(publicKey))
-  };
-};
+const mapStateToProps = state => ({});
+
+const mapDispatchToProps = dispatch => ({
+  loadKeypair: () => dispatch(loadKeypair()),
+  loadAccount: publicKey => dispatch(loadAccount(publicKey))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   InitialLoadingScreen

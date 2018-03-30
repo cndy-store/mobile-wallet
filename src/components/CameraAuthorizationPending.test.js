@@ -1,7 +1,6 @@
 import React from 'react';
-import CameraAuthorizationPending from './CameraAuthorizationPending.js';
-
 import renderer from 'react-test-renderer';
+import CameraAuthorizationPending from './CameraAuthorizationPending.js';
 
 it('renders correctly', () => {
   const tree = renderer.create(<CameraAuthorizationPending />).toJSON();

@@ -1,14 +1,40 @@
+import { padEnd } from 'lodash';
+
+const delimiter = '.';
+const maxPrecisionLength = 7;
+
+const allowedChars = new RegExp(`^[0-9${delimiter}]+`);
+const delimiterSplit = new RegExp(`[${delimiter}]+`);
+
 const sanitizeOngoingAmountInput = input => {
-  const delimiter = '.';
+  const onlyAllowedChars = input.match(allowedChars);
+  if (!onlyAllowedChars) return '';
+  if (onlyAllowedChars[0] !== input) return onlyAllowedChars[0];
 
-  const allowedChars = input.match(new RegExp(`^[0-9${delimiter}]+`));
-  if (!allowedChars) return '';
-  if (allowedChars[0] !== input) return allowedChars[0];
+  const [precision, ...rest] = input.split(delimiterSplit);
+  if (!precision.length) return '';
+  if (!rest.length) return precision;
 
-  const [first, ...rest] = input.split(new RegExp(`[${delimiter}]+`));
-  if (!rest.length) return first;
+  let scale = rest.join('');
+  if (scale.length > maxPrecisionLength) {
+    scale = scale.substr(0, maxPrecisionLength);
+  }
 
-  return [first, rest.join('')].join(delimiter);
+  return [precision, scale].join(delimiter);
 };
 
-export { sanitizeOngoingAmountInput };
+const ensureScale = input => {
+  const [precision, scale] = input.split(delimiter);
+  const paddedScale = padEnd(scale || '', 2, '0');
+
+  return `${precision}${delimiter}${paddedScale}`;
+};
+
+const parseTransactionAmount = input => {
+  const sanitized = sanitizeOngoingAmountInput(input);
+  if (sanitized === '') return null;
+
+  return ensureScale(sanitized);
+};
+
+export { sanitizeOngoingAmountInput, parseTransactionAmount };

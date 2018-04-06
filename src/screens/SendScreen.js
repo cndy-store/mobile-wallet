@@ -6,7 +6,11 @@ import Modal from 'react-native-modal';
 import { sendPayment } from '../lib/stellarAPI';
 import HeaderWithBalance from '../components/HeaderWithBalance';
 import BarCodeScanner from '../components/BarCodeScanner';
+import TransactionSender from '../components/TransactionSender';
 import { decodePublicKey } from '../lib/keypairHelpers';
+
+const amount = '10.00';
+const receiver = 'GARYCROHQXWIQIRMGFRVFXDX53Y2RYUOYRJPB6OHLHIQ53AMLXM22EZL';
 
 export class SendScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -25,31 +29,51 @@ export class SendScreen extends Component {
     super(props);
 
     this.state = {
-      isModalVisible: false
+      isScannerModalVisible: false,
+      isSenderModalVisible: true
     };
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.openSenderModal = this.openSenderModal.bind(this);
+    this.closeSenderModal = this.closeSenderModal.bind(this);
+    this.handleTransactionSuccess = this.handleTransactionSuccess.bind(this);
+    this.handleTransactionFailure = this.handleTransactionFailure.bind(this);
+    this.openScannerModal = this.openScannerModal.bind(this);
+    this.closeScannerModal = this.closeScannerModal.bind(this);
     this.handleScannedCode = this.handleScannedCode.bind(this);
   }
 
-  openModal() {
-    this.setState({ isModalVisible: true });
+  openSenderModal() {
+    this.setState({ isSenderModalVisible: true });
   }
 
-  closeModal() {
-    this.setState({ isModalVisible: false });
+  closeSenderModal() {
+    this.setState({ isSenderModalVisible: false });
+  }
+
+  handleTransactionSuccess() {
+    console.warn('success!');
+    this.closeSenderModal();
+  }
+
+  handleTransactionFailure() {
+    console.warn('FAILURE!');
+    this.closeSenderModal();
+  }
+
+  openScannerModal() {
+    this.setState({ isScannerModalVisible: true });
+  }
+
+  closeScannerModal() {
+    this.setState({ isScannerModalVisible: false });
   }
 
   handleScannedCode(result) {
     console.warn(result);
-    this.closeModal();
+    this.closeScannerModal();
   }
 
   testTransaction() {
-    const amount = '10.00';
-    const receiver = 'GARYCROHQXWIQIRMGFRVFXDX53Y2RYUOYRJPB6OHLHIQ53AMLXM22EZL';
-
     console.info('starting...');
     sendPayment({ amount, receiver, keypair: this.props.keypair })
       .then(result => console.dir(result))
@@ -60,18 +84,31 @@ export class SendScreen extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Send Screen</Text>
-        <Button title="Scan Code" onPress={this.openModal} />
+        <Button title="Scan Code" onPress={this.openScannerModal} />
+
+        <Text>Show transaction</Text>
+        <Button title="Open Transaction Modal" onPress={this.openSenderModal} />
 
         <Text>Send Test Transaction</Text>
         <Button
           title="Send transaction"
           onPress={() => this.testTransaction()}
         />
-        <Modal isVisible={this.state.isModalVisible} style={styles.modal}>
+        <Modal
+          isVisible={this.state.isScannerModalVisible}
+          style={styles.modal}
+        >
           <BarCodeScanner
-            onCancel={this.closeModal}
+            onCancel={this.closeScannerModal}
             onCodeScan={this.handleScannedCode}
             decoder={decodePublicKey}
+          />
+        </Modal>
+        <Modal isVisible={this.state.isSenderModalVisible} style={styles.modal}>
+          <TransactionSender
+            onCancel={this.closeSenderModal}
+            onSuccess={this.handleTransactionSuccess}
+            onFailure={this.handleTransactionFailure}
           />
         </Modal>
       </View>

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="middle"
+  numberOfLines={1}
+  style={
+    Object {
+      "fontSize": 24,
+    }
+  }
+>
+  GCHSUHOKNZQAKTULV5YTMG5CKU2NKE7UUQVN6JT2JY7337CRBIAZ6LXK
+</Text>
+`;

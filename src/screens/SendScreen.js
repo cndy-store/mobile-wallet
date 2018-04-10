@@ -1,16 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { Button, StyleSheet, View, Text } from 'react-native';
 import Modal from 'react-native-modal';
 
-import { sendPayment } from '../lib/stellarAPI';
 import HeaderWithBalance from '../components/HeaderWithBalance';
 import BarCodeScanner from '../components/BarCodeScanner';
 import TransactionSender from '../components/TransactionSender';
 import { decodePublicKey } from '../lib/keypairHelpers';
-
-const amount = '10.00';
-const receiver = 'GARYCROHQXWIQIRMGFRVFXDX53Y2RYUOYRJPB6OHLHIQ53AMLXM22EZL';
 
 export class SendScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -30,7 +25,7 @@ export class SendScreen extends Component {
 
     this.state = {
       isScannerModalVisible: false,
-      isSenderModalVisible: true
+      isSenderModalVisible: false
     };
 
     this.openSenderModal = this.openSenderModal.bind(this);
@@ -73,27 +68,15 @@ export class SendScreen extends Component {
     this.closeScannerModal();
   }
 
-  testTransaction() {
-    console.info('starting...');
-    sendPayment({ amount, receiver, keypair: this.props.keypair })
-      .then(result => console.dir(result))
-      .catch(result => console.warn(result));
-  }
-
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Send Screen</Text>
         <Button title="Scan Code" onPress={this.openScannerModal} />
 
-        <Text>Show transaction</Text>
+        <Text>New transaction</Text>
         <Button title="Open Transaction Modal" onPress={this.openSenderModal} />
 
-        <Text>Send Test Transaction</Text>
-        <Button
-          title="Send transaction"
-          onPress={() => this.testTransaction()}
-        />
         <Modal
           isVisible={this.state.isScannerModalVisible}
           style={styles.modal}
@@ -123,15 +106,4 @@ const styles = StyleSheet.create({
     margin: 0
   }
 });
-
-const mapStateToProps = state => {
-  return {
-    keypair: state.keypair.keypair
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SendScreen);
+export default SendScreen;

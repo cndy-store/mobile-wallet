@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Button, StatusBar, StyleSheet, View, TextInput } from 'react-native';
 import Dimensions from 'Dimensions';
 import ShortenedPublicKey from '../../components/ShortenedPublicKey';
@@ -9,6 +10,7 @@ import ConfirmTransactionDetails from './ConfirmTransactionDetails';
 import TransactionInProgress from './TransactionInProgress';
 import TransactionSuccess from './TransactionSuccess';
 import TransactionFailure from './TransactionFailure';
+import { sendPayment } from '../../lib/stellarAPI';
 import { parseTransactionAmount } from '../../lib/formatter';
 import { isValidPublicKey } from '../../lib/keypairHelpers';
 
@@ -60,7 +62,23 @@ class TransactionSender extends Component {
   }
 
   handleConfirmation() {
+    const { amount, receiver } = this.state;
     this.setState({ inProgress: true });
+
+    sendPayment({ amount, receiver, keypair: this.props.keypair })
+      .then(result => {
+        console.dir(result);
+        this.setState({
+          response: result,
+          inProgress: false
+        });
+      })
+      .catch(error => {
+        this.setState({
+          error,
+          inProgress: false
+        });
+      });
   }
 
   handleRejection() {
@@ -79,7 +97,13 @@ class TransactionSender extends Component {
   }
 
   renderSubview() {
-    if (!this.state.receiver) {
+    if (this.state.inProgress) {
+      return <TransactionInProgress />;
+    } else if (this.state.response) {
+      return <TransactionSuccess />;
+    } else if (this.state.error) {
+      return <TransactionFailure />;
+    } else if (!this.state.receiver) {
       return (
         <EnterTransactionReceiver
           error={this.state.receiverError}
@@ -94,7 +118,7 @@ class TransactionSender extends Component {
           onSubmit={this.handleAmountUpdate}
         />
       );
-    } else if (this.state.amount && !this.state.inProgress) {
+    } else if (this.state.amount && this.state.receiver) {
       return (
         <ConfirmTransactionDetails
           receiver={this.state.receiver}
@@ -103,12 +127,6 @@ class TransactionSender extends Component {
           onReject={this.handleRejection}
         />
       );
-    } else if (this.state.inProgress) {
-      return <TransactionInProgress />;
-    } else if (this.state.response && !this.state.error) {
-      return <TransactionSuccess />;
-    } else if (this.state.error) {
-      return <TransactionFailure />;
     } else {
       throw 'Invalid configuration of TransactionSender';
     }
@@ -143,4 +161,14 @@ TransactionSender.propTypes = {
   receiver: PropTypes.string
 };
 
-export default TransactionSender;
+const mapStateToProps = state => {
+  return {
+    keypair: state.keypair.keypair
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionSender);

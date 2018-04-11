@@ -96,6 +96,12 @@ class TransactionSender extends Component {
     this.props.onFailure();
   }
 
+  renderCloseButton() {
+    if (this.state.inProgress) return null;
+
+    return <Button onPress={this.handleCancel} title="Close" />;
+  }
+
   renderSubview() {
     if (this.state.inProgress) {
       return <TransactionInProgress />;
@@ -133,7 +139,12 @@ class TransactionSender extends Component {
   }
 
   render() {
-    return <View style={styles.container}>{this.renderSubview()}</View>;
+    return (
+      <View style={styles.container}>
+        {this.renderCloseButton()}
+        {this.renderSubview()}
+      </View>
+    );
   }
 }
 

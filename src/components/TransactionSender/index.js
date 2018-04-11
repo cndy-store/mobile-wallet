@@ -16,7 +16,7 @@ import { isValidPublicKey } from '../../lib/keypairHelpers';
 
 const { width, height } = Dimensions.get('window');
 
-class TransactionSender extends Component {
+export class TransactionSender extends Component {
   constructor(props) {
     super(props);
 

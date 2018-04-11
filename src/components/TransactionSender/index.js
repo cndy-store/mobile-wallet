@@ -36,7 +36,7 @@ export class TransactionSender extends Component {
     this.handleConfirmation = this.handleConfirmation.bind(this);
     this.handleRejection = this.handleRejection.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
-    this.handleSuccess = this.handleSuccess.bind(this);
+    this.handleFailure = this.handleFailure.bind(this);
   }
 
   handleCancel() {
@@ -97,7 +97,9 @@ export class TransactionSender extends Component {
   }
 
   renderCloseButton() {
-    if (this.state.inProgress) return null;
+    if (this.state.inProgress || this.state.response || this.state.error) {
+      return null;
+    }
 
     return <Button onPress={this.handleCancel} title="Close" />;
   }
@@ -106,9 +108,9 @@ export class TransactionSender extends Component {
     if (this.state.inProgress) {
       return <TransactionInProgress />;
     } else if (this.state.response) {
-      return <TransactionSuccess />;
+      return <TransactionSuccess onAcknowledge={this.handleSuccess} />;
     } else if (this.state.error) {
-      return <TransactionFailure />;
+      return <TransactionFailure onAcknowledge={this.handleFailure} />;
     } else if (!this.state.receiver) {
       return (
         <EnterTransactionReceiver

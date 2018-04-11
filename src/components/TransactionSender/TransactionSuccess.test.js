@@ -1,8 +1,23 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { Button } from 'react-native';
 import TransactionSuccess from './TransactionSuccess';
 
 it('renders correctly without an error', () => {
-  const tree = renderer.create(<TransactionSuccess />).toJSON();
+  const onAcknowledge = jest.fn();
+  const tree = renderer
+    .create(<TransactionSuccess onAcknowledge={onAcknowledge} />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
+});
+
+it('calls onAcknowledge when button is pressed', () => {
+  const onAcknowledge = jest.fn();
+
+  const instance = renderer.create(
+    <TransactionSuccess onAcknowledge={onAcknowledge} />
+  ).root;
+
+  instance.findByType(Button).props.onPress();
+  expect(onAcknowledge).toHaveBeenCalled();
 });

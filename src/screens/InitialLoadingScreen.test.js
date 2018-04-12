@@ -1,7 +1,6 @@
 import React from 'react';
 import { InitialLoadingScreen } from './InitialLoadingScreen';
-
-import renderer from 'react-test-renderer';
+import { render } from '../__tests__/renderer';
 
 const loadKeypair = jest.fn();
 const loadAccount = jest.fn();
@@ -9,21 +8,19 @@ const navigate = jest.fn();
 const navigation = { navigate };
 
 it('renders correctly', () => {
-  const tree = renderer
-    .create(
-      <InitialLoadingScreen
-        navigation={navigation}
-        loadKeypair={loadKeypair}
-        loadAccount={loadAccount}
-      />
-    )
-    .toJSON();
+  const { toJSON } = render(
+    <InitialLoadingScreen
+      navigation={navigation}
+      loadKeypair={loadKeypair}
+      loadAccount={loadAccount}
+    />
+  );
 
-  expect(tree).toMatchSnapshot();
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('calls the loadKeypair function', () => {
-  renderer.create(
+  render(
     <InitialLoadingScreen
       navigation={navigation}
       loadKeypair={loadKeypair}
@@ -37,7 +34,7 @@ it('calls the loadKeypair function', () => {
 it('opens the KeySetup screen when no key was found', done => {
   loadKeypair.mockResolvedValueOnce({ keypair: null });
 
-  renderer.create(
+  render(
     <InitialLoadingScreen
       navigation={navigation}
       loadKeypair={loadKeypair}
@@ -55,7 +52,7 @@ it('opens the Main screen and load account when a key was found', done => {
   const fakeKeypair = { publicKey: jest.fn() };
   loadKeypair.mockResolvedValueOnce({ keypair: fakeKeypair });
 
-  renderer.create(
+  render(
     <InitialLoadingScreen
       navigation={navigation}
       loadKeypair={loadKeypair}

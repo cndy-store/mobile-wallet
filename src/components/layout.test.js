@@ -1,28 +1,27 @@
 import React from 'react';
 import { Container, Row } from './layout';
-
-import renderer from 'react-test-renderer';
+import { render } from '../__tests__/renderer';
 
 describe('Container', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(<Container />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { toJSON } = render(<Container />);
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('adds additional props', () => {
-    const tree = renderer.create(<Container hello="world" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { toJSON } = render(<Container hello="world" />);
+    expect(toJSON()).toMatchSnapshot();
   });
 });
 
 describe('Row', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(<Row />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { toJSON } = render(<Row />);
+    expect(toJSON()).toMatchSnapshot();
   });
 
   it('adds additional props', () => {
-    const tree = renderer.create(<Row hello="world" />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const { toJSON } = render(<Row hello="world" />);
+    expect(toJSON()).toMatchSnapshot();
   });
 });

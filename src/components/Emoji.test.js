@@ -1,8 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '../__tests__/renderer';
 import Emoji from './Emoji';
 
 it('renders correctly', () => {
-  const tree = renderer.create(<Emoji name={'lollipop'} />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(<Emoji name={'lollipop'} />);
+  expect(toJSON()).toMatchSnapshot();
 });

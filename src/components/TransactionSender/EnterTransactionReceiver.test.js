@@ -1,43 +1,37 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '../../__tests__/renderer';
 import { Button, TextInput } from 'react-native';
 import { publicKey } from '../../__tests__/fixtures/keypair';
 import EnterTransactionReceiver from './EnterTransactionReceiver';
 
-it('renders correctly without an error', () => {
-  const onSubmit = jest.fn();
+const onSubmit = jest.fn();
 
-  const tree = renderer
-    .create(<EnterTransactionReceiver error={null} onSubmit={onSubmit} />)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+it('renders correctly without an error', () => {
+  const { toJSON } = render(
+    <EnterTransactionReceiver error={null} onSubmit={onSubmit} />
+  );
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('calls onSubmit with entered public key', () => {
-  const onSubmit = jest.fn();
-
-  const instance = renderer.create(
+  const { root } = render(
     <EnterTransactionReceiver error={null} onSubmit={onSubmit} />
-  ).root;
+  );
 
-  const input = instance.findByType(TextInput);
+  const input = root.findByType(TextInput);
   input.props.onChangeText(publicKey);
 
-  instance.findByType(Button).props.onPress();
+  root.findByType(Button).props.onPress();
   expect(onSubmit).toHaveBeenCalledWith({ receiverInput: publicKey });
 });
 
 it('renders correctly with an error', () => {
-  const onSubmit = jest.fn();
-
-  const tree = renderer
-    .create(
-      <EnterTransactionReceiver
-        receiver={publicKey}
-        error={'With an error'}
-        onSubmit={onSubmit}
-      />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(
+    <EnterTransactionReceiver
+      receiver={publicKey}
+      error={'With an error'}
+      onSubmit={onSubmit}
+    />
+  );
+  expect(toJSON()).toMatchSnapshot();
 });

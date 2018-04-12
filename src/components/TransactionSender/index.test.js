@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '../../__tests__/renderer';
 import { publicKey } from '../../__tests__/fixtures/keypair';
 import { TransactionSender } from './index';
 import ConfirmTransactionDetails from './ConfirmTransactionDetails';
@@ -15,50 +15,46 @@ const onFailure = jest.fn();
 const fakeResponse = { data: 'TRANSACTION' };
 
 it('renders correctly without an error', () => {
-  const tree = renderer
-    .create(
-      <TransactionSender
-        onCancel={onCancel}
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-      />
-    )
-    .toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-describe('no receiver given', () => {
-  const rendered = renderer.create(
+  const { toJSON } = render(
     <TransactionSender
       onCancel={onCancel}
       onSuccess={onSuccess}
       onFailure={onFailure}
     />
   );
-  const instance = rendered.root;
-  const component = rendered.getInstance();
+  expect(toJSON()).toMatchSnapshot();
+});
+
+describe('no receiver given', () => {
+  const { instance, root } = render(
+    <TransactionSender
+      onCancel={onCancel}
+      onSuccess={onSuccess}
+      onFailure={onFailure}
+    />
+  );
 
   it('renders EnterTransactionReceiver', () => {
     expect(() => {
-      instance.findByType(EnterTransactionReceiver);
+      root.findByType(EnterTransactionReceiver);
     }).not.toThrowError();
   });
 
   it('shows the close button', () => {
-    const closeButton = instance.findByProps({ title: 'Close' });
+    const closeButton = root.findByProps({ title: 'Close' });
     expect(closeButton).toBeDefined();
   });
 
   it('passes the correct props to the subcomponent', () => {
-    component.setState({ receiverError: 'Some error' });
-    const subcomponent = instance.findByType(EnterTransactionReceiver);
-    expect(subcomponent.props.onSubmit).toEqual(component.handleReceiverUpdate);
-    expect(subcomponent.props.error).toEqual(component.state.receiverError);
+    instance.setState({ receiverError: 'Some error' });
+    const subcomponent = root.findByType(EnterTransactionReceiver);
+    expect(subcomponent.props.onSubmit).toEqual(instance.handleReceiverUpdate);
+    expect(subcomponent.props.error).toEqual(instance.state.receiverError);
   });
 });
 
 describe('no amount given', () => {
-  const rendered = renderer.create(
+  const { instance, root } = render(
     <TransactionSender
       onCancel={onCancel}
       onSuccess={onSuccess}
@@ -66,31 +62,29 @@ describe('no amount given', () => {
       receiver={publicKey}
     />
   );
-  const instance = rendered.root;
-  const component = rendered.getInstance();
 
   it('renders EnterTransactionDetails', () => {
     expect(() => {
-      instance.findByType(EnterTransactionDetails);
+      root.findByType(EnterTransactionDetails);
     }).not.toThrowError();
   });
 
   it('shows the close button', () => {
-    const closeButton = instance.findByProps({ title: 'Close' });
+    const closeButton = root.findByProps({ title: 'Close' });
     expect(closeButton).toBeDefined();
   });
 
   it('passes the correct props to the subcomponent', () => {
-    component.setState({ amountError: 'Some error' });
-    const subcomponent = instance.findByType(EnterTransactionDetails);
-    expect(subcomponent.props.onSubmit).toEqual(component.handleAmountUpdate);
-    expect(subcomponent.props.receiver).toEqual(component.state.receiver);
-    expect(subcomponent.props.error).toEqual(component.state.amountError);
+    instance.setState({ amountError: 'Some error' });
+    const subcomponent = root.findByType(EnterTransactionDetails);
+    expect(subcomponent.props.onSubmit).toEqual(instance.handleAmountUpdate);
+    expect(subcomponent.props.receiver).toEqual(instance.state.receiver);
+    expect(subcomponent.props.error).toEqual(instance.state.amountError);
   });
 });
 
 describe('user input complete', () => {
-  const rendered = renderer.create(
+  const { instance, root } = render(
     <TransactionSender
       onCancel={onCancel}
       onSuccess={onSuccess}
@@ -99,31 +93,29 @@ describe('user input complete', () => {
       amount={'100.00'}
     />
   );
-  const instance = rendered.root;
-  const component = rendered.getInstance();
 
   it('renders ConfirmTransactionDetails', () => {
     expect(() => {
-      instance.findByType(ConfirmTransactionDetails);
+      root.findByType(ConfirmTransactionDetails);
     }).not.toThrowError();
   });
 
   it('shows the close button', () => {
-    const closeButton = instance.findByProps({ title: 'Close' });
+    const closeButton = root.findByProps({ title: 'Close' });
     expect(closeButton).toBeDefined();
   });
 
   it('passes the correct props to the subcomponent', () => {
-    const subcomponent = instance.findByType(ConfirmTransactionDetails);
-    expect(subcomponent.props.onConfirm).toEqual(component.handleConfirmation);
-    expect(subcomponent.props.onReject).toEqual(component.handleRejection);
-    expect(subcomponent.props.receiver).toEqual(component.state.receiver);
-    expect(subcomponent.props.amount).toEqual(component.state.amount);
+    const subcomponent = root.findByType(ConfirmTransactionDetails);
+    expect(subcomponent.props.onConfirm).toEqual(instance.handleConfirmation);
+    expect(subcomponent.props.onReject).toEqual(instance.handleRejection);
+    expect(subcomponent.props.receiver).toEqual(instance.state.receiver);
+    expect(subcomponent.props.amount).toEqual(instance.state.amount);
   });
 });
 
 describe('transaction in progress', () => {
-  const rendered = renderer.create(
+  const { instance, root } = render(
     <TransactionSender
       onCancel={onCancel}
       onSuccess={onSuccess}
@@ -132,27 +124,25 @@ describe('transaction in progress', () => {
       amount={'100.00'}
     />
   );
-  const instance = rendered.root;
-  const component = rendered.getInstance();
 
   it('renders TransactionInProgress', () => {
-    component.setState({ inProgress: true });
+    instance.setState({ inProgress: true });
 
     expect(() => {
-      instance.findByType(TransactionInProgress);
+      root.findByType(TransactionInProgress);
     }).not.toThrowError();
   });
 
   it('hides the close button', () => {
-    component.setState({ inProgress: true });
+    instance.setState({ inProgress: true });
 
-    const closeButton = instance.findAllByProps({ title: 'Close' });
+    const closeButton = root.findAllByProps({ title: 'Close' });
     expect(closeButton).toHaveLength(0);
   });
 });
 
 describe('transaction fails', () => {
-  const rendered = renderer.create(
+  const { instance, root } = render(
     <TransactionSender
       onCancel={onCancel}
       onSuccess={onSuccess}
@@ -161,29 +151,27 @@ describe('transaction fails', () => {
       amount={'100.00'}
     />
   );
-  const instance = rendered.root;
-  const component = rendered.getInstance();
-  component.setState({ error: new Error() });
+  instance.setState({ error: new Error() });
 
   it('renders TransactionFailure', () => {
     expect(() => {
-      instance.findByType(TransactionFailure);
+      root.findByType(TransactionFailure);
     }).not.toThrowError();
   });
 
   it('hides the close button', () => {
-    const closeButton = instance.findAllByProps({ title: 'Close' });
+    const closeButton = root.findAllByProps({ title: 'Close' });
     expect(closeButton).toHaveLength(0);
   });
 
   it('passes the correct handler to the subcomponent', () => {
-    const subcomponent = instance.findByType(TransactionFailure);
-    expect(subcomponent.props.onAcknowledge).toEqual(component.handleFailure);
+    const subcomponent = root.findByType(TransactionFailure);
+    expect(subcomponent.props.onAcknowledge).toEqual(instance.handleFailure);
   });
 });
 
 describe('transaction succeeds', () => {
-  const rendered = renderer.create(
+  const { instance, root } = render(
     <TransactionSender
       onCancel={onCancel}
       onSuccess={onSuccess}
@@ -192,23 +180,21 @@ describe('transaction succeeds', () => {
       amount={'100.00'}
     />
   );
-  const instance = rendered.root;
-  const component = rendered.getInstance();
-  component.setState({ response: fakeResponse });
+  instance.setState({ response: fakeResponse });
 
   it('renders TransactionSuccess when response was received', () => {
     expect(() => {
-      instance.findByType(TransactionSuccess);
+      root.findByType(TransactionSuccess);
     }).not.toThrowError();
   });
 
   it('hides the close button', () => {
-    const closeButton = instance.findAllByProps({ title: 'Close' });
+    const closeButton = root.findAllByProps({ title: 'Close' });
     expect(closeButton).toHaveLength(0);
   });
 
   it('passes the correct handler to the subcomponent', () => {
-    const subcomponent = instance.findByType(TransactionSuccess);
-    expect(subcomponent.props.onAcknowledge).toEqual(component.handleSuccess);
+    const subcomponent = root.findByType(TransactionSuccess);
+    expect(subcomponent.props.onAcknowledge).toEqual(instance.handleSuccess);
   });
 });

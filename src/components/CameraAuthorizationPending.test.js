@@ -1,8 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '../__tests__/renderer';
 import CameraAuthorizationPending from './CameraAuthorizationPending.js';
 
 it('renders correctly', () => {
-  const tree = renderer.create(<CameraAuthorizationPending />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(<CameraAuthorizationPending />);
+  expect(toJSON()).toMatchSnapshot();
 });

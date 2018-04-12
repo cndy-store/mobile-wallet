@@ -1,13 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '../__tests__/renderer';
 import { asset } from '../lib/stellar';
 import ShortenedPublicKey from './ShortenedPublicKey';
 
 import { publicKey } from '../__tests__/fixtures/keypair';
 
 it('renders correctly', () => {
-  const tree = renderer
-    .create(<ShortenedPublicKey publicKey={publicKey} />)
-    .toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(<ShortenedPublicKey publicKey={publicKey} />);
+  expect(toJSON()).toMatchSnapshot();
 });

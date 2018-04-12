@@ -1,8 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '../__tests__/renderer';
 import CameraNotAuthorized from './CameraNotAuthorized';
 
 it('renders correctly', () => {
-  const tree = renderer.create(<CameraNotAuthorized />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(<CameraNotAuthorized />);
+  expect(toJSON()).toMatchSnapshot();
 });

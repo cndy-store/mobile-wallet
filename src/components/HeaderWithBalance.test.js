@@ -1,11 +1,11 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '../__tests__/renderer';
 import { asset } from '../lib/stellar';
 import { HeaderWithBalance } from './HeaderWithBalance';
 
 it('renders correctly when no balance is given', () => {
-  const tree = renderer.create(<HeaderWithBalance />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(<HeaderWithBalance />);
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders correctly when account data is present, but not for the desired asset', () => {
@@ -18,8 +18,8 @@ it('renders correctly when account data is present, but not for the desired asse
     ]
   };
 
-  const tree = renderer.create(<HeaderWithBalance data={data} />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(<HeaderWithBalance data={data} />);
+  expect(toJSON()).toMatchSnapshot();
 });
 
 it('renders correctly when a balance is given', () => {
@@ -39,6 +39,6 @@ it('renders correctly when a balance is given', () => {
     ]
   };
 
-  const tree = renderer.create(<HeaderWithBalance data={data} />).toJSON();
-  expect(tree).toMatchSnapshot();
+  const { toJSON } = render(<HeaderWithBalance data={data} />);
+  expect(toJSON()).toMatchSnapshot();
 });

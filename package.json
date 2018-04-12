@@ -15,6 +15,7 @@
     "preset": "react-native",
     "testPathIgnorePatterns": [
       "<rootDir>/src/__tests__/fixtures/",
+      "<rootDir>/src/__tests__/renderer.js",
       "node_modules/"
     ],
     "transform": {

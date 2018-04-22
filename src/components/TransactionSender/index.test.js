@@ -51,6 +51,24 @@ describe('no receiver given', () => {
     expect(subcomponent.props.onSubmit).toEqual(instance.handleReceiverUpdate);
     expect(subcomponent.props.error).toEqual(instance.state.receiverError);
   });
+
+  it('updates receiver and resets error when receiver valid', () => {
+    instance.setState({ receiver: null });
+    const receiverInput = publicKey;
+
+    instance.handleReceiverUpdate({ receiverInput });
+    expect(instance.state.receiver).toEqual(publicKey);
+    expect(instance.state.receiverError).toEqual(null);
+  });
+
+  it('leaves receiver unchanged and adds error when receiver invalid', () => {
+    instance.setState({ receiver: publicKey });
+    const receiverInput = 'SOMETHING_INVALID';
+
+    instance.handleReceiverUpdate({ receiverInput });
+    expect(instance.state.receiver).toEqual(publicKey);
+    expect(instance.state.receiverError).toEqual('Invalid public key');
+  });
 });
 
 describe('no amount given', () => {
@@ -80,6 +98,24 @@ describe('no amount given', () => {
     expect(subcomponent.props.onSubmit).toEqual(instance.handleAmountUpdate);
     expect(subcomponent.props.receiver).toEqual(instance.state.receiver);
     expect(subcomponent.props.error).toEqual(instance.state.amountError);
+  });
+
+  it('updates amount and resets error when receiver valid', () => {
+    instance.setState({ amount: null });
+    const amountInput = '10.00';
+
+    instance.handleAmountUpdate({ amountInput });
+    expect(instance.state.amount).toEqual(amountInput);
+    expect(instance.state.amountError).toEqual(null);
+  });
+
+  xit('leaves amount unchanged and adds error when amount invalid', () => {
+    instance.setState({ amount: '10.00' });
+    const amountInput = 'SOMETHING_INVALID';
+
+    instance.handleAmountUpdate({ amountInput });
+    expect(instance.state.amount).toEqual('10.00');
+    expect(instance.state.amountError).toEqual('Invalid amount');
   });
 });
 
@@ -111,6 +147,12 @@ describe('user input complete', () => {
     expect(subcomponent.props.onReject).toEqual(instance.handleRejection);
     expect(subcomponent.props.receiver).toEqual(instance.state.receiver);
     expect(subcomponent.props.amount).toEqual(instance.state.amount);
+  });
+
+  it('resets amount and adds error when confirmaton rejects', () => {
+    instance.handleRejection();
+    expect(instance.state.amount).toEqual(null);
+    expect(instance.state.amountError).toEqual('Please enter a new amount');
   });
 });
 
@@ -197,4 +239,49 @@ describe('transaction succeeds', () => {
     const subcomponent = root.findByType(TransactionSuccess);
     expect(subcomponent.props.onAcknowledge).toEqual(instance.handleSuccess);
   });
+});
+
+describe('calling the cancel button', () => {
+  it('calls the onCancel callback', () => {
+    const { instance, root } = render(
+      <TransactionSender
+        onCancel={onCancel}
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+      />
+    );
+
+    const closeButton = root.findByProps({ title: 'Close' });
+    closeButton.props.onPress();
+
+    expect(onCancel).toHaveBeenCalled();
+  });
+});
+
+it('calls the onSuccess prop when handleSuccess is triggered', () => {
+  const { instance, root } = render(
+    <TransactionSender
+      onCancel={onCancel}
+      onSuccess={onSuccess}
+      onFailure={onFailure}
+    />
+  );
+
+  instance.handleSuccess();
+
+  expect(onSuccess).toHaveBeenCalled();
+});
+
+it('calls the onFailure prop when handleFailure is triggered', () => {
+  const { instance, root } = render(
+    <TransactionSender
+      onCancel={onCancel}
+      onSuccess={onSuccess}
+      onFailure={onFailure}
+    />
+  );
+
+  instance.handleFailure();
+
+  expect(onFailure).toHaveBeenCalled();
 });

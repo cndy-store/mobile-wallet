@@ -1,28 +1,154 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Text, View } from 'react-native';
-import { Container, Row } from '../components/layout';
+import { Image, StyleSheet } from 'react-native';
+import Modal from 'react-native-modal';
+import {
+  Icon,
+  Body,
+  Card,
+  CardItem,
+  Container,
+  Header,
+  Left,
+  Right,
+  Content,
+  Button,
+  Text,
+  Title
+} from 'native-base';
 
-export default class WelcomeScreen extends Component {
+import BarCodeScanner from '../components/BarCodeScanner';
+import EnterSecretModal from '../components/EnterSecretModal';
+import { decodeSecret } from '../lib/keypairHelpers';
+import { saveKeypair } from '../actions/keypair';
+import modalStyle from '../styles/modal';
+import image from '../../assets/img/qr-code.png';
+
+export class WelcomeScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isScannerModalVisible: false,
+      isTextInputModalVisible: false
+    };
+
+    this.openTextInputModal = this.openTextInputModal.bind(this);
+    this.closeTextInputModal = this.closeTextInputModal.bind(this);
+    this.handleTextInput = this.handleTextInput.bind(this);
+
+    this.openScannerModal = this.openScannerModal.bind(this);
+    this.closeScannerModal = this.closeScannerModal.bind(this);
+    this.handleScannedCode = this.handleScannedCode.bind(this);
+  }
+
+  openTextInputModal() {
+    this.setState({ isTextInputModalVisible: true });
+  }
+
+  closeTextInputModal() {
+    this.setState({ isTextInputModalVisible: false });
+  }
+
+  handleTextInput(result) {
+    this.closeTextInputModal();
+    this.saveKeypair(result);
+  }
+
+  openScannerModal() {
+    this.setState({ isScannerModalVisible: true });
+  }
+
+  closeScannerModal() {
+    this.setState({ isScannerModalVisible: false });
+  }
+
+  handleScannedCode(result) {
+    console.warn(result);
+    this.closeScannerModal();
+    this.saveKeypair(result);
+  }
+
+  saveKeypair(secret) {
+    this.props
+      .saveKeypair(secret)
+      .then(() => {
+        this.props.navigation.navigate('Main');
+      })
+      .catch(() => {
+        Alert.alert('Could not save secret!');
+      });
+  }
+
   render() {
     return (
       <Container>
-        <Row>
-          <Text>Please setup your Secret</Text>
-        </Row>
+        <Header>
+          <Body>
+            <Title>Setup</Title>
+          </Body>
+        </Header>
+        <Content padder>
+          <Card>
+            <CardItem header>
+              <Text>Setup your keypair</Text>
+            </CardItem>
+            <CardItem>
+              <Image
+                style={{ width: '100%', height: 250 }}
+                resizeMode={'contain'}
+                source={image}
+              />
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Button block onPress={this.openScannerModal}>
+                  <Text>Scan QR Code</Text>
+                </Button>
+              </Body>
+            </CardItem>
+          </Card>
+          <Button block light onPress={this.openTextInputModal}>
+            <Text>Manually Enter Secret</Text>
+          </Button>
+        </Content>
 
-        <Row>
-          <Button color="#ff0000" title={'Scan QR Code'} onPress={() => {}} />
-        </Row>
-
-        <Row>
-          <Button
-            color="#ff0000"
-            title={'Manually enter Secret'}
-            onPress={() => this.props.navigation.navigate('EnterSecret')}
+        <Modal
+          isVisible={this.state.isScannerModalVisible}
+          style={modalStyle.modal}
+        >
+          <BarCodeScanner
+            onCancel={this.closeScannerModal}
+            onCodeScan={this.handleScannedCode}
+            decoder={decodeSecret}
           />
-        </Row>
+        </Modal>
+        <Modal
+          isVisible={this.state.isTextInputModalVisible}
+          style={modalStyle.modal}
+        >
+          <EnterSecretModal
+            onCancel={this.closeTextInputModal}
+            onSubmit={this.handleTextInput}
+          />
+        </Modal>
       </Container>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    inProgress: state.keypair.inProgress,
+    error: state.keypair.error
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    saveKeypair: secret => dispatch(saveKeypair(secret))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);

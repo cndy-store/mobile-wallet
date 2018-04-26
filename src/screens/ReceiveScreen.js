@@ -34,8 +34,6 @@ export class ReceiveScreen extends Component {
   }
 }
 
-const styles = StyleSheet.create({});
-
 ReceiveScreen.propTypes = {};
 
 const mapStateToProps = state => {

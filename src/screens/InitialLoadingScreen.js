@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
-
+import { Toast } from 'native-base';
 import { loadKeypair } from '../actions/keypair';
 import { loadAccount } from '../actions/account';
 
@@ -13,15 +13,19 @@ export class InitialLoadingScreen extends Component {
   }
 
   loadKeypair = async () => {
-    this.props.loadKeypair().then(({ keypair }) => {
-      let nextScreen = 'KeySetup';
-      if (keypair) {
-        nextScreen = 'Main';
-        this.props.loadAccount(keypair.publicKey());
-      }
+    const { keypair } = await this.props.loadKeypair();
+    let nextScreen = 'KeySetup';
+    if (keypair) {
+      nextScreen = 'Main';
 
-      this.props.navigation.navigate(nextScreen);
-    });
+      this.props.loadAccount(keypair.publicKey()).catch(e => {
+        Toast.show({
+          text: 'Could not load account data. Please check internet connection.'
+        });
+      });
+    }
+
+    this.props.navigation.navigate(nextScreen);
   };
 
   render() {

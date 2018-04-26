@@ -60,8 +60,6 @@ class EnterTransactionReceiver extends Component {
   }
 }
 
-const styles = StyleSheet.create({});
-
 EnterTransactionReceiver.propTypes = {
   error: PropTypes.string,
   onSubmit: PropTypes.func.isRequired

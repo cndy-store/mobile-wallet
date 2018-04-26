@@ -64,8 +64,6 @@ class EnterTransactionDetails extends Component {
   }
 }
 
-const styles = StyleSheet.create({});
-
 EnterTransactionDetails.propTypes = {
   receiver: PropTypes.string.isRequired,
   error: PropTypes.string,

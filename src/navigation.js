@@ -8,7 +8,6 @@ import {
 import Emoji from './components/Emoji';
 
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
-import EnterSecretScreen from './screens/EnterSecretScreen';
 import ReceiveScreen from './screens/ReceiveScreen';
 import SendScreen from './screens/SendScreen';
 import SettingsScreen from './screens/SettingsScreen';
@@ -55,8 +54,7 @@ const MainStack = StackNavigator({
 
 const KeySetupStack = StackNavigator(
   {
-    Welcome: { screen: WelcomeScreen },
-    EnterSecret: { screen: EnterSecretScreen }
+    Welcome: { screen: WelcomeScreen }
   },
   {
     initialRouteName: 'Welcome',

@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Button, StyleSheet, View, Text } from 'react-native';
 import Modal from 'react-native-modal';
 
+import modalStyle from '../styles/modal';
 import HeaderWithBalance from '../components/HeaderWithBalance';
 import BarCodeScanner from '../components/BarCodeScanner';
 import TransactionSender from '../components/TransactionSender';
@@ -79,7 +80,7 @@ export class SendScreen extends Component {
 
         <Modal
           isVisible={this.state.isScannerModalVisible}
-          style={styles.modal}
+          style={modalStyle.modal}
         >
           <BarCodeScanner
             onCancel={this.closeScannerModal}
@@ -87,7 +88,10 @@ export class SendScreen extends Component {
             decoder={decodePublicKey}
           />
         </Modal>
-        <Modal isVisible={this.state.isSenderModalVisible} style={styles.modal}>
+        <Modal
+          isVisible={this.state.isSenderModalVisible}
+          style={modalStyle.modal}
+        >
           <TransactionSender
             onCancel={this.closeSenderModal}
             onSuccess={this.handleTransactionSuccess}
@@ -101,9 +105,4 @@ export class SendScreen extends Component {
 
 SendScreen.propTypes = {};
 
-const styles = StyleSheet.create({
-  modal: {
-    margin: 0
-  }
-});
 export default SendScreen;

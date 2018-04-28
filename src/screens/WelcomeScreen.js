@@ -109,7 +109,7 @@ export class WelcomeScreen extends Component {
               </Body>
             </CardItem>
           </Card>
-          <Button block light onPress={this.openTextInputModal}>
+          <Button block transparent onPress={this.openTextInputModal}>
             <Text>Manually Enter Secret</Text>
           </Button>
         </Content>

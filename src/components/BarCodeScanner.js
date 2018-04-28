@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, StatusBar, StyleSheet, View, Text } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
+import {
+  Body,
+  Container,
+  Header,
+  Left,
+  Right,
+  Content,
+  Button,
+  Text
+} from 'native-base';
 import Dimensions from 'Dimensions';
 import Camera from 'react-native-camera';
 import CameraNotAuthorized from '../components/CameraNotAuthorized';
@@ -85,13 +95,10 @@ export class BarCodeScanner extends Component {
       <View style={styles.container}>
         <StatusBar animated hidden />
         {this.renderCamera()}
-        <View style={[styles.overlay, styles.topOverlay]}>
-          <Text>Scan a QR Code</Text>
-        </View>
-        <View style={[styles.overlay, styles.bottomOverlay]}>
-          <View>
-            <Button title={'Abort'} onPress={this.handleCancel} />
-          </View>
+        <View style={[styles.overlay]}>
+          <Button transparent onPress={this.handleCancel}>
+            <Text>Cancel</Text>
+          </Button>
         </View>
         {this.renderError()}
       </View>
@@ -116,10 +123,12 @@ const styles = StyleSheet.create({
   overlay: {
     flex: 1,
     position: 'absolute',
-    backgroundColor: 'rgba(255,255,255, 0.5)',
-    padding: 16,
+    top: 0,
     right: 0,
     left: 0,
+    paddingTop: 15,
+    paddingRight: 10,
+    paddingLeft: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -133,12 +142,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ffffff',
     backgroundColor: 'rgba(255,0,0,0.4)'
-  },
-  topOverlay: {
-    top: 0
-  },
-  bottomOverlay: {
-    bottom: 0
   }
 });
 

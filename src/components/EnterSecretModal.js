@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { styles as s } from 'react-native-style-tachyons';
 import {
   Icon,
@@ -57,22 +57,26 @@ export class EnterSecretModal extends React.Component {
   renderError() {
     if (!this.state.error) return null;
 
-    return <FormError message={this.state.error} />;
+    return (
+      <View style={[s.mt2]}>
+        <FormError message={this.state.error} />
+      </View>
+    );
   }
 
   render() {
     return (
       <Container style={modalStyle.container}>
         <Header>
-          <Left />
+          <Left>
+            <Button transparent onPress={this.handleCancel}>
+              <Text>Cancel</Text>
+            </Button>
+          </Left>
           <Body>
             <Title>Enter Secret</Title>
           </Body>
-          <Right>
-            <Button transparent onPress={this.handleCancel}>
-              <Icon name="close" />
-            </Button>
-          </Right>
+          <Right />
         </Header>
         <Content padder>
           <Form>
@@ -83,12 +87,12 @@ export class EnterSecretModal extends React.Component {
                 onChangeText={this.handleTextInput}
               />
             </Item>
+            {this.renderError()}
             <View style={[s.mt2]}>
               <Button block onPress={this.handleSave}>
                 <Text>Save</Text>
               </Button>
             </View>
-            {this.renderError()}
           </Form>
         </Content>
       </Container>

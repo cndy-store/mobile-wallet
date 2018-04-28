@@ -17,106 +17,86 @@ exports[`renders correctly 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(255,255,255, 0.5)",
           "flex": 1,
           "flexDirection": "row",
           "justifyContent": "space-between",
           "left": 0,
-          "padding": 16,
+          "paddingLeft": 10,
+          "paddingRight": 10,
+          "paddingTop": 15,
           "position": "absolute",
           "right": 0,
-        },
-        Object {
           "top": 0,
         },
       ]
     }
   >
-    <Text
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
       accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-    >
-      Scan a QR Code
-    </Text>
-  </View>
-  <View
-    style={
-      Array [
+      collapsable={undefined}
+      hasTVPreferredFocus={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "rgba(255,255,255, 0.5)",
-          "flex": 1,
+          "alignSelf": "flex-start",
+          "backgroundColor": "transparent",
+          "borderBottomWidth": null,
+          "borderColor": "#007aff",
+          "borderLeftWidth": null,
+          "borderRadius": 5,
+          "borderRightWidth": null,
+          "borderTopWidth": null,
+          "elevation": 0,
           "flexDirection": "row",
+          "height": 45,
           "justifyContent": "space-between",
-          "left": 0,
-          "padding": 16,
-          "position": "absolute",
-          "right": 0,
-        },
-        Object {
-          "bottom": 0,
-        },
-      ]
-    }
-  >
-    <View>
-      <View
-        accessibilityComponentType="button"
-        accessibilityLabel={undefined}
-        accessibilityTraits={
-          Array [
-            "button",
-          ]
+          "opacity": 1,
+          "paddingBottom": 6,
+          "paddingTop": 6,
+          "shadowColor": null,
+          "shadowOffset": null,
+          "shadowOpacity": null,
+          "shadowRadius": null,
         }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
         accessible={true}
-        collapsable={undefined}
-        hasTVPreferredFocus={undefined}
-        hitSlop={undefined}
-        isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
         style={
           Object {
-            "opacity": 1,
+            "backgroundColor": "transparent",
+            "color": "#007aff",
+            "fontFamily": "System",
+            "fontSize": 16.5,
+            "lineHeight": 19,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "paddingLeft": 16,
+            "paddingRight": 16,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
+        uppercase={false}
+        virtual={undefined}
       >
-        <View
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={undefined}
-            ellipsizeMode="tail"
-            style={
-              Array [
-                Object {
-                  "color": "#007AFF",
-                  "fontSize": 18,
-                  "padding": 8,
-                  "textAlign": "center",
-                },
-              ]
-            }
-          >
-            Abort
-          </Text>
-        </View>
-      </View>
+        Cancel
+      </Text>
     </View>
   </View>
 </View>

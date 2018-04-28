@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { HeaderTitle } from 'react-navigation';
+import { Title } from 'native-base';
 import { asset } from '../lib/stellar';
 
 const defaultText = '...';
 
-export class HeaderWithBalance extends Component {
+export class HeaderTitleWithBalance extends Component {
   getBalance() {
     if (!this.props.data) return null;
 
@@ -20,21 +20,21 @@ export class HeaderWithBalance extends Component {
 
     const balance = parseFloat(assetToShow.balance, 10);
 
-    return `${balance.toFixed(7)} 🍭`;
+    return `~${balance.toFixed(2)} 🍭`;
   }
 
   render() {
     const text = this.getBalance() || defaultText;
 
-    return <HeaderTitle>{text}</HeaderTitle>;
+    return <Title>{text}</Title>;
   }
 }
 
-HeaderWithBalance.defaultProps = {
+HeaderTitleWithBalance.defaultProps = {
   data: null
 };
 
-HeaderWithBalance.propTypes = {
+HeaderTitleWithBalance.propTypes = {
   data: PropTypes.shape({
     balances: PropTypes.array.isRequired
   })
@@ -46,4 +46,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderWithBalance);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  HeaderTitleWithBalance
+);

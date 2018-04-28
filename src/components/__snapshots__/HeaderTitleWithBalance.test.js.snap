@@ -2,43 +2,41 @@
 
 exports[`renders correctly when a balance is given 1`] = `
 <Text
-  accessibilityTraits="header"
   accessible={true}
   allowFontScaling={true}
-  collapsable={undefined}
   ellipsizeMode="tail"
   numberOfLines={1}
   style={
     Object {
-      "color": "rgba(0, 0, 0, .9)",
+      "color": "#000",
+      "fontFamily": "System",
       "fontSize": 17,
-      "fontWeight": "700",
-      "marginHorizontal": 16,
+      "fontWeight": "600",
       "textAlign": "center",
     }
   }
+  virtual={undefined}
 >
-  930.0000000 🍭
+  ~930.00 🍭
 </Text>
 `;
 
 exports[`renders correctly when account data is present, but not for the desired asset 1`] = `
 <Text
-  accessibilityTraits="header"
   accessible={true}
   allowFontScaling={true}
-  collapsable={undefined}
   ellipsizeMode="tail"
   numberOfLines={1}
   style={
     Object {
-      "color": "rgba(0, 0, 0, .9)",
+      "color": "#000",
+      "fontFamily": "System",
       "fontSize": 17,
-      "fontWeight": "700",
-      "marginHorizontal": 16,
+      "fontWeight": "600",
       "textAlign": "center",
     }
   }
+  virtual={undefined}
 >
   ...
 </Text>
@@ -46,21 +44,20 @@ exports[`renders correctly when account data is present, but not for the desired
 
 exports[`renders correctly when no balance is given 1`] = `
 <Text
-  accessibilityTraits="header"
   accessible={true}
   allowFontScaling={true}
-  collapsable={undefined}
   ellipsizeMode="tail"
   numberOfLines={1}
   style={
     Object {
-      "color": "rgba(0, 0, 0, .9)",
+      "color": "#000",
+      "fontFamily": "System",
       "fontSize": 17,
-      "fontWeight": "700",
-      "marginHorizontal": 16,
+      "fontWeight": "600",
       "textAlign": "center",
     }
   }
+  virtual={undefined}
 >
   ...
 </Text>

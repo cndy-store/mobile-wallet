@@ -1,26 +1,25 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, StyleSheet, View, Text } from 'react-native';
 import Modal from 'react-native-modal';
+import {
+  Icon,
+  Container,
+  Header,
+  Left,
+  Right,
+  Body,
+  Title,
+  Content,
+  Tab,
+  Tabs
+} from 'native-base';
 
 import modalStyle from '../styles/modal';
-import HeaderWithBalance from '../components/HeaderWithBalance';
 import BarCodeScanner from '../components/BarCodeScanner';
 import TransactionSender from '../components/TransactionSender';
 import { decodePublicKey } from '../lib/keypairHelpers';
 
 export class SendScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-
-    return {
-      headerTitle: <HeaderWithBalance />,
-      headerLeft: (
-        <Button onPress={() => navigation.navigate('Settings')} title="|||" />
-      ),
-      title: 'Send'
-    };
-  };
-
   constructor(props) {
     super(props);
 
@@ -71,7 +70,7 @@ export class SendScreen extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Content>
         <Text>Send Screen</Text>
         <Button title="Scan Code" onPress={this.openScannerModal} />
 
@@ -98,7 +97,7 @@ export class SendScreen extends Component {
             onFailure={this.handleTransactionFailure}
           />
         </Modal>
-      </View>
+      </Content>
     );
   }
 }

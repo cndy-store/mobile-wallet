@@ -1,56 +1,26 @@
 import React from 'react';
-import { Button, StyleSheet, View, Text } from 'react-native';
 import {
+  DrawerNavigator,
   StackNavigator,
   SwitchNavigator,
   TabNavigator
 } from 'react-navigation';
-import Emoji from './components/Emoji';
 
 import InitialLoadingScreen from './screens/InitialLoadingScreen';
-import ReceiveScreen from './screens/ReceiveScreen';
-import SendScreen from './screens/SendScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
+import MainScreen from './screens/MainScreen';
+import SideBar from './components/Sidebar';
 
-const TabNav = TabNavigator(
+const MainStack = DrawerNavigator(
   {
-    Send: { screen: SendScreen },
-    Receive: { screen: ReceiveScreen }
+    Main: { screen: MainScreen },
+    Settings: { screen: SettingsScreen }
   },
   {
-    initialRouteName: 'Send',
-    navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
-        let emojiName;
-        if (routeName === 'Send') {
-          emojiName = 'money_with_wings';
-        } else if (routeName === 'Receive') {
-          emojiName = 'moneybag';
-        }
-
-        return (
-          <Text style={{ fontSize: 30 }}>
-            <Emoji name={emojiName} />
-          </Text>
-        );
-      }
-    }),
-    tabBarOptions: {
-      activeTintColor: 'tomato',
-      inactiveTintColor: 'gray'
-    },
-    lazy: false,
-    animationEnabled: true,
-    swipeEnabled: true
+    contentComponent: SideBar
   }
 );
-
-const MainStack = StackNavigator({
-  MainTabs: { screen: TabNav },
-  Settings: { screen: SettingsScreen }
-});
 
 const KeySetupStack = StackNavigator(
   {

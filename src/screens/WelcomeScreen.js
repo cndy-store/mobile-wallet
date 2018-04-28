@@ -85,9 +85,11 @@ export class WelcomeScreen extends Component {
     return (
       <Container>
         <Header>
+          <Left />
           <Body>
             <Title>Setup</Title>
           </Body>
+          <Right />
         </Header>
         <Content padder>
           <Card>

@@ -1,18 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button, Text, View, TextInput } from 'react-native';
-import { Container, Row } from '../components/layout';
+import { Text, View } from 'react-native';
+
+import {
+  Button,
+  Icon,
+  Container,
+  Header,
+  Left,
+  Right,
+  Body,
+  Title,
+  Content,
+  Tab,
+  Tabs
+} from 'native-base';
 import { removeKeypair } from '../actions/keypair';
 
+import MainScreenHeader from '../components/MainScreenHeader';
+
 class SettingsScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    const { params } = navigation.state;
-
-    return {
-      headerTitle: 'Settings'
-    };
-  };
-
   constructor(props) {
     super(props);
 
@@ -40,17 +47,19 @@ class SettingsScreen extends React.Component {
 
     return (
       <Container>
-        <Row>
+        <MainScreenHeader hasTabs={false} />
+        <Content padded>
           <View>
             <Text>Click here to delete secret</Text>
 
             <Button
               disabled={this.props.inProgress}
-              title={buttonTitle}
               onPress={this.handleDeleteSecret}
-            />
+            >
+              <Text>{buttonTitle}</Text>
+            </Button>
           </View>
-        </Row>
+        </Content>
       </Container>
     );
   }

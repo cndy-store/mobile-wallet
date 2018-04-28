@@ -1,10 +1,10 @@
 import React from 'react';
 import { render } from '../__tests__/renderer';
 import { asset } from '../lib/stellar';
-import { HeaderWithBalance } from './HeaderWithBalance';
+import { HeaderTitleWithBalance } from './HeaderTitleWithBalance';
 
 it('renders correctly when no balance is given', () => {
-  const { toJSON } = render(<HeaderWithBalance />);
+  const { toJSON } = render(<HeaderTitleWithBalance />);
   expect(toJSON()).toMatchSnapshot();
 });
 
@@ -18,7 +18,7 @@ it('renders correctly when account data is present, but not for the desired asse
     ]
   };
 
-  const { toJSON } = render(<HeaderWithBalance data={data} />);
+  const { toJSON } = render(<HeaderTitleWithBalance data={data} />);
   expect(toJSON()).toMatchSnapshot();
 });
 
@@ -39,6 +39,6 @@ it('renders correctly when a balance is given', () => {
     ]
   };
 
-  const { toJSON } = render(<HeaderWithBalance data={data} />);
+  const { toJSON } = render(<HeaderTitleWithBalance data={data} />);
   expect(toJSON()).toMatchSnapshot();
 });

@@ -54,6 +54,7 @@ export class MainScreen extends Component {
 }
 
 MainScreen.propTypes = {
+  keypair: PropTypes.object.isRequired,
   loadAccount: PropTypes.func.isRequired
 };
 

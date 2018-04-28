@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Image, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import {
@@ -18,10 +20,11 @@ import {
   Tabs
 } from 'native-base';
 
-import modalStyle from '../styles/modal';
+import { loadAccount } from '../actions/account';
 import BarCodeScanner from '../components/BarCodeScanner';
 import TransactionSender from '../components/TransactionSender';
 import { decodePublicKey } from '../lib/keypairHelpers';
+import modalStyle from '../styles/modal';
 import image from '../../assets/img/qr-code.png';
 
 export class SendScreen extends Component {
@@ -52,11 +55,13 @@ export class SendScreen extends Component {
 
   handleTransactionSuccess() {
     console.warn('success!');
+    this.props.loadAccount(this.props.keypair.publicKey());
     this.closeSenderModal();
   }
 
   handleTransactionFailure() {
     console.warn('FAILURE!');
+    this.props.loadAccount(this.props.keypair.publicKey());
     this.closeSenderModal();
   }
 
@@ -124,6 +129,17 @@ export class SendScreen extends Component {
   }
 }
 
-SendScreen.propTypes = {};
+SendScreen.propTypes = {
+  keypair: PropTypes.object.isRequired,
+  loadAccount: PropTypes.func.isRequired
+};
 
-export default SendScreen;
+const mapStateToProps = state => ({
+  keypair: state.keypair.keypair
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadAccount: publicKey => dispatch(loadAccount(publicKey))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SendScreen);

@@ -96,9 +96,9 @@ export class WelcomeScreen extends Component {
             <CardItem header>
               <Text>Setup your keypair</Text>
             </CardItem>
-            <CardItem>
+            <CardItem cardBody>
               <Image
-                style={{ width: '100%', height: 250 }}
+                style={{ flex: 1, width: null, height: 250 }}
                 resizeMode={'contain'}
                 source={image}
               />

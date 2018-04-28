@@ -58,7 +58,6 @@ class EnterTransactionReceiver extends Component {
           <CardItem header>
             <Text>Enter Public Key of Receiver</Text>
           </CardItem>
-          <CardItem />
           <CardItem>
             <View style={{ flex: 1 }}>
               <Form>

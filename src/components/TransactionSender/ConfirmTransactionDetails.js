@@ -44,7 +44,6 @@ class ConfirmTransactionDetails extends Component {
           <CardItem header>
             <Text>Confirm Transaction Details</Text>
           </CardItem>
-          <CardItem />
           <CardItem>
             <Text>Receiver</Text>
           </CardItem>

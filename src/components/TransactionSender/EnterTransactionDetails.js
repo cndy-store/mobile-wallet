@@ -60,7 +60,6 @@ class EnterTransactionDetails extends Component {
           <CardItem header>
             <Text>Enter Amount to Transfer</Text>
           </CardItem>
-          <CardItem />
           <CardItem>
             <Text>Receiver</Text>
           </CardItem>

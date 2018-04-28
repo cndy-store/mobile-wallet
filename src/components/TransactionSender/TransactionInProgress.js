@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Button,
-  StatusBar,
-  StyleSheet,
-  View,
-  Text,
-  TextInput
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { Text } from 'native-base';
 import BouncingPreloader from 'react-native-bouncing-preloader';
 import Dimensions from 'Dimensions';
 import { styles as s } from 'react-native-style-tachyons';

@@ -30,7 +30,7 @@ export class SendScreen extends Component {
 
     this.state = {
       isScannerModalVisible: false,
-      isSenderModalVisible: true
+      isSenderModalVisible: false
     };
 
     this.openSenderModal = this.openSenderModal.bind(this);

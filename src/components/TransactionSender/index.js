@@ -129,9 +129,21 @@ export class TransactionSender extends Component {
     if (this.state.inProgress) {
       return <TransactionInProgress />;
     } else if (this.state.response) {
-      return <TransactionSuccess onAcknowledge={this.handleSuccess} />;
+      return (
+        <TransactionSuccess
+          receiver={this.state.receiver}
+          amount={this.state.amount}
+          onAcknowledge={this.handleSuccess}
+        />
+      );
     } else if (this.state.error) {
-      return <TransactionFailure onAcknowledge={this.handleFailure} />;
+      return (
+        <TransactionFailure
+          receiver={this.state.receiver}
+          amount={this.state.amount}
+          onAcknowledge={this.handleFailure}
+        />
+      );
     } else if (!this.state.receiver) {
       return (
         <EnterTransactionReceiver

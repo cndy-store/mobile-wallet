@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { StatusBar, View } from 'react-native';
 import {
+  Icon,
+  Body,
+  Card,
+  CardItem,
+  Container,
+  Form,
+  Input,
+  Label,
+  Header,
+  Item,
+  Left,
+  Right,
+  Content,
   Button,
-  StatusBar,
-  StyleSheet,
-  View,
   Text,
-  TextInput
-} from 'react-native';
+  Title
+} from 'native-base';
+import { styles as s } from 'react-native-style-tachyons';
+import FormError from '../../components/FormError';
 import Dimensions from 'Dimensions';
 
 const { width, height } = Dimensions.get('window');
@@ -35,26 +48,42 @@ class EnterTransactionReceiver extends Component {
   renderError() {
     if (!this.props.error) return null;
 
-    return <Text>{this.props.error}</Text>;
+    return <FormError message={this.props.error} />;
   }
 
   render() {
     return (
       <View>
-        <Text>Please enter Public Key of Receiver</Text>
-        <TextInput
-          style={{
-            width,
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1
-          }}
-          value={this.state.receiverInput}
-          autoCorrect={false}
-          onChangeText={this.updateReceiver}
-        />
-        <Button title="Next" onPress={this.handleSubmit} />
-        {this.renderError()}
+        <Card>
+          <CardItem header>
+            <Text>Enter Public Key of Receiver</Text>
+          </CardItem>
+          <CardItem />
+          <CardItem>
+            <View style={{ flex: 1 }}>
+              <Form>
+                <Item stackedLabel error={!!this.state.error}>
+                  <Label>Receiver</Label>
+                  <Input
+                    autoFocus={true}
+                    style={{ fontSize: 27 }}
+                    value={this.state.receiverInput}
+                    autoCorrect={false}
+                    onChangeText={this.updateReceiver}
+                  />
+                </Item>
+                {this.renderError()}
+              </Form>
+            </View>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Button block onPress={this.handleSubmit}>
+                <Text>Next</Text>
+              </Button>
+            </Body>
+          </CardItem>
+        </Card>
       </View>
     );
   }

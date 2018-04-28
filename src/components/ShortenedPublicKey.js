@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, StyleSheet, Text } from 'react-native';
+import { H1 } from 'native-base';
 
 class ShortenedPublicKey extends Component {
   render() {
     return (
-      <Text ellipsizeMode="middle" numberOfLines={1} style={styles.publicKey}>
+      <H1 ellipsizeMode="middle" numberOfLines={1}>
         {this.props.publicKey}
-      </Text>
+      </H1>
     );
   }
 }
@@ -15,11 +15,5 @@ class ShortenedPublicKey extends Component {
 ShortenedPublicKey.propTypes = {
   publicKey: PropTypes.string.isRequired
 };
-
-const styles = StyleSheet.create({
-  publicKey: {
-    fontSize: 24
-  }
-});
 
 export default ShortenedPublicKey;

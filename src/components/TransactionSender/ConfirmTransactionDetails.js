@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { View } from 'react-native';
+
 import {
+  Icon,
+  H1,
+  Body,
+  Card,
+  CardItem,
+  Container,
+  Header,
+  Left,
+  Right,
+  Content,
   Button,
-  StatusBar,
-  StyleSheet,
-  View,
   Text,
-  TextInput
-} from 'react-native';
+  Title
+} from 'native-base';
 import Dimensions from 'Dimensions';
 import ShortenedPublicKey from '../../components/ShortenedPublicKey';
 import { sanitizeOngoingAmountInput } from '../../lib/formatter';
-
-const { width, height } = Dimensions.get('window');
 
 class ConfirmTransactionDetails extends Component {
   constructor(props) {
@@ -33,18 +40,35 @@ class ConfirmTransactionDetails extends Component {
   render() {
     return (
       <View>
-        <ShortenedPublicKey publicKey={this.props.receiver} />
-        <Text>Amount:</Text>
-        <Text
-          style={{
-            width,
-            height: 40
-          }}
-        >
-          {this.props.amount}
-        </Text>
-        <Button title="Confirm!" onPress={this.handleConfirm} />
-        <Button title="Change!" onPress={this.handleReject} />
+        <Card>
+          <CardItem header>
+            <Text>Confirm Transaction Details</Text>
+          </CardItem>
+          <CardItem />
+          <CardItem>
+            <Text>Receiver</Text>
+          </CardItem>
+          <CardItem>
+            <ShortenedPublicKey publicKey={this.props.receiver} />
+          </CardItem>
+          <CardItem>
+            <Text>Amount</Text>
+          </CardItem>
+          <CardItem>
+            <H1>{this.props.amount}</H1>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Button block onPress={this.handleConfirm}>
+                <Text>Confirm</Text>
+              </Button>
+            </Body>
+          </CardItem>
+        </Card>
+
+        <Button block transparent onPress={this.handleReject}>
+          <Text>Change amount</Text>
+        </Button>
       </View>
     );
   }

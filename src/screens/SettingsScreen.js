@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 
 import {
   Button,
+  Text,
   Icon,
   Container,
   Header,

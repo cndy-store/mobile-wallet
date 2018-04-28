@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, StatusBar, StyleSheet, View, TextInput } from 'react-native';
+import { StatusBar, StyleSheet, View, TextInput } from 'react-native';
+import {
+  Icon,
+  Body,
+  Card,
+  CardItem,
+  Container,
+  Form,
+  Input,
+  Label,
+  Header,
+  Item,
+  Left,
+  Right,
+  Content,
+  Button,
+  Text,
+  Title
+} from 'native-base';
 import Dimensions from 'Dimensions';
 import ShortenedPublicKey from '../../components/ShortenedPublicKey';
 import EnterTransactionReceiver from './EnterTransactionReceiver';
@@ -13,8 +31,7 @@ import TransactionFailure from './TransactionFailure';
 import { sendPayment } from '../../lib/stellarAPI';
 import { parseTransactionAmount } from '../../lib/formatter';
 import { isValidPublicKey } from '../../lib/keypairHelpers';
-
-const { width, height } = Dimensions.get('window');
+import modalStyle from '../../styles/modal';
 
 export class TransactionSender extends Component {
   constructor(props) {
@@ -101,7 +118,11 @@ export class TransactionSender extends Component {
       return null;
     }
 
-    return <Button onPress={this.handleCancel} title="Close" />;
+    return (
+      <Button transparent onPress={this.handleCancel}>
+        <Text>Cancel</Text>
+      </Button>
+    );
   }
 
   renderSubview() {
@@ -142,24 +163,19 @@ export class TransactionSender extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.renderCloseButton()}
-        {this.renderSubview()}
-      </View>
+      <Container style={modalStyle.container}>
+        <Header>
+          <Left>{this.renderCloseButton()}</Left>
+          <Body>
+            <Title>Send CNDY</Title>
+          </Body>
+          <Right />
+        </Header>
+        <Content padder>{this.renderSubview()}</Content>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignContent: 'center',
-    height,
-    backgroundColor: '#ffffff'
-  }
-});
 
 TransactionSender.defaultProps = {
   amount: null,

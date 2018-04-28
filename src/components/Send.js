@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, StyleSheet, View, Text } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import Modal from 'react-native-modal';
 import {
+  Button,
+  Text,
   Icon,
+  Card,
+  CardItem,
   Container,
   Header,
   Left,
@@ -18,6 +22,7 @@ import modalStyle from '../styles/modal';
 import BarCodeScanner from '../components/BarCodeScanner';
 import TransactionSender from '../components/TransactionSender';
 import { decodePublicKey } from '../lib/keypairHelpers';
+import image from '../../assets/img/qr-code.png';
 
 export class SendScreen extends Component {
   constructor(props) {
@@ -25,7 +30,7 @@ export class SendScreen extends Component {
 
     this.state = {
       isScannerModalVisible: false,
-      isSenderModalVisible: false
+      isSenderModalVisible: true
     };
 
     this.openSenderModal = this.openSenderModal.bind(this);
@@ -70,12 +75,29 @@ export class SendScreen extends Component {
 
   render() {
     return (
-      <Content>
-        <Text>Send Screen</Text>
-        <Button title="Scan Code" onPress={this.openScannerModal} />
-
-        <Text>New transaction</Text>
-        <Button title="Open Transaction Modal" onPress={this.openSenderModal} />
+      <Content padder>
+        <Card>
+          <CardItem header>
+            <Text>Scan Receiver QR Code</Text>
+          </CardItem>
+          <CardItem cardBody>
+            <Image
+              style={{ flex: 1, width: null, height: 250 }}
+              resizeMode={'contain'}
+              source={image}
+            />
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Button block onPress={this.openScannerModal}>
+                <Text>Scan QR Code</Text>
+              </Button>
+            </Body>
+          </CardItem>
+        </Card>
+        <Button block transparent onPress={this.openSenderModal}>
+          <Text>Manually Enter Receiver</Text>
+        </Button>
 
         <Modal
           isVisible={this.state.isScannerModalVisible}

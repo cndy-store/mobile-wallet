@@ -1,4 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { StyleSheet, View, Text } from 'react-native';
 import {
   Button,
@@ -15,11 +17,25 @@ import {
 } from 'native-base';
 import Modal from 'react-native-modal';
 
+import { loadAccount } from '../actions/account';
 import MainScreenHeader from '../components/MainScreenHeader';
 import Send from '../components/Send';
 import Receive from '../components/Receive';
 
 export class MainScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.loadAccount();
+  }
+
+  loadAccount = async () => {
+    this.props.loadAccount(this.props.keypair.publicKey()).catch(e => {
+      Toast.show({
+        text: 'Could not load account data. Please check internet connection.'
+      });
+    });
+  };
+
   render() {
     return (
       <Container>
@@ -37,6 +53,16 @@ export class MainScreen extends Component {
   }
 }
 
-MainScreen.propTypes = {};
+MainScreen.propTypes = {
+  loadAccount: PropTypes.func.isRequired
+};
 
-export default MainScreen;
+const mapStateToProps = state => ({
+  keypair: state.keypair.keypair
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadAccount: publicKey => dispatch(loadAccount(publicKey))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

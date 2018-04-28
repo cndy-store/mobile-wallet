@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 import { Toast } from 'native-base';
 import { loadKeypair } from '../actions/keypair';
-import { loadAccount } from '../actions/account';
 
 export class InitialLoadingScreen extends Component {
   constructor(props) {
@@ -17,12 +16,6 @@ export class InitialLoadingScreen extends Component {
     let nextScreen = 'KeySetup';
     if (keypair) {
       nextScreen = 'Main';
-
-      this.props.loadAccount(keypair.publicKey()).catch(e => {
-        Toast.show({
-          text: 'Could not load account data. Please check internet connection.'
-        });
-      });
     }
 
     this.props.navigation.navigate(nextScreen);
@@ -48,7 +41,6 @@ const styles = StyleSheet.create({
 
 InitialLoadingScreen.propTypes = {
   loadKeypair: PropTypes.func.isRequired,
-  loadAccount: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     navigate: PropTypes.func.isRequired
   })
@@ -57,8 +49,7 @@ InitialLoadingScreen.propTypes = {
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
-  loadKeypair: () => dispatch(loadKeypair()),
-  loadAccount: publicKey => dispatch(loadAccount(publicKey))
+  loadKeypair: () => dispatch(loadKeypair())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(

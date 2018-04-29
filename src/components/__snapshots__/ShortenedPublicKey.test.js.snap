@@ -8,9 +8,12 @@ exports[`renders correctly 1`] = `
   numberOfLines={1}
   style={
     Object {
-      "fontSize": 24,
+      "color": "#000",
+      "fontSize": 27,
+      "lineHeight": 32,
     }
   }
+  virtual={undefined}
 >
   GCHSUHOKNZQAKTULV5YTMG5CKU2NKE7UUQVN6JT2JY7337CRBIAZ6LXK
 </Text>

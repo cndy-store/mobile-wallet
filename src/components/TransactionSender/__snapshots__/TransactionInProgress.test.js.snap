@@ -1,13 +1,110 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly without an error 1`] = `
-<View>
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "height": 1067.2,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={Object {}}
+  >
+    <View
+      collapsable={undefined}
+      style={
+        Object {
+          "marginLeft": 60,
+          "transform": Array [
+            Object {
+              "translateY": 0,
+            },
+          ],
+        }
+      }
+    >
+      <Image
+        collapsable={undefined}
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../assets/img/food/1.png",
+          }
+        }
+        style={
+          Object {
+            "height": 90,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+              Object {
+                "translateY": 5,
+              },
+            ],
+            "width": 150,
+          }
+        }
+      />
+    </View>
+    <View
+      collapsable={undefined}
+      style={
+        Object {
+          "marginLeft": 0,
+          "marginTop": -100,
+          "transform": Array [
+            Object {
+              "translateY": 0,
+            },
+          ],
+        }
+      }
+    >
+      <Image
+        collapsable={undefined}
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../assets/img/food/2.png",
+          }
+        }
+        style={
+          Object {
+            "height": 90,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+              Object {
+                "translateY": 5,
+              },
+            ],
+            "width": 150,
+          }
+        }
+      />
+    </View>
+  </View>
   <Text
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "#000",
+        "fontFamily": "System",
+        "fontSize": 16,
+      }
+    }
+    uppercase={false}
+    virtual={undefined}
   >
-    In Progress...
+    Transaction in Progress...
   </Text>
 </View>
 `;

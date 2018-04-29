@@ -10,6 +10,26 @@ const loadAccount = async publicKey => {
   return { account, data };
 };
 
+const loadPayments = async ({ publicKey, params }) => {
+  const urlParams = Object.assign({ limit: 30, order: 'desc' }, params);
+  const response = await axios.get(`/accounts/${publicKey}/payments`, {
+    params: urlParams
+  });
+
+  const { data } = response;
+  const records = data._embedded.records;
+  const hasNextPage = records.length >= urlParams.limit;
+
+  const filtered = records.filter(
+    item =>
+      item.type === 'payment' &&
+      item.asset_code === asset.getCode() &&
+      item.asset_issuer === asset.getIssuer()
+  );
+
+  return { data, hasNextPage, payments: filtered };
+};
+
 const sendPayment = async ({ amount, receiver, keypair }) => {
   const response = await loadAccount(keypair.publicKey());
   const senderAccount = response.account;
@@ -40,4 +60,4 @@ const sendPayment = async ({ amount, receiver, keypair }) => {
   return { data: transactionResponse.data };
 };
 
-export { loadAccount, sendPayment };
+export { loadAccount, loadPayments, sendPayment };

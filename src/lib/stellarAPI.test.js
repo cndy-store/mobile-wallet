@@ -1,10 +1,15 @@
 import MockAdapter from 'axios-mock-adapter';
-import { axios, StellarSdk } from './stellar';
+import { asset, axios, StellarSdk } from './stellar';
 import * as api from './stellarAPI';
 
 import { publicKey, secret } from '../__tests__/fixtures/keypair';
+import paymentsResponse from '../__tests__/fixtures/response_account_payments';
 
-const mock = new MockAdapter(axios);
+let mock;
+
+beforeEach(() => {
+  mock = new MockAdapter(axios);
+});
 
 describe('loadAccount', () => {
   it('returns response and an Account object', () => {
@@ -39,6 +44,69 @@ describe('loadAccount', () => {
     mock.onGet(/accounts/).networkError();
 
     return api.loadAccount(publicKey).catch(error => {
+      expect(error).toEqual(new Error('Network Error'));
+    });
+  });
+});
+
+describe('loadPayments', () => {
+  const expectedUrl = `accounts/${publicKey}/payments`;
+
+  it('returns response, a list of payment objects and indicator if next page could be loaded', () => {
+    mock.onGet(expectedUrl).reply(200, paymentsResponse);
+
+    return api.loadPayments({ publicKey }).then(response => {
+      expect(response.data).toEqual(paymentsResponse);
+      expect(response.hasNextPage).toEqual(false);
+      expect(response.payments).toBeDefined();
+    });
+  });
+
+  it('only returns payments that match the asset and are an actual payment', () => {
+    mock.onGet(expectedUrl).reply(200, paymentsResponse);
+
+    return api.loadPayments({ publicKey }).then(response => {
+      expect(response.payments.length).toEqual(24);
+      response.payments.forEach(payment => {
+        expect(payment.type).toEqual('payment');
+        expect(payment.asset_code).toEqual('CNDY');
+        expect(payment.asset_issuer).toEqual(asset.getIssuer());
+      });
+    });
+  });
+
+  it('indicates a next page, if the limit is fulfilled', () => {
+    mock.onGet(expectedUrl).reply(200, paymentsResponse);
+
+    return api
+      .loadPayments({ publicKey, params: { limit: 27 } })
+      .then(response => {
+        expect(response.hasNextPage).toEqual(true);
+        // the limit is based on the number of returned records before the filtering
+        expect(response.payments.length).toEqual(24);
+      });
+  });
+
+  it('handles a non-successful response', () => {
+    mock.onGet(expectedUrl).reply(404);
+
+    return api.loadPayments({ publicKey }).catch(error => {
+      expect(error).toEqual(new Error('Request failed with status code 404'));
+    });
+  });
+
+  it('handles a timeout', () => {
+    mock.onGet(expectedUrl).timeout();
+
+    return api.loadPayments({ publicKey }).catch(error => {
+      expect(error).toEqual(new Error('timeout of 10000ms exceeded'));
+    });
+  });
+
+  it('handles a network error', () => {
+    mock.onGet(expectedUrl).networkError();
+
+    return api.loadPayments({ publicKey }).catch(error => {
       expect(error).toEqual(new Error('Network Error'));
     });
   });

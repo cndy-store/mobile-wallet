@@ -26,7 +26,7 @@ export default function payments(state = defaultState, action) {
     case PAYMENTS_LOAD:
       return {
         ...state,
-        payments: [...state.payments, ...action.payments],
+        payments: action.payments,
         data: action.data,
         firstPageLoaded: action.firstPageLoaded,
         hasNextPage: action.hasNextPage,

@@ -73,7 +73,7 @@ it('handles the first PAYMENTS_LOAD', () => {
   });
 });
 
-it('handles the PAYMENTS_LOAD with existing payments in the state', () => {
+it('replaces the PAYMENTS_LOAD with existing payments in the state', () => {
   expect(
     reducer(
       { payments: ['EXISTING_PAYMENTS'] },
@@ -89,7 +89,7 @@ it('handles the PAYMENTS_LOAD with existing payments in the state', () => {
   ).toEqual({
     isProcessing: false,
     error: null,
-    payments: ['EXISTING_PAYMENTS', 'PAYMENTS'],
+    payments: ['PAYMENTS'],
     data: 'DATA',
     hasNextPage: true
   });

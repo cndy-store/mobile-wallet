@@ -13,6 +13,7 @@ import {
 
 const routes = [
   { name: 'Send/Receive', route: 'Main' },
+  { name: 'Payments', route: 'Payments' },
   { name: 'Settings', route: 'Settings' }
 ];
 

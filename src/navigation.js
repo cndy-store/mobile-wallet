@@ -10,12 +10,14 @@ import InitialLoadingScreen from './screens/InitialLoadingScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import MainScreen from './screens/MainScreen';
+import PaymentsScreen from './screens/PaymentsScreen';
 import SideBar from './components/Sidebar';
 
 const MainStack = DrawerNavigator(
   {
     Main: { screen: MainScreen },
-    Settings: { screen: SettingsScreen }
+    Settings: { screen: SettingsScreen },
+    Payments: { screen: PaymentsScreen }
   },
   {
     contentComponent: SideBar

@@ -23,7 +23,7 @@ it('calls the onConfirm prop if confirm button is pressed', () => {
   const onConfirm = jest.fn();
   const onReject = jest.fn();
 
-  const { root } = render(
+  const { root, instance } = render(
     <ConfirmTransactionDetails
       receiver={publicKey}
       amount={'12.34'}
@@ -32,7 +32,7 @@ it('calls the onConfirm prop if confirm button is pressed', () => {
     />
   );
 
-  root.findByProps({ title: 'Confirm!' }).props.onPress();
+  root.findByProps({ onPress: instance.handleConfirm }).props.onPress();
   expect(onConfirm).toHaveBeenCalled();
 });
 
@@ -40,7 +40,7 @@ it('calls the onConfirm prop if reject button is pressed', () => {
   const onConfirm = jest.fn();
   const onReject = jest.fn();
 
-  const { root } = render(
+  const { root, instance } = render(
     <ConfirmTransactionDetails
       receiver={publicKey}
       amount={'12.34'}
@@ -49,6 +49,6 @@ it('calls the onConfirm prop if reject button is pressed', () => {
     />
   );
 
-  root.findByProps({ title: 'Change!' }).props.onPress();
+  root.findByProps({ onPress: instance.handleReject }).props.onPress();
   expect(onReject).toHaveBeenCalled();
 });

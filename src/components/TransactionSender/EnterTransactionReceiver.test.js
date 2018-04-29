@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from '../../__tests__/renderer';
-import { Button, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
+import { Button } from 'native-base';
 import { publicKey } from '../../__tests__/fixtures/keypair';
 import EnterTransactionReceiver from './EnterTransactionReceiver';
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'native-base';
 import { render } from '../../__tests__/renderer';
 import { publicKey } from '../../__tests__/fixtures/keypair';
 import { TransactionSender } from './index';
@@ -41,7 +42,7 @@ describe('no receiver given', () => {
   });
 
   it('shows the close button', () => {
-    const closeButton = root.findByProps({ title: 'Close' });
+    const closeButton = root.findByProps({ onPress: instance.handleCancel });
     expect(closeButton).toBeDefined();
   });
 
@@ -88,7 +89,7 @@ describe('no amount given', () => {
   });
 
   it('shows the close button', () => {
-    const closeButton = root.findByProps({ title: 'Close' });
+    const closeButton = root.findByProps({ onPress: instance.handleCancel });
     expect(closeButton).toBeDefined();
   });
 
@@ -137,7 +138,7 @@ describe('user input complete', () => {
   });
 
   it('shows the close button', () => {
-    const closeButton = root.findByProps({ title: 'Close' });
+    const closeButton = root.findByProps({ onPress: instance.handleCancel });
     expect(closeButton).toBeDefined();
   });
 
@@ -251,7 +252,7 @@ describe('calling the cancel button', () => {
       />
     );
 
-    const closeButton = root.findByProps({ title: 'Close' });
+    const closeButton = root.findByProps({ onPress: instance.handleCancel });
     closeButton.props.onPress();
 
     expect(onCancel).toHaveBeenCalled();

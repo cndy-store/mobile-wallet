@@ -48,7 +48,7 @@ it('opens the KeySetup screen when no key was found', done => {
   }, 1);
 });
 
-fit('opens the Main screen and load account when a key was found', done => {
+it('opens the Main screen when a key was found', done => {
   const fakeKeypair = { publicKey: jest.fn() };
   loadKeypair.mockResolvedValueOnce({ keypair: fakeKeypair });
   loadAccount.mockResolvedValueOnce({});
@@ -62,9 +62,8 @@ fit('opens the Main screen and load account when a key was found', done => {
   );
 
   setTimeout(() => {
-    expect(loadAccount).toHaveBeenCalled();
-
     expect(navigate).toHaveBeenCalledWith('Main');
+
     done();
   }, 1);
 });

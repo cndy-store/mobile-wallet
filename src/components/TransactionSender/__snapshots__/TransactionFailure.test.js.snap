@@ -157,7 +157,9 @@ exports[`renders correctly without an error 1`] = `
           }
         }
         virtual={undefined}
-      />
+      >
+        GCHSUHOKNZQAKTULV5YTMG5CKU2NKE7UUQVN6JT2JY7337CRBIAZ6LXK
+      </Text>
     </View>
     <View
       style={
@@ -218,7 +220,9 @@ exports[`renders correctly without an error 1`] = `
           }
         }
         virtual={undefined}
-      />
+      >
+        12.000
+      </Text>
     </View>
     <View
       style={

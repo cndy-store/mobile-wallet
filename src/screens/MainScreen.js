@@ -12,6 +12,7 @@ import {
   Body,
   Title,
   Content,
+  Toast,
   Tab,
   Tabs
 } from 'native-base';

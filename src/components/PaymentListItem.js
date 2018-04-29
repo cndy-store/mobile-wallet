@@ -17,7 +17,6 @@ import {
   Tab,
   Tabs
 } from 'native-base';
-import moment from 'moment';
 import { styles as s } from 'react-native-style-tachyons';
 import { color } from '../styles/colors';
 import ShortenedPublicKey from './ShortenedPublicKey';
@@ -42,16 +41,13 @@ class PaymentListItem extends React.Component {
 
   render() {
     const amountColor = amountColors[this.props.type];
-    const timeString = moment(this.props.createdAt).format(
-      'MMM Do YYYY, HH:mm'
-    );
 
     return (
       <Card>
         <CardItem>
           <Left />
           <Right>
-            <Text note>{timeString}</Text>
+            <Text note>{this.props.createdAt}</Text>
           </Right>
         </CardItem>
         <CardItem>

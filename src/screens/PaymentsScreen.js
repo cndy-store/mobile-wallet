@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FlatList } from 'react-native';
-
+import { ActivityIndicator, FlatList } from 'react-native';
 import {
   View,
   Button,
@@ -12,32 +12,17 @@ import {
   Left,
   Right,
   Body,
+  Toast,
   Title,
   Content,
   Tab,
   Tabs
 } from 'native-base';
+import moment from 'moment';
 
+import { loadPayments } from '../actions/payments';
 import MainScreenHeader from '../components/MainScreenHeader';
 import PaymentListItem from '../components/PaymentListItem';
-
-const keyExtractor = (item, index) => item.id;
-const data = [
-  {
-    id: '37302740153602049',
-    type: 'credit',
-    publicKey: 'GBET4AVL4BYLFJTFKX2UYE3Y3EHNZXOBMBO5FP7O5FFTHSEAPZ5VEHHD',
-    amount: '1221.000000',
-    createdAt: '2018-04-28T15:16:28Z'
-  },
-  {
-    id: '47302740153602049',
-    type: 'debit',
-    publicKey: 'GBET4AVL4BYLFJTFKX2UYE2Y3E2NZXOBMBO5FP7O5FFTHSEAPZ5VEHHD',
-    amount: '100.000000',
-    createdAt: '2018-04-28T15:12:28Z'
-  }
-];
 
 class PaymentsScreen extends React.Component {
   constructor(props) {
@@ -49,25 +34,75 @@ class PaymentsScreen extends React.Component {
 
     this.renderListItem = this.renderListItem.bind(this);
     this.handleRefresh = this.handleRefresh.bind(this);
+    this.loadPayments();
   }
 
-  handleRefresh() {
-    this.setState({ refreshing: true });
+  loadPayments = async () => {
+    this.props.loadPayments(this.props.keypair.publicKey()).catch(e => {
+      Toast.show({
+        text: 'Could not load payment data. Please check internet connection.'
+      });
+    });
+  };
 
-    setTimeout(() => {
-      this.setState({ refreshing: false });
-    }, 1000);
+  handleRefresh() {
+    this.loadPayments();
+  }
+
+  transformData(payments) {
+    const me = this.props.keypair.publicKey();
+
+    return payments.map(payment => {
+      let type, publicKey;
+      if (payment.from === me) {
+        type = 'debit';
+        publicKey = payment.to;
+      } else {
+        type = 'credit';
+        publicKey = payment.from;
+      }
+
+      const createdAt = moment(payment.created_at).format('MMM Do YYYY, HH:mm');
+
+      return {
+        key: payment.id,
+        amount: payment.amount,
+        createdAt,
+        type,
+        publicKey
+      };
+    });
   }
 
   renderListItem({ item }) {
+    return <PaymentListItem {...item} />;
+  }
+
+  renderList() {
+    if (this.props.payments.length === 0) return null;
+
     return (
-      <PaymentListItem
-        type={item.type}
-        publicKey={item.publicKey}
-        amount={item.amount}
-        createdAt={item.createdAt}
+      <FlatList
+        data={this.transformData(this.props.payments)}
+        renderItem={this.renderListItem}
+        refreshing={this.props.isProcessing}
+        onRefresh={this.handleRefresh}
       />
     );
+  }
+
+  renderActivityIndicator() {
+    if (this.props.payments.length) return null;
+    if (!this.props.isProcessing) return null;
+
+    return <ActivityIndicator />;
+  }
+
+  renderEmptyState() {
+    if (!this.props.firstPageLoaded) return null;
+    if (this.props.payments.length) return null;
+
+    return <Text>No payment data available</Text>;
   }
 
   render() {
@@ -75,27 +110,34 @@ class PaymentsScreen extends React.Component {
       <Container>
         <MainScreenHeader hasTabs={false} />
         <View padder>
-          <FlatList
-            data={data}
-            keyExtractor={keyExtractor}
-            renderItem={this.renderListItem}
-            refreshing={this.state.refreshing}
-            onRefresh={this.handleRefresh}
-          />
+          {this.renderActivityIndicator()}
+          {this.renderEmptyState()}
+          {this.renderList()}
         </View>
       </Container>
     );
   }
 }
 
+PaymentsScreen.propTypes = {
+  keypair: PropTypes.object.isRequired,
+  loadPayments: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => {
   return {
-    keypair: state.keypair.keypait
+    keypair: state.keypair.keypair,
+    isProcessing: state.payments.isProcessing,
+    payments: state.payments.payments,
+    firstPageLoaded: state.payments.firstPageLoaded,
+    hasNextPage: state.payments.hasNextPage
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    loadPayments: publicKey => dispatch(loadPayments(publicKey))
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentsScreen);

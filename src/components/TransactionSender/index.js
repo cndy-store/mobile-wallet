@@ -84,7 +84,6 @@ export class TransactionSender extends Component {
 
     sendPayment({ amount, receiver, keypair: this.props.keypair })
       .then(result => {
-        console.dir(result);
         this.setState({
           response: result,
           inProgress: false

@@ -65,12 +65,11 @@ export class WelcomeScreen extends Component {
   }
 
   handleScannedCode(result) {
-    console.warn(result);
     this.closeScannerModal();
     this.saveKeypair(result);
   }
 
-  saveKeypair(secret) {
+  saveKeypair({ secret }) {
     this.props
       .saveKeypair(secret)
       .then(() => {

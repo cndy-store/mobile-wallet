@@ -64,12 +64,12 @@ export class WelcomeScreen extends Component {
     this.setState({ isScannerModalVisible: false });
   }
 
-  handleScannedCode(result) {
+  handleScannedCode({ secret }) {
     this.closeScannerModal();
-    this.saveKeypair(result);
+    this.saveKeypair(secret);
   }
 
-  saveKeypair({ secret }) {
+  saveKeypair(secret) {
     this.props
       .saveKeypair(secret)
       .then(() => {

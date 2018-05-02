@@ -32,8 +32,10 @@ export class SendScreen extends Component {
     super(props);
 
     this.state = {
-      isScannerModalVisible: false,
-      isSenderModalVisible: false
+      isModalVisible: false,
+      showScanner: false,
+      showTransactionSender: false,
+      receiver: null
     };
 
     this.openSenderModal = this.openSenderModal.bind(this);
@@ -46,36 +48,71 @@ export class SendScreen extends Component {
   }
 
   openSenderModal() {
-    this.setState({ isSenderModalVisible: true });
+    this.setState({ isModalVisible: true, showTransactionSender: true });
   }
 
   closeSenderModal() {
-    this.setState({ isSenderModalVisible: false });
+    this.setState({
+      isModalVisible: false,
+      showTransactionSender: false,
+      receiver: null
+    });
   }
 
   handleTransactionSuccess() {
-    console.warn('success!');
     this.props.loadAccount(this.props.keypair.publicKey());
     this.closeSenderModal();
   }
 
   handleTransactionFailure() {
-    console.warn('FAILURE!');
     this.props.loadAccount(this.props.keypair.publicKey());
     this.closeSenderModal();
   }
 
   openScannerModal() {
-    this.setState({ isScannerModalVisible: true });
+    this.setState({ isModalVisible: true, showScanner: true });
   }
 
   closeScannerModal() {
-    this.setState({ isScannerModalVisible: false });
+    this.setState({
+      isModalVisible: false,
+      showScanner: false,
+      receiver: null
+    });
   }
 
-  handleScannedCode(result) {
-    console.warn(result);
-    this.closeScannerModal();
+  handleScannedCode({ publicKey }) {
+    this.setState({
+      receiver: publicKey,
+      isModalVisible: true,
+      showScanner: false,
+      showTransactionSender: true
+    });
+  }
+
+  renderScanner() {
+    if (!this.state.showScanner) return null;
+
+    return (
+      <BarCodeScanner
+        onCancel={this.closeScannerModal}
+        onCodeScan={this.handleScannedCode}
+        decoder={decodePublicKey}
+      />
+    );
+  }
+
+  renderTransactionSender() {
+    if (!this.state.showTransactionSender) return null;
+
+    return (
+      <TransactionSender
+        receiver={this.state.receiver}
+        onCancel={this.closeSenderModal}
+        onSuccess={this.handleTransactionSuccess}
+        onFailure={this.handleTransactionFailure}
+      />
+    );
   }
 
   render() {
@@ -104,25 +141,9 @@ export class SendScreen extends Component {
           <Text>Manually Enter Receiver</Text>
         </Button>
 
-        <Modal
-          isVisible={this.state.isScannerModalVisible}
-          style={modalStyle.modal}
-        >
-          <BarCodeScanner
-            onCancel={this.closeScannerModal}
-            onCodeScan={this.handleScannedCode}
-            decoder={decodePublicKey}
-          />
-        </Modal>
-        <Modal
-          isVisible={this.state.isSenderModalVisible}
-          style={modalStyle.modal}
-        >
-          <TransactionSender
-            onCancel={this.closeSenderModal}
-            onSuccess={this.handleTransactionSuccess}
-            onFailure={this.handleTransactionFailure}
-          />
+        <Modal isVisible={this.state.isModalVisible} style={modalStyle.modal}>
+          {this.renderScanner()}
+          {this.renderTransactionSender()}
         </Modal>
       </Content>
     );

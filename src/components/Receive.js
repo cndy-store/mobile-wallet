@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   Icon,
@@ -18,7 +19,7 @@ import { Button, StyleSheet, View, Text } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { encodePublicKey } from '../lib/keypairHelpers';
 
-export class ReceiveScreen extends Component {
+export class Receive extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,7 +36,7 @@ export class ReceiveScreen extends Component {
   }
 
   renderQRCode() {
-    if (!this.state.qrCodeWidth) return;
+    if (!this.state.qrCodeWidth) return null;
 
     const url = encodePublicKey(this.props.keypair.publicKey());
     return <QRCode size={this.state.qrCodeWidth} value={url} elc="M" />;
@@ -59,7 +60,9 @@ export class ReceiveScreen extends Component {
   }
 }
 
-ReceiveScreen.propTypes = {};
+Receive.propTypes = {
+  keypair: PropTypes.string.isRequired
+};
 
 const mapStateToProps = state => {
   return {
@@ -71,4 +74,4 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReceiveScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(Receive);

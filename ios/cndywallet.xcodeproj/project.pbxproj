@@ -799,7 +799,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 920;
-				ORGANIZATIONNAME = Facebook;
+				ORGANIZATIONNAME = CNDY;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -1407,7 +1407,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cndywallet;
 				PRODUCT_NAME = cndywallet;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1430,7 +1430,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.cndywallet;
 				PRODUCT_NAME = cndywallet;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

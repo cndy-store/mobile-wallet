@@ -11,7 +11,7 @@ const asset = new StellarSdk.Asset(assetCode, issuerPublicKey);
 
 const axiosInstance = axios.create({
   baseURL: 'https://horizon-testnet.stellar.org',
-  timeout: 10 * 1000
+  timeout: 30 * 1000
 });
 
 module.exports = {

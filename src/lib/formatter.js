@@ -1,6 +1,7 @@
 import { padEnd } from 'lodash';
+import { localeSettings } from './i18n';
 
-const delimiter = '.';
+const delimiter = localeSettings.decimalSeparator;
 const maxPrecisionLength = 7;
 
 const allowedChars = new RegExp(`^[0-9${delimiter}]+`);

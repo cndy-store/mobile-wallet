@@ -3,6 +3,7 @@ package com.cndywallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.fixd.rctlocale.RCTLocalePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.horcrux.svg.SvgPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTLocalePackage(),
             new VectorIconsPackage(),
           new RNCameraPackage(),
           new SvgPackage()

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { chunk } from 'lodash';
-import { Button, StyleSheet, Text, Platform } from 'react-native';
+import { View, Button, StyleSheet, Text, Platform } from 'react-native';
 
 const pairsPerRow = 4;
 
@@ -38,9 +38,11 @@ class DisplayPublicKey extends Component {
 
   render() {
     return (
-      <Text numberOfLines={7} style={styles.publicKey}>
-        {this.keyParts()}
-      </Text>
+      <View style={{ alignSelf: 'center' }}>
+        <Text numberOfLines={7} style={styles.publicKey}>
+          {this.keyParts()}
+        </Text>
+      </View>
     );
   }
 }

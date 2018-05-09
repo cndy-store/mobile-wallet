@@ -36,7 +36,7 @@ describe('loadAccount', () => {
     mock.onGet(/accounts/).timeout();
 
     return api.loadAccount(publicKey).catch(error => {
-      expect(error).toEqual(new Error('timeout of 10000ms exceeded'));
+      expect(error).toEqual(new Error('timeout of 30000ms exceeded'));
     });
   });
 
@@ -99,7 +99,7 @@ describe('loadPayments', () => {
     mock.onGet(expectedUrl).timeout();
 
     return api.loadPayments({ publicKey }).catch(error => {
-      expect(error).toEqual(new Error('timeout of 10000ms exceeded'));
+      expect(error).toEqual(new Error('timeout of 30000ms exceeded'));
     });
   });
 
@@ -151,7 +151,7 @@ describe('sendPayment', () => {
     mock.onPost(/transactions/).timeout();
 
     return api.sendPayment({ amount, receiver, keypair }).catch(error => {
-      expect(error).toEqual(new Error('timeout of 10000ms exceeded'));
+      expect(error).toEqual(new Error('timeout of 30000ms exceeded'));
     });
   });
 

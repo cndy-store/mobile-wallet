@@ -1,14 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders a public key correctly 1`] = `
-<Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
-  numberOfLines={7}
+<View
   style={
     Object {
-      "fontSize": 24,
+      "alignSelf": "center",
     }
   }
 >
@@ -16,442 +12,454 @@ exports[`renders a public key correctly 1`] = `
     accessible={true}
     allowFontScaling={true}
     ellipsizeMode="tail"
+    numberOfLines={7}
     style={
       Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+        "fontSize": 24,
       }
     }
   >
-    GC
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    HS
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    >
+      GC
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    UH
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      HS
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    OK
-    
+    >
+      UH
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
+      }
+    >
+      OK
+      
 
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    NZ
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      NZ
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    QA
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    >
+      QA
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    KT
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      KT
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    UL
-    
+    >
+      UL
+      
 
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    V5
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      V5
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    YT
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    >
+      YT
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    MG
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      MG
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    5C
-    
+    >
+      5C
+      
 
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    KU
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      KU
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    2N
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    >
+      2N
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    KE
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      KE
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    7U
-    
+    >
+      7U
+      
 
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    UQ
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      UQ
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    VN
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    >
+      VN
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    6J
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      6J
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    T2
-    
+    >
+      T2
+      
 
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    JY
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      JY
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    73
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    >
+      73
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    37
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      37
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    CR
-    
+    >
+      CR
+      
 
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    BI
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      BI
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    AZ
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "fontWeight": "bold",
-        "letterSpacing": 5,
+    >
+      AZ
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "fontWeight": "bold",
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    6L
-    
-  </Text>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "fontFamily": "Courier",
-        "fontSize": 30,
-        "letterSpacing": 5,
+    >
+      6L
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontSize": 30,
+          "letterSpacing": 5,
+        }
       }
-    }
-  >
-    XK
-    
+    >
+      XK
+      
 
+    </Text>
   </Text>
-</Text>
+</View>
 `;

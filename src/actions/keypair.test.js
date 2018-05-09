@@ -55,7 +55,7 @@ describe('loadKeypair', () => {
     ];
 
     return store.dispatch(keypair.loadKeypair()).catch(error => {
-      expect(error).toEqual({ error: expectedError });
+      expect(error).toEqual(expectedError);
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -111,7 +111,7 @@ describe('saveKeypair', () => {
     return store
       .dispatch(keypair.saveKeypair('INVALID SECRET'))
       .catch(error => {
-        expect(error).toEqual({ error: expectedError });
+        expect(error).toEqual(expectedError);
         expect(store.getActions()).toEqual(expectedActions);
       });
   });
@@ -127,7 +127,7 @@ describe('saveKeypair', () => {
     ];
 
     return store.dispatch(keypair.saveKeypair(secret)).catch(error => {
-      expect(error).toEqual({ error: expectedError });
+      expect(error).toEqual(expectedError);
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -164,7 +164,7 @@ describe('removeKeypair', () => {
     ];
 
     return store.dispatch(keypair.removeKeypair()).catch(error => {
-      expect(error).toEqual({ error: expectedError });
+      expect(error).toEqual(expectedError);
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

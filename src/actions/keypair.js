@@ -55,7 +55,7 @@ export const loadKeypair = () => {
       return Promise.resolve({ keypair });
     } catch (error) {
       dispatch(keypairErrored({ error }));
-      return Promise.reject({ error });
+      return Promise.reject(error);
     }
   };
 };
@@ -69,7 +69,7 @@ export const saveKeypair = secretString => {
     if (!isValidSecret(secret)) {
       const error = new Error('Invalid Secret');
       dispatch(keypairErrored({ error }));
-      return Promise.reject({ error });
+      return Promise.reject(error);
     }
 
     try {
@@ -79,7 +79,7 @@ export const saveKeypair = secretString => {
       return Promise.resolve({ keypair });
     } catch (error) {
       dispatch(keypairErrored({ error }));
-      return Promise.reject({ error });
+      return Promise.reject(error);
     }
   };
 };
@@ -94,7 +94,7 @@ export const removeKeypair = () => {
       return Promise.resolve();
     } catch (error) {
       dispatch(keypairErrored({ error }));
-      return Promise.reject({ error });
+      return Promise.reject(error);
     }
   };
 };

@@ -35,7 +35,7 @@ export const loadPayments = publicKey => {
       return Promise.resolve({ payments, data, hasNextPage });
     } catch (error) {
       dispatch(paymentsErrored({ error }));
-      return Promise.reject({ error });
+      return Promise.reject(error);
     }
   };
 };

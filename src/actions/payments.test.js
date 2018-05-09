@@ -52,7 +52,7 @@ describe('loadPayments', () => {
     ];
 
     return store.dispatch(payments.loadPayments(publicKey)).catch(error => {
-      expect(error).toEqual({ error: expectedError });
+      expect(error).toEqual(expectedError);
       expect(store.getActions()).toEqual(expectedActions);
     });
   });

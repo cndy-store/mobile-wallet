@@ -33,7 +33,7 @@ export const loadAccount = publicKey => {
       return Promise.resolve({ account, data });
     } catch (error) {
       dispatch(accountErrored({ error }));
-      return Promise.reject({ error });
+      return Promise.reject(error);
     }
   };
 };

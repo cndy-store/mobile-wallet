@@ -54,3 +54,7 @@ buck-out/
 /.dir-locals.el
 /.credentials_issuer.js
 /.credentials_distributor.js
+
+# Ignore environment configuration
+.env
+.envrc

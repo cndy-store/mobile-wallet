@@ -96,6 +96,23 @@ exports[`renders correctly without an error 1`] = `
       >
         The transaction could not be completed, please check your transaction logs to make sure it took place or retry later.
       </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#000",
+            "fontFamily": "System",
+            "fontSize": 16,
+          }
+        }
+        uppercase={false}
+        virtual={undefined}
+      >
+        Reason: 
+        op_underfunded
+      </Text>
     </View>
     <View
       style={

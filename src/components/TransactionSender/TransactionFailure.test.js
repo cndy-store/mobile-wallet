@@ -6,11 +6,13 @@ import TransactionFailure from './TransactionFailure';
 
 const onAcknowledge = jest.fn();
 const amount = '12.000';
+const error = 'op_underfunded';
 
 it('renders correctly without an error', () => {
   const { toJSON } = render(
     <TransactionFailure
       receiver={publicKey}
+      error={error}
       amount={amount}
       onAcknowledge={onAcknowledge}
     />
@@ -22,6 +24,7 @@ it('calls onAcknowledge when button is pressed', () => {
   const { root } = render(
     <TransactionFailure
       receiver={publicKey}
+      error={error}
       amount={amount}
       onAcknowledge={onAcknowledge}
     />

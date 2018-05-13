@@ -194,7 +194,7 @@ describe('transaction fails', () => {
       amount={'100.00'}
     />
   );
-  instance.setState({ error: new Error() });
+  instance.setState({ error: 'op_underfunded' });
 
   it('renders TransactionFailure', () => {
     expect(() => {

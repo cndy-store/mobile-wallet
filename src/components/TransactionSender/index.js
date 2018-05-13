@@ -34,6 +34,11 @@ import { parseTransactionAmount } from '../../lib/formatter';
 import { isValidPublicKey } from '../../lib/keypairHelpers';
 import modalStyle from '../../styles/modal';
 
+const wrapTransactionError = ({ response }) => {
+  const { data } = response;
+  return data.extras.result_codes.operations.join(', ');
+};
+
 export class TransactionSender extends Component {
   constructor(props) {
     super(props);
@@ -92,7 +97,7 @@ export class TransactionSender extends Component {
       })
       .catch(error => {
         this.setState({
-          error,
+          error: wrapTransactionError(error),
           inProgress: false
         });
       });
@@ -137,6 +142,7 @@ export class TransactionSender extends Component {
         <TransactionFailure
           receiver={this.state.receiver}
           amount={this.state.amount}
+          error={this.state.error}
           onAcknowledge={this.handleFailure}
         />
       );

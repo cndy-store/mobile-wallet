@@ -46,6 +46,7 @@ class TransactionFailure extends Component {
               The transaction could not be completed, please check your
               transaction logs to make sure it took place or retry later.
             </Text>
+            <Text>Reason: {this.props.error}</Text>
           </CardItem>
           <CardItem>
             <Text>Receiver</Text>
@@ -73,7 +74,8 @@ class TransactionFailure extends Component {
 }
 
 TransactionFailure.propTypes = {
-  onAcknowledge: PropTypes.func.isRequired
+  onAcknowledge: PropTypes.func.isRequired,
+  error: PropTypes.string.isRequired
 };
 
 export default TransactionFailure;

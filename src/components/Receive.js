@@ -61,7 +61,7 @@ export class Receive extends Component {
 }
 
 Receive.propTypes = {
-  keypair: PropTypes.string.isRequired
+  keypair: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {

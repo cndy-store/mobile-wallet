@@ -65,7 +65,6 @@ class EnterTransactionReceiver extends Component {
                   <Label>Receiver</Label>
                   <Input
                     autoFocus={true}
-                    style={{ fontSize: 27 }}
                     value={this.state.receiverInput}
                     autoCorrect={false}
                     onChangeText={this.updateReceiver}

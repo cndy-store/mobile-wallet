@@ -221,24 +221,19 @@ exports[`renders correctly with an error 1`] = `
               onChangeText={[Function]}
               placeholderTextColor="#575757"
               style={
-                Array [
-                  Object {
-                    "alignSelf": "stretch",
-                    "color": "#000",
-                    "flex": 1,
-                    "fontSize": 17,
-                    "height": 50,
-                    "lineHeight": 18,
-                    "marginLeft": null,
-                    "paddingLeft": null,
-                    "paddingRight": 5,
-                    "top": 1.5,
-                    "width": null,
-                  },
-                  Object {
-                    "fontSize": 27,
-                  },
-                ]
+                Object {
+                  "alignSelf": "stretch",
+                  "color": "#000",
+                  "flex": 1,
+                  "fontSize": 17,
+                  "height": 50,
+                  "lineHeight": 18,
+                  "marginLeft": null,
+                  "paddingLeft": null,
+                  "paddingRight": 5,
+                  "top": 1.5,
+                  "width": null,
+                }
               }
               underlineColorAndroid="rgba(0,0,0,0)"
               value=""
@@ -579,24 +574,19 @@ exports[`renders correctly without an error 1`] = `
               onChangeText={[Function]}
               placeholderTextColor="#575757"
               style={
-                Array [
-                  Object {
-                    "alignSelf": "stretch",
-                    "color": "#000",
-                    "flex": 1,
-                    "fontSize": 17,
-                    "height": 50,
-                    "lineHeight": 18,
-                    "marginLeft": null,
-                    "paddingLeft": null,
-                    "paddingRight": 5,
-                    "top": 1.5,
-                    "width": null,
-                  },
-                  Object {
-                    "fontSize": 27,
-                  },
-                ]
+                Object {
+                  "alignSelf": "stretch",
+                  "color": "#000",
+                  "flex": 1,
+                  "fontSize": 17,
+                  "height": 50,
+                  "lineHeight": 18,
+                  "marginLeft": null,
+                  "paddingLeft": null,
+                  "paddingRight": 5,
+                  "top": 1.5,
+                  "width": null,
+                }
               }
               underlineColorAndroid="rgba(0,0,0,0)"
               value=""

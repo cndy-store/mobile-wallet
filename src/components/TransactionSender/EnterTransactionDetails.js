@@ -73,7 +73,6 @@ class EnterTransactionDetails extends Component {
                   <Label>Amount</Label>
                   <Input
                     autoFocus={true}
-                    style={{ fontSize: 27 }}
                     value={this.state.amountInput}
                     autoCorrect={false}
                     keyboardType={'numeric'}

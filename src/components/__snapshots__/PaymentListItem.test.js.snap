@@ -174,7 +174,7 @@ exports[`renders correctly with type credit 1`] = `
           undefined,
           undefined,
           Object {
-            "color": "#00FF00",
+            "color": "rgba( 77,254, 31,1)",
           },
         ]
       }
@@ -360,7 +360,7 @@ exports[`renders correctly with type debit 1`] = `
           undefined,
           undefined,
           Object {
-            "color": "#FF0000",
+            "color": "rgba(253, 31,180,1)",
           },
         ]
       }

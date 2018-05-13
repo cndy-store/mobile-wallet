@@ -2,6 +2,7 @@ import { padEnd } from 'lodash';
 import { localeSettings } from './i18n';
 
 const delimiter = localeSettings.decimalSeparator;
+const finalDelimiter = '.';
 const maxPrecisionLength = 7;
 
 const allowedChars = new RegExp(`^[0-9${delimiter}]+`);
@@ -34,8 +35,10 @@ const ensureScale = input => {
 const parseTransactionAmount = input => {
   const sanitized = sanitizeOngoingAmountInput(input);
   if (sanitized === '') return null;
+  const withScale = ensureScale(sanitized);
 
-  return ensureScale(sanitized);
+  const withCorrectDelimiter = withScale.replace(delimiter, finalDelimiter);
+  return withCorrectDelimiter;
 };
 
 export { sanitizeOngoingAmountInput, parseTransactionAmount };

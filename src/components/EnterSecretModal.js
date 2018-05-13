@@ -23,6 +23,7 @@ import {
 import { isValidSecret } from '../lib/keypairHelpers';
 import modalStyle from '../styles/modal';
 import FormError from '../components/FormError';
+import HeaderCancelButton from '../components/HeaderCancelButton';
 
 export class EnterSecretModal extends React.Component {
   constructor(props) {
@@ -69,9 +70,7 @@ export class EnterSecretModal extends React.Component {
       <Container style={modalStyle.container}>
         <Header>
           <Left>
-            <Button transparent onPress={this.handleCancel}>
-              <Text>Cancel</Text>
-            </Button>
+            <HeaderCancelButton onCancel={this.handleCancel} />
           </Left>
           <Body>
             <Title>Enter Secret</Title>

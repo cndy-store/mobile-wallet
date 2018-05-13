@@ -21,6 +21,7 @@ import {
   Title
 } from 'native-base';
 import Dimensions from 'Dimensions';
+import HeaderCancelButton from '../../components/HeaderCancelButton';
 import ShortenedPublicKey from '../../components/ShortenedPublicKey';
 import EnterTransactionReceiver from './EnterTransactionReceiver';
 import EnterTransactionDetails from './EnterTransactionDetails';
@@ -117,11 +118,7 @@ export class TransactionSender extends Component {
       return null;
     }
 
-    return (
-      <Button transparent onPress={this.handleCancel}>
-        <Text>Cancel</Text>
-      </Button>
-    );
+    return <HeaderCancelButton onCancel={this.handleCancel} />;
   }
 
   renderSubview() {

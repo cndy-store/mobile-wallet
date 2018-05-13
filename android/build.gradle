@@ -18,6 +18,18 @@ buildscript {
     }
 }
 
+subprojects {
+    afterEvaluate {project ->
+        if (project.hasProperty("android")) {
+            android {
+                // TODO: should be the same like in android/app/build.gradle
+                compileSdkVersion 26
+                buildToolsVersion '26.0.2'
+            }
+        }
+    }
+}
+
 allprojects {
     repositories {
         mavenLocal()

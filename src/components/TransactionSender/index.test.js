@@ -194,7 +194,8 @@ describe('transaction fails', () => {
       amount={'100.00'}
     />
   );
-  instance.setState({ error: 'op_underfunded' });
+
+  instance.handlePaymentError(new Error('Payment Error'));
 
   it('renders TransactionFailure', () => {
     expect(() => {
@@ -211,6 +212,24 @@ describe('transaction fails', () => {
     const subcomponent = root.findByType(TransactionFailure);
     expect(subcomponent.props.onAcknowledge).toEqual(instance.handleFailure);
   });
+
+  it('sets the error state', () => {
+    expect(instance.state.error).toEqual('Payment Error');
+  });
+
+  it('can handle nested operation information in the error', () => {
+    const error = new Error();
+    error.data = {
+      response: {
+        extras: {
+          result_codes: { operations: ['op_underfunded', 'tx_invalid'] }
+        }
+      }
+    };
+
+    instance.handlePaymentError(error);
+    expect(instance.state.error).toEqual('op_underfunded, tx_invalid');
+  });
 });
 
 describe('transaction succeeds', () => {
@@ -223,7 +242,7 @@ describe('transaction succeeds', () => {
       amount={'100.00'}
     />
   );
-  instance.setState({ response: fakeResponse });
+  instance.handlePaymentSuccess({ response: fakeResponse });
 
   it('renders TransactionSuccess when response was received', () => {
     expect(() => {

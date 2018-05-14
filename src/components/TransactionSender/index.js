@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { StatusBar, StyleSheet, View, TextInput } from 'react-native';
+import { get } from 'lodash';
 import {
   Icon,
   Body,
@@ -34,9 +35,14 @@ import { parseTransactionAmount } from '../../lib/formatter';
 import { isValidPublicKey } from '../../lib/keypairHelpers';
 import modalStyle from '../../styles/modal';
 
-const wrapTransactionError = ({ response }) => {
-  const { data } = response;
-  return data.extras.result_codes.operations.join(', ');
+const wrapTransactionError = error => {
+  const operations = get(error, 'data.response.extras.result_codes.operations');
+
+  if (operations) {
+    return operations.join(', ');
+  } else {
+    return error.message;
+  }
 };
 
 export class TransactionSender extends Component {
@@ -89,18 +95,22 @@ export class TransactionSender extends Component {
     this.setState({ inProgress: true });
 
     sendPayment({ amount, receiver, keypair: this.props.keypair })
-      .then(result => {
-        this.setState({
-          response: result,
-          inProgress: false
-        });
-      })
-      .catch(error => {
-        this.setState({
-          error: wrapTransactionError(error),
-          inProgress: false
-        });
-      });
+      .then(this.handlePaymentSuccess)
+      .catch(this.handleRejection);
+  }
+
+  handlePaymentSuccess(result) {
+    this.setState({
+      response: result,
+      inProgress: false
+    });
+  }
+
+  handlePaymentError(error) {
+    this.setState({
+      error: wrapTransactionError(error),
+      inProgress: false
+    });
   }
 
   handleRejection() {

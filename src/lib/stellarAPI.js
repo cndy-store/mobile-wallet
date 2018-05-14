@@ -31,6 +31,10 @@ const loadPayments = async ({ publicKey, params }) => {
 };
 
 const sendPayment = async ({ amount, receiver, keypair }) => {
+  if (receiver === keypair.publicKey()) {
+    return Promise.reject(new Error('Sender and receiver are the same'));
+  }
+
   const response = await loadAccount(keypair.publicKey());
   const senderAccount = response.account;
 

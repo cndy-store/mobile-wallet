@@ -162,4 +162,11 @@ describe('sendPayment', () => {
       expect(error).toEqual(new Error('Network Error'));
     });
   });
+
+  it('rejects payments to the same account', () => {
+    const receiver = keypair.publicKey();
+    return api.sendPayment({ amount, receiver, keypair }).catch(error => {
+      expect(error).toEqual(new Error('Sender and receiver are the same'));
+    });
+  });
 });

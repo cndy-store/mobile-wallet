@@ -93,7 +93,6 @@ export class BarCodeScanner extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar animated hidden />
         {this.renderCamera()}
         <View style={[styles.overlay]}>
           <Button transparent onPress={this.handleCancel}>

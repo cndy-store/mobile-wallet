@@ -109,12 +109,10 @@ android {
     }
     signingConfigs {
         release {
-            if (project.hasProperty('CNDY_RELEASE_STORE_FILE')) {
-                storeFile file(CNDY_RELEASE_STORE_FILE)
-                storePassword CNDY_RELEASE_STORE_PASSWORD
-                keyAlias CNDY_RELEASE_KEY_ALIAS
-                keyPassword CNDY_RELEASE_KEY_PASSWORD
-            }
+          storeFile rootProject.file("app/" + project.findProperty('CNDY_RELEASE_STORE_FILE') ?: "ANDROID_STORE_FILE_NOT_SET")
+          storePassword project.findProperty('CNDY_RELEASE_STORE_PASSWORD') ?: "ANDROID_STORE_PASSWORD_NOT_SET"
+          keyAlias project.findProperty('CNDY_RELEASE_KEY_ALIAS') ?: "ANDROID_KEY_ALIAS_NOT_SET"
+          keyPassword project.findProperty('CNDY_RELEASE_KEY_PASSWORD') ?: "ANDROID_KEY_PASSWORD_NOT_SET"
         }
     }
     splits {

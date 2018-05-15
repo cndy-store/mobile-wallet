@@ -14,11 +14,13 @@ Food icons by [Salinee Pimpakun](https://www.shareicon.net/author/salinee-pimpak
 
 [Follow along here](https://facebook.github.io/react-native/docs/signed-apk-android.html).
 
-Create a file `~/.gradle/gradle.properties` with the following content
+The keystore file needs to be located at: `android/app/cndy-wallet-dev.keystore`
+
+You need to set the following environment variables.
 
 ```
-CNDY_RELEASE_STORE_FILE=
-CNDY_RELEASE_KEY_ALIAS=
-CNDY_RELEASE_STORE_PASSWORD=
-CNDY_RELEASE_KEY_PASSWORD=
+ORG_GRADLE_PROJECT_CNDY_RELEASE_STORE_FILE=cndy-wallet-dev.keystore
+ORG_GRADLE_PROJECT_CNDY_RELEASE_KEY_ALIAS=***
+ORG_GRADLE_PROJECT_CNDY_RELEASE_STORE_PASSWORD=***
+ORG_GRADLE_PROJECT_CNDY_RELEASE_KEY_PASSWORD=***
 ```

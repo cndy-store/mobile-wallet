@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-ls -a1 $APPCENTER_SOURCE_DIRECTORY
-ls -a1R $APPCENTER_SOURCE_DIRECTORY/android

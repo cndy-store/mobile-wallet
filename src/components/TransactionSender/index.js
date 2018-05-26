@@ -66,6 +66,8 @@ export class TransactionSender extends Component {
     this.handleRejection = this.handleRejection.bind(this);
     this.handleSuccess = this.handleSuccess.bind(this);
     this.handleFailure = this.handleFailure.bind(this);
+    this.handlePaymentSuccess = this.handlePaymentSuccess.bind(this);
+    this.handlePaymentError = this.handlePaymentError.bind(this);
   }
 
   handleCancel() {

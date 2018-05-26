@@ -20,7 +20,7 @@ export class HeaderTitleWithBalance extends Component {
 
     const balance = parseFloat(assetToShow.balance, 10);
 
-    return `~${balance.toFixed(2)} 🍭`;
+    return `~${balance.toFixed(2)} CNDY`;
   }
 
   render() {

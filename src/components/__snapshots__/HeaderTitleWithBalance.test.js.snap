@@ -17,7 +17,7 @@ exports[`renders correctly when a balance is given 1`] = `
   }
   virtual={undefined}
 >
-  ~930.00 🍭
+  ~930.00 CNDY
 </Text>
 `;
 

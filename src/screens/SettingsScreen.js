@@ -22,6 +22,7 @@ import { removeKeypair } from '../actions/keypair';
 import modalStyle from '../styles/modal';
 import MainScreenHeader from '../components/MainScreenHeader';
 import DisplayPublicKey from '../components/DisplayPublicKey';
+import HeaderCancelButton from '../components/HeaderCancelButton';
 
 class SettingsScreen extends React.Component {
   constructor(props) {
@@ -136,9 +137,7 @@ class SettingsScreen extends React.Component {
           <Container style={modalStyle.container}>
             <Header>
               <Left>
-                <Button transparent onPress={this.handleCloseModal}>
-                  <Text>Cancel</Text>
-                </Button>
+                <HeaderCancelButton onCancel={this.handleCloseModal} />
               </Left>
               <Body>
                 <Title>Your Secret</Title>

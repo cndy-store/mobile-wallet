@@ -122,7 +122,7 @@ class SettingsScreen extends React.Component {
               <Body>
                 <Button
                   block
-                  danger
+                  bordered
                   disabled={this.props.inProgress}
                   onPress={this.handleDeleteSecret}
                 >

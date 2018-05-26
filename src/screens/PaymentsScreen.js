@@ -74,12 +74,26 @@ class PaymentsScreen extends React.Component {
     });
   }
 
+  renderHeader() {
+    return <MainScreenHeader hasTabs={false} />;
+  }
+
   renderListItem({ item }) {
     return <PaymentListItem {...item} />;
   }
 
+  shouldRenderList() {
+    return this.props.payments.length >= 0;
+  }
+
+  renderHeaderWithoutList() {
+    if (this.shouldRenderList()) return null;
+
+    return this.renderHeader();
+  }
+
   renderList() {
-    if (this.props.payments.length === 0) return null;
+    if (!this.shouldRenderList()) return null;
 
     return (
       <FlatList
@@ -87,6 +101,8 @@ class PaymentsScreen extends React.Component {
         renderItem={this.renderListItem}
         refreshing={this.props.isProcessing}
         onRefresh={this.handleRefresh}
+        ListHeaderComponent={this.renderHeader}
+        stickyHeaderIndices={[0]}
       />
     );
   }
@@ -108,8 +124,8 @@ class PaymentsScreen extends React.Component {
   render() {
     return (
       <Container>
-        <MainScreenHeader hasTabs={false} />
-        <View padder>
+        <View>
+          {this.renderHeaderWithoutList()}
           {this.renderActivityIndicator()}
           {this.renderEmptyState()}
           {this.renderList()}

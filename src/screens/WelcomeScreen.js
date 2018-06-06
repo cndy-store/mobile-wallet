@@ -81,6 +81,10 @@ export class WelcomeScreen extends Component {
   }
 
   render() {
+    const scanCodeButtonCaption = this.state.isScannerModalVisible
+      ? 'Opening Camera...'
+      : 'Scan QR Code';
+
     return (
       <Container>
         <Header>
@@ -104,8 +108,12 @@ export class WelcomeScreen extends Component {
             </CardItem>
             <CardItem>
               <Body>
-                <Button block onPress={this.openScannerModal}>
-                  <Text>Scan QR Code</Text>
+                <Button
+                  block
+                  disabled={this.isScannerModalVisible}
+                  onPress={this.openScannerModal}
+                >
+                  <Text>{scanCodeButtonCaption}</Text>
                 </Button>
               </Body>
             </CardItem>

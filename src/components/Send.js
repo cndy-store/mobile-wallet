@@ -116,6 +116,10 @@ export class SendScreen extends Component {
   }
 
   render() {
+    const scanCodeButtonCaption = this.state.isModalVisible
+      ? 'Opening Camera...'
+      : 'Scan QR Code';
+
     return (
       <Content padder>
         <Card>
@@ -131,8 +135,12 @@ export class SendScreen extends Component {
           </CardItem>
           <CardItem>
             <Body>
-              <Button block onPress={this.openScannerModal}>
-                <Text>Scan QR Code</Text>
+              <Button
+                block
+                disabled={this.isModalVisible}
+                onPress={this.openScannerModal}
+              >
+                <Text>{scanCodeButtonCaption}</Text>
               </Button>
             </Body>
           </CardItem>

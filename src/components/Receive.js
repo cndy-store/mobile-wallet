@@ -18,6 +18,7 @@ import {
 import { Button, StyleSheet, View, Text } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { encodePublicKey } from '../lib/keypairHelpers';
+import qrCodeLogo from '../../assets/img/logo-round.png';
 
 export class Receive extends Component {
   constructor(props) {
@@ -39,7 +40,15 @@ export class Receive extends Component {
     if (!this.state.qrCodeWidth) return null;
 
     const url = encodePublicKey(this.props.keypair.publicKey());
-    return <QRCode size={this.state.qrCodeWidth} value={url} elc="M" />;
+    return (
+      <QRCode
+        size={this.state.qrCodeWidth}
+        value={url}
+        logo={qrCodeLogo}
+        logoBackgroundColor="transparent"
+        elc="M"
+      />
+    );
   }
 
   render() {

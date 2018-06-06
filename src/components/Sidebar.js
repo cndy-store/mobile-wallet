@@ -10,6 +10,8 @@ import {
   Content,
   Icon
 } from 'native-base';
+import drawerImageBackground from '../../assets/img/drawer-image-background.png';
+import drawerImageLogo from '../../assets/img/drawer-image-logo.png';
 
 const routes = [
   { name: 'Send/Receive', route: 'Main' },
@@ -23,10 +25,7 @@ export class SideBar extends React.Component {
       <Container>
         <Content>
           <Image
-            source={{
-              uri:
-                'https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/drawer-cover.png'
-            }}
+            source={drawerImageBackground}
             style={{
               height: 120,
               width: '100%',
@@ -38,15 +37,12 @@ export class SideBar extends React.Component {
             square
             style={{
               height: 80,
-              width: 70,
+              width: 80,
               position: 'absolute',
               alignSelf: 'center',
               top: 20
             }}
-            source={{
-              uri:
-                'https://raw.githubusercontent.com/GeekyAnts/NativeBase-KitchenSink/master/assets/logo.png'
-            }}
+            source={drawerImageLogo}
           />
           <List
             dataArray={routes}

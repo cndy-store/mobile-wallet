@@ -33,7 +33,6 @@ subprojects {
 allprojects {
     repositories {
         mavenLocal()
-        jcenter()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url "$rootDir/../node_modules/react-native/android"
@@ -43,5 +42,6 @@ allprojects {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        jcenter()
     }
 }

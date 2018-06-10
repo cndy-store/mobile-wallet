@@ -6,6 +6,8 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "generate:icon": "yo rn-toolbox:assets --icon assets/app-icon.png",
+    "generate:splash": "yo rn-toolbox:assets --splash assets/app-splash-screen.jpg",
     "lint": "eslint src",
     "test": "node node_modules/jest/bin/jest.js",
     "test:watch": "yarn run test --watch",
@@ -65,10 +67,12 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-react-native": "^3.2.1",
+    "generator-rn-toolbox": "^3.3.2",
     "jest": "^22.4.2",
     "jest-react-native": "^18.0.0",
     "prettier": "^1.11.1",
     "react-test-renderer": "16.2.0",
-    "redux-devtools-extension": "^2.13.2"
+    "redux-devtools-extension": "^2.13.2",
+    "yo": "^2.0.2"
   }
 }

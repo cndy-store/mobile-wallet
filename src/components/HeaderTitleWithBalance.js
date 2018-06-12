@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Platform } from 'react-native';
 import { Title } from 'native-base';
 import { asset } from '../lib/stellar';
 
 const defaultText = '...';
 
 export class HeaderTitleWithBalance extends Component {
+  getPlatform() {
+    return Platform.OS;
+  }
+
+  getAssetPostfix() {
+    if (this.getPlatform() === 'ios') {
+      return '🍭';
+    } else {
+      return 'CNDY';
+    }
+  }
+
   getBalance() {
     if (!this.props.data) return null;
 
@@ -20,7 +33,7 @@ export class HeaderTitleWithBalance extends Component {
 
     const balance = parseFloat(assetToShow.balance, 10);
 
-    return `~${balance.toFixed(2)} CNDY`;
+    return `~${balance.toFixed(2)} ${this.getAssetPostfix()}`;
   }
 
   render() {

@@ -40,9 +40,8 @@ const wrapTransactionError = error => {
 
   if (operations) {
     return operations.join(', ');
-  } else {
-    return error.message;
   }
+  return error.message;
 };
 
 export class TransactionSender extends Component {
@@ -182,9 +181,8 @@ export class TransactionSender extends Component {
           onReject={this.handleRejection}
         />
       );
-    } else {
-      throw 'Invalid configuration of TransactionSender';
     }
+    throw 'Invalid configuration of TransactionSender';
   }
 
   render() {
@@ -216,14 +214,10 @@ TransactionSender.propTypes = {
   receiver: PropTypes.string
 };
 
-const mapStateToProps = state => {
-  return {
-    keypair: state.keypair.keypair
-  };
-};
+const mapStateToProps = state => ({
+  keypair: state.keypair.keypair
+});
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionSender);

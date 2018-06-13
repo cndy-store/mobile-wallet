@@ -164,18 +164,14 @@ class SettingsScreen extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    keypair: state.keypair.keypair,
-    inProgress: state.keypair.inProgress,
-    error: state.keypair.error
-  };
-};
+const mapStateToProps = state => ({
+  keypair: state.keypair.keypair,
+  inProgress: state.keypair.inProgress,
+  error: state.keypair.error
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    removeKeypair: () => dispatch(removeKeypair())
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  removeKeypair: () => dispatch(removeKeypair())
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen);

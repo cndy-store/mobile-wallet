@@ -31,7 +31,7 @@ export class Receive extends Component {
   }
 
   setQRCodeWidth(event) {
-    var { x, y, width, height } = event.nativeEvent.layout;
+    const { x, y, width, height } = event.nativeEvent.layout;
 
     this.setState({ qrCodeWidth: width });
   }
@@ -73,14 +73,10 @@ Receive.propTypes = {
   keypair: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-  return {
-    keypair: state.keypair.keypair
-  };
-};
+const mapStateToProps = state => ({
+  keypair: state.keypair.keypair
+});
 
-const mapDispatchToProps = dispatch => {
-  return {};
-};
+const mapDispatchToProps = dispatch => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Receive);

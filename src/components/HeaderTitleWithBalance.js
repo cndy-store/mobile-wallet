@@ -15,9 +15,8 @@ export class HeaderTitleWithBalance extends Component {
   getAssetPostfix() {
     if (this.getPlatform() === 'ios') {
       return '🍭';
-    } else {
-      return 'CNDY';
     }
+    return 'CNDY';
   }
 
   getBalance() {

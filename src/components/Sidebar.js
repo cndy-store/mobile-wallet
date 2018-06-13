@@ -47,16 +47,14 @@ export class SideBar extends React.Component {
           <List
             dataArray={routes}
             contentContainerStyle={{ marginTop: 120 }}
-            renderRow={data => {
-              return (
-                <ListItem
-                  button
-                  onPress={() => this.props.navigation.navigate(data.route)}
-                >
-                  <Text>{data.name}</Text>
-                </ListItem>
-              );
-            }}
+            renderRow={data => (
+              <ListItem
+                button
+                onPress={() => this.props.navigation.navigate(data.route)}
+              >
+                <Text>{data.name}</Text>
+              </ListItem>
+            )}
           />
         </Content>
       </Container>

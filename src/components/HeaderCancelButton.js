@@ -38,9 +38,8 @@ class HeaderCancelButton extends React.Component {
   render() {
     if (this.getPlatform() === 'ios') {
       return this.renderIOS();
-    } else {
-      return this.renderAndroid();
     }
+    return this.renderAndroid();
   }
 }
 

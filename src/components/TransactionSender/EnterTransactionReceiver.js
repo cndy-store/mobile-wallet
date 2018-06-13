@@ -64,7 +64,7 @@ class EnterTransactionReceiver extends Component {
                 <Item stackedLabel error={!!this.state.error}>
                   <Label>Receiver</Label>
                   <Input
-                    autoFocus={true}
+                    autoFocus
                     value={this.state.receiverInput}
                     autoCorrect={false}
                     onChangeText={this.updateReceiver}

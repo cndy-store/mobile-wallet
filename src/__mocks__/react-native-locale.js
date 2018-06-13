@@ -1,7 +1,5 @@
-const constants = () => {
-  return {
-    decimalSeparator: '.'
-  };
-};
+const constants = () => ({
+  decimalSeparator: '.'
+});
 
 export default { constants };

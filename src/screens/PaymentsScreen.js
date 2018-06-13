@@ -140,20 +140,16 @@ PaymentsScreen.propTypes = {
   loadPayments: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => {
-  return {
-    keypair: state.keypair.keypair,
-    isProcessing: state.payments.isProcessing,
-    payments: state.payments.payments,
-    firstPageLoaded: state.payments.firstPageLoaded,
-    hasNextPage: state.payments.hasNextPage
-  };
-};
+const mapStateToProps = state => ({
+  keypair: state.keypair.keypair,
+  isProcessing: state.payments.isProcessing,
+  payments: state.payments.payments,
+  firstPageLoaded: state.payments.firstPageLoaded,
+  hasNextPage: state.payments.hasNextPage
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loadPayments: publicKey => dispatch(loadPayments(publicKey))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  loadPayments: publicKey => dispatch(loadPayments(publicKey))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentsScreen);

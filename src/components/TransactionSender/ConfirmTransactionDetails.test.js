@@ -11,7 +11,7 @@ it('renders correctly without an error', () => {
   const { toJSON } = render(
     <ConfirmTransactionDetails
       receiver={publicKey}
-      amount={'12.34'}
+      amount="12.34"
       onConfirm={onConfirm}
       onReject={onReject}
     />
@@ -26,7 +26,7 @@ it('calls the onConfirm prop if confirm button is pressed', () => {
   const { root, instance } = render(
     <ConfirmTransactionDetails
       receiver={publicKey}
-      amount={'12.34'}
+      amount="12.34"
       onConfirm={onConfirm}
       onReject={onReject}
     />
@@ -43,7 +43,7 @@ it('calls the onConfirm prop if reject button is pressed', () => {
   const { root, instance } = render(
     <ConfirmTransactionDetails
       receiver={publicKey}
-      amount={'12.34'}
+      amount="12.34"
       onConfirm={onConfirm}
       onReject={onReject}
     />

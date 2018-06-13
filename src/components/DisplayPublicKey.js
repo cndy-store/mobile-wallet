@@ -31,9 +31,7 @@ class DisplayPublicKey extends Component {
     const pairs = chunk(chars, 2).map(pair => pair.join(''));
     const perRow = chunk(pairs, 4);
 
-    return perRow.map((pairs, index) => {
-      return this.pairsToText(pairs);
-    });
+    return perRow.map((pairs, index) => this.pairsToText(pairs));
   }
 
   render() {

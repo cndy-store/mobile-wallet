@@ -45,7 +45,6 @@ describe('renders correctly when a balance is given', () => {
     expect(toJSON()).toMatchSnapshot();
   });
 
-
   it('for android', () => {
     HeaderTitleWithBalance.prototype.getPlatform = jest.fn(() => 'android');
     const data = {

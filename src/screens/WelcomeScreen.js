@@ -102,7 +102,7 @@ export class WelcomeScreen extends Component {
             <CardItem cardBody>
               <Image
                 style={{ flex: 1, width: null, height: 250 }}
-                resizeMode={'contain'}
+                resizeMode="contain"
                 source={image}
               />
             </CardItem>
@@ -147,17 +147,13 @@ export class WelcomeScreen extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    inProgress: state.keypair.inProgress,
-    error: state.keypair.error
-  };
-};
+const mapStateToProps = state => ({
+  inProgress: state.keypair.inProgress,
+  error: state.keypair.error
+});
 
-const mapDispatchToProps = dispatch => {
-  return {
-    saveKeypair: secret => dispatch(saveKeypair(secret))
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  saveKeypair: secret => dispatch(saveKeypair(secret))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);

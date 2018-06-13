@@ -127,7 +127,7 @@ describe('user input complete', () => {
       onSuccess={onSuccess}
       onFailure={onFailure}
       receiver={publicKey}
-      amount={'100.00'}
+      amount="100.00"
     />
   );
 
@@ -164,7 +164,7 @@ describe('transaction in progress', () => {
       onSuccess={onSuccess}
       onFailure={onFailure}
       receiver={publicKey}
-      amount={'100.00'}
+      amount="100.00"
     />
   );
 
@@ -191,7 +191,7 @@ describe('transaction fails', () => {
       onSuccess={onSuccess}
       onFailure={onFailure}
       receiver={publicKey}
-      amount={'100.00'}
+      amount="100.00"
     />
   );
 
@@ -239,7 +239,7 @@ describe('transaction succeeds', () => {
       onSuccess={onSuccess}
       onFailure={onFailure}
       receiver={publicKey}
-      amount={'100.00'}
+      amount="100.00"
     />
   );
   instance.handlePaymentSuccess({ response: fakeResponse });

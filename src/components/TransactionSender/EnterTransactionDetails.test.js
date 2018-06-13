@@ -42,7 +42,7 @@ it('renders correctly with an error', () => {
   const { toJSON } = render(
     <EnterTransactionDetails
       receiver={publicKey}
-      error={'With an error'}
+      error="With an error"
       onSubmit={onSubmit}
     />
   );

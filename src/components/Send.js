@@ -129,7 +129,7 @@ export class SendScreen extends Component {
           <CardItem cardBody>
             <Image
               style={{ flex: 1, width: null, height: 250 }}
-              resizeMode={'contain'}
+              resizeMode="contain"
               source={image}
             />
           </CardItem>

@@ -72,10 +72,10 @@ class EnterTransactionDetails extends Component {
                 <Item stackedLabel error={!!this.state.error}>
                   <Label>Amount</Label>
                   <Input
-                    autoFocus={true}
+                    autoFocus
                     value={this.state.amountInput}
                     autoCorrect={false}
-                    keyboardType={'numeric'}
+                    keyboardType="numeric"
                     onChangeText={this.updateAmount}
                   />
                 </Item>

@@ -6,6 +6,8 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
+    "android:emulator:list": "${HOME}/Library/Android/sdk/emulator/emulator -list-avds",
+    "android:emulator:start": "${HOME}/Library/Android/sdk/emulator/emulator -avd",
     "generate:icon": "yo rn-toolbox:assets --icon assets/app-icon.png",
     "generate:splash": "yo rn-toolbox:assets --splash assets/app-splash-screen.jpg",
     "lint": "eslint src",

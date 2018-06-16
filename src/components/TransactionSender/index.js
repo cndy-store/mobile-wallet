@@ -36,7 +36,7 @@ import { isValidPublicKey } from '../../lib/keypairHelpers';
 import modalStyle from '../../styles/modal';
 
 const wrapTransactionError = error => {
-  const operations = get(error, 'data.response.extras.result_codes.operations');
+  const operations = get(error, 'response.data.extras.result_codes.operations');
 
   if (operations) {
     return operations.join(', ');
@@ -97,7 +97,7 @@ export class TransactionSender extends Component {
 
     sendPayment({ amount, receiver, keypair: this.props.keypair })
       .then(this.handlePaymentSuccess)
-      .catch(this.handleRejection);
+      .catch(this.handlePaymentError);
   }
 
   handlePaymentSuccess(result) {

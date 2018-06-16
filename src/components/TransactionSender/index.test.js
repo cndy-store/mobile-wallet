@@ -219,8 +219,8 @@ describe('transaction fails', () => {
 
   it('can handle nested operation information in the error', () => {
     const error = new Error();
-    error.data = {
-      response: {
+    error.response = {
+      data: {
         extras: {
           result_codes: { operations: ['op_underfunded', 'tx_invalid'] }
         }

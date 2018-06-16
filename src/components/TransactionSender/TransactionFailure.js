@@ -43,9 +43,11 @@ class TransactionFailure extends Component {
           </CardItem>
           <CardItem>
             <Text>
-              The transaction could not be completed, please check your
-              transaction logs to make sure it took place or retry later.
+              Sorry, something went wrong! The transaction could not be
+              completed!
             </Text>
+          </CardItem>
+          <CardItem>
             <Text>Reason: {this.props.error}</Text>
           </CardItem>
           <CardItem>

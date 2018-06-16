@@ -94,8 +94,24 @@ exports[`renders correctly without an error 1`] = `
         uppercase={false}
         virtual={undefined}
       >
-        The transaction could not be completed, please check your transaction logs to make sure it took place or retry later.
+        Sorry, something went wrong! The transaction could not be completed!
       </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "borderRadius": 2,
+          "flexDirection": "row",
+          "paddingBottom": 10,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "paddingTop": 10,
+        }
+      }
+      virtual={undefined}
+    >
       <Text
         accessible={true}
         allowFontScaling={true}

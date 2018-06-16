@@ -30,6 +30,7 @@ class HeaderCancelButton extends React.Component {
   renderAndroid() {
     return (
       <Button transparent onPress={this.props.onCancel}>
+
         <Icon name={this.props.icon} />
       </Button>
     );

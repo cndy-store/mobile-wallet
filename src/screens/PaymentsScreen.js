@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActivityIndicator, FlatList } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StatusBar,
+  StyleSheet
+} from 'react-native';
 import {
   View,
   Button,
@@ -23,6 +28,8 @@ import moment from 'moment';
 import { loadPayments } from '../actions/payments';
 import MainScreenHeader from '../components/MainScreenHeader';
 import PaymentListItem from '../components/PaymentListItem';
+import themeVariables from '../native-base-theme/variables/platformCustomized';
+import { shortFormat } from '../lib/formatter';
 
 class PaymentsScreen extends React.Component {
   constructor(props) {
@@ -66,16 +73,12 @@ class PaymentsScreen extends React.Component {
 
       return {
         key: payment.id,
-        amount: payment.amount,
+        amount: shortFormat(payment.amount),
         createdAt,
         type,
         publicKey
       };
     });
-  }
-
-  renderHeader() {
-    return <MainScreenHeader hasTabs={false} />;
   }
 
   renderListItem({ item }) {
@@ -84,12 +87,6 @@ class PaymentsScreen extends React.Component {
 
   shouldRenderList() {
     return this.props.payments.length >= 0;
-  }
-
-  renderHeaderWithoutList() {
-    if (this.shouldRenderList()) return null;
-
-    return this.renderHeader();
   }
 
   renderList() {
@@ -101,8 +98,6 @@ class PaymentsScreen extends React.Component {
         renderItem={this.renderListItem}
         refreshing={this.props.isProcessing}
         onRefresh={this.handleRefresh}
-        ListHeaderComponent={this.renderHeader}
-        stickyHeaderIndices={[0]}
       />
     );
   }
@@ -124,8 +119,8 @@ class PaymentsScreen extends React.Component {
   render() {
     return (
       <Container>
-        <View>
-          {this.renderHeaderWithoutList()}
+        <MainScreenHeader hasTabs={false} />
+        <View style={styles.container}>
           {this.renderActivityIndicator()}
           {this.renderEmptyState()}
           {this.renderList()}
@@ -134,6 +129,17 @@ class PaymentsScreen extends React.Component {
     );
   }
 }
+
+const listHeight =
+  themeVariables.deviceHeight -
+  themeVariables.toolbarHeight -
+  (StatusBar.currentHeight || 0);
+
+const styles = StyleSheet.create({
+  container: {
+    height: listHeight
+  }
+});
 
 PaymentsScreen.propTypes = {
   keypair: PropTypes.object.isRequired,

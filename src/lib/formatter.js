@@ -1,4 +1,4 @@
-import { padEnd } from 'lodash';
+import { padEnd, reduceRight } from 'lodash';
 import { localeSettings } from './i18n';
 
 const delimiter = localeSettings.decimalSeparator;
@@ -41,4 +41,28 @@ const parseTransactionAmount = input => {
   return withCorrectDelimiter;
 };
 
-export { sanitizeOngoingAmountInput, parseTransactionAmount };
+const optimizeScale = scale => {
+  const scaleNumbers = scale.split('');
+  const neededNumbers = reduceRight(
+    scaleNumbers,
+    (acc, number) => {
+      if (acc.length || number !== '0') {
+        acc.push(number);
+      }
+      return acc;
+    },
+    []
+  );
+
+  return neededNumbers.reverse().join('');
+};
+
+const shortFormat = input => {
+  const [precision, scale] = input.split(delimiter);
+  const optimizedScale = optimizeScale(scale);
+  const paddedScale = padEnd(optimizedScale, 2, '0');
+
+  return `${precision}${delimiter}${paddedScale}`;
+};
+
+export { sanitizeOngoingAmountInput, parseTransactionAmount, shortFormat };

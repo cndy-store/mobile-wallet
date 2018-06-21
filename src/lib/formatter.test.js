@@ -1,6 +1,7 @@
 import {
   sanitizeOngoingAmountInput,
-  parseTransactionAmount
+  parseTransactionAmount,
+  shortFormat
 } from './formatter';
 
 describe('sanitizeOngoingAmountInput', () => {
@@ -68,5 +69,27 @@ describe('parseTransactionAmount', () => {
 
     result = parseTransactionAmount('12.0001');
     expect(result).toEqual('12.0001');
+  });
+});
+
+describe('shortFormat', () => {
+  it('keeps a simple amount', () => {
+    const amount = '12.34';
+    expect(shortFormat(amount)).toEqual('12.34');
+  });
+
+  it('shortens a simple amount with unnecessary zeroes', () => {
+    const amount = '12.000000';
+    expect(shortFormat(amount)).toEqual('12.00');
+  });
+
+  it('keeps a more-complex amount and does not lose information', () => {
+    const amount = '12.000001';
+    expect(shortFormat(amount)).toEqual(amount);
+  });
+
+  it('keeps a precision of at least two', () => {
+    const amount = '12.1';
+    expect(shortFormat(amount)).toEqual('12.10');
   });
 });

@@ -29,7 +29,6 @@ import { loadPayments } from '../actions/payments';
 import MainScreenHeader from '../components/MainScreenHeader';
 import PaymentListItem from '../components/PaymentListItem';
 import themeVariables from '../native-base-theme/variables/platformCustomized';
-import { shortFormat } from '../lib/formatter';
 
 class PaymentsScreen extends React.Component {
   constructor(props) {
@@ -73,7 +72,7 @@ class PaymentsScreen extends React.Component {
 
       return {
         key: payment.id,
-        amount: shortFormat(payment.amount),
+        amount: payment.amount,
         createdAt,
         type,
         publicKey

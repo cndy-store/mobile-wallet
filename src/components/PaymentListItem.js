@@ -10,25 +10,27 @@ import {
   Container,
   Header,
   Left,
+  ListItem,
   Right,
   Body,
   Title,
   Content,
   Tab,
-  Tabs
+  Tabs,
+  View
 } from 'native-base';
 import { styles as s } from 'react-native-style-tachyons';
-import { color } from '../styles/colors';
 import ShortenedPublicKey from './ShortenedPublicKey';
+import { shortFormat } from '../lib/formatter';
 
 const captions = {
   credit: 'From',
   debit: 'To'
 };
 
-const amountColors = {
-  credit: color.credit,
-  debit: color.debit
+const amountPrefixes = {
+  credit: '+',
+  debit: '-'
 };
 
 class PaymentListItem extends React.Component {
@@ -40,28 +42,21 @@ class PaymentListItem extends React.Component {
   };
 
   render() {
-    const amountColor = amountColors[this.props.type];
+    const prefix = amountPrefixes[this.props.type];
 
     return (
-      <Card>
-        <CardItem>
-          <Left />
-          <Right>
+      <ListItem>
+        <Left>
+          <View>
+            <H1>
+              {prefix}
+              {shortFormat(this.props.amount)}
+            </H1>
             <Text note>{this.props.createdAt}</Text>
-          </Right>
-        </CardItem>
-        <CardItem>
-          <Body>
-            <Text>{captions[this.props.type]}</Text>
-            <ShortenedPublicKey publicKey={this.props.publicKey} />
-          </Body>
-        </CardItem>
-        <CardItem>
-          <H1 style={[s.flx_i, s.tr, s.ass, amountColor]}>
-            {this.props.amount}
-          </H1>
-        </CardItem>
-      </Card>
+          </View>
+        </Left>
+        <Right />
+      </ListItem>
     );
   }
 }

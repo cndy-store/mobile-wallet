@@ -61,7 +61,9 @@ export class Receive extends Component {
         </Card>
         <Card>
           <CardItem header>
-            <Text>This is your public key in form of a QR Code</Text>
+            <Text>
+              This is your public key: {this.props.keypair.publicKey()}
+            </Text>
           </CardItem>
         </Card>
       </Content>

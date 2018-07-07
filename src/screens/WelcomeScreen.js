@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Image, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet } from 'react-native';
 import Modal from 'react-native-modal';
+import LottieView from 'lottie-react-native';
 import {
   Icon,
   Body,
@@ -23,7 +24,10 @@ import EnterSecretModal from '../components/EnterSecretModal';
 import { decodeSecret } from '../lib/keypairHelpers';
 import { saveKeypair } from '../actions/keypair';
 import modalStyle from '../styles/modal';
-import image from '../../assets/img/qr-code.png';
+
+import animationSource from '../../assets/lottie/scan_qr_code_success.json';
+
+const animationSize = 250;
 
 export class WelcomeScreen extends Component {
   constructor(props) {
@@ -41,6 +45,10 @@ export class WelcomeScreen extends Component {
     this.openScannerModal = this.openScannerModal.bind(this);
     this.closeScannerModal = this.closeScannerModal.bind(this);
     this.handleScannedCode = this.handleScannedCode.bind(this);
+  }
+
+  componentDidMount() {
+    this.animation.play();
   }
 
   openTextInputModal() {
@@ -99,12 +107,26 @@ export class WelcomeScreen extends Component {
             <CardItem header>
               <Text>Setup your keypair</Text>
             </CardItem>
+            <CardItem>
+              <Body>
+                <Text>
+                  Scan your private key from the QR code that was created for
+                  you.
+                </Text>
+              </Body>
+            </CardItem>
             <CardItem cardBody>
-              <Image
-                style={{ flex: 1, width: null, height: 250 }}
-                resizeMode="contain"
-                source={image}
-              />
+              <View style={[styles.animationContainer]}>
+                <View style={[styles.lottieWrapper]}>
+                  <LottieView
+                    style={[styles.lottieAnimation]}
+                    ref={animation => {
+                      this.animation = animation;
+                    }}
+                    source={animationSource}
+                  />
+                </View>
+              </View>
             </CardItem>
             <CardItem>
               <Body>
@@ -146,6 +168,24 @@ export class WelcomeScreen extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  animationContainer: {
+    flex: 1,
+    width: '100%',
+    height: animationSize,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  lottieWrapper: {
+    flex: 1,
+    width: '100%',
+    height: animationSize
+  },
+  lottieAnimation: {
+    height: animationSize
+  }
+});
 
 const mapStateToProps = state => ({
   inProgress: state.keypair.inProgress,

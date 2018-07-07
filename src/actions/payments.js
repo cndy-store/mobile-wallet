@@ -3,6 +3,7 @@ import * as api from '../lib/stellarAPI';
 export const PAYMENTS_STARTS_PROCESSING = 'PAYMENTS_STARTS_PROCESSING';
 export const PAYMENTS_ERROR = 'PAYMENTS_ERROR';
 export const PAYMENTS_LOAD = 'PAYMENTS_LOAD';
+export const PAYMENTS_MARK_AS_SEEN = 'PAYMENTS_MARK_AS_SEEN';
 
 export const paymentsProcessing = bool => ({
   type: PAYMENTS_STARTS_PROCESSING,
@@ -24,6 +25,18 @@ export const paymentsLoadSucceded = ({ payments, data, hasNextPage }) => ({
   hasNextPage,
   data
 });
+
+export const paymentMarkedAsSeen = ({ paymentId }) => ({
+  type: PAYMENTS_MARK_AS_SEEN,
+  paymentId
+});
+
+export const markPaymentAsSeen = ({ paymentId }) => {
+  return async dispatch => {
+    dispatch(paymentMarkedAsSeen({ paymentId }));
+    return Promise.resolve({ paymentId });
+  };
+};
 
 export const loadPayments = publicKey => {
   return async dispatch => {

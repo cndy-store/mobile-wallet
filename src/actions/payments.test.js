@@ -57,3 +57,24 @@ describe('loadPayments', () => {
     });
   });
 });
+
+describe('markPaymentAsSeen', () => {
+  it('resolves if marking was dispatched successful', () => {
+    const paymentId = '123456';
+    const store = mockStore();
+    const expectedActions = [
+      {
+        type: 'PAYMENTS_MARK_AS_SEEN',
+        paymentId
+      }
+    ];
+
+    return store
+      .dispatch(payments.markPaymentAsSeen({ paymentId }))
+      .then(result => {
+        expect(result).toEqual({ paymentId });
+        const actions = store.getActions();
+        expect(actions).toEqual(expectedActions);
+      });
+  });
+});

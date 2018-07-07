@@ -19,6 +19,11 @@ import {
 import Modal from 'react-native-modal';
 
 import { loadAccount } from '../actions/account';
+import { loadPayments } from '../actions/payments';
+import {
+  start as startPaymentWatcher,
+  stop as stopPaymentWatcher
+} from '../lib/paymentWatcher';
 import MainScreenHeader from '../components/MainScreenHeader';
 import Send from '../components/Send';
 import Receive from '../components/Receive';
@@ -30,12 +35,21 @@ export class MainScreen extends Component {
   }
 
   loadAccount = async () => {
-    this.props.loadAccount(this.props.keypair.publicKey()).catch(e => {
+    const publicKey = this.props.keypair.publicKey();
+
+    try {
+      await this.props.loadAccount(publicKey);
+      this.props.startPaymentWatcher(publicKey);
+    } catch (error) {
       Toast.show({
         text: 'Could not load account data. Please check internet connection.'
       });
-    });
+    }
   };
+
+  componentWillUnmount() {
+    this.props.stopPaymentWatcher();
+  }
 
   render() {
     return (
@@ -43,6 +57,7 @@ export class MainScreen extends Component {
         <MainScreenHeader />
         <Tabs initialPage={0}>
           <Tab heading="Send">
+            <Text>See {this.props.unseenPaymentIds.join('')}</Text>
             <Send />
           </Tab>
           <Tab heading="Receive">
@@ -60,11 +75,15 @@ MainScreen.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  keypair: state.keypair.keypair
+  keypair: state.keypair.keypair,
+  unseenPaymentIds: state.payments.unseenPaymentIds
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadAccount: publicKey => dispatch(loadAccount(publicKey))
+  loadAccount: publicKey => dispatch(loadAccount(publicKey)),
+  startPaymentWatcher: publicKey =>
+    startPaymentWatcher(dispatch, loadPayments, publicKey),
+  stopPaymentWatcher: stopPaymentWatcher
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

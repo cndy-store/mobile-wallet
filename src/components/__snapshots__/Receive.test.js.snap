@@ -147,7 +147,8 @@ exports[`renders correctly 1`] = `
           allowFontScaling={true}
           ellipsizeMode="tail"
         >
-          This is your public key in form of a QR Code
+          This is your public key: 
+          GCHSUHOKNZQAKTULV5YTMG5CKU2NKE7UUQVN6JT2JY7337CRBIAZ6LXK
         </Text>
       </View>
     </View>

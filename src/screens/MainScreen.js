@@ -17,20 +17,26 @@ import {
   Tabs
 } from 'native-base';
 import Modal from 'react-native-modal';
+import { find } from 'lodash';
 
 import { loadAccount } from '../actions/account';
+import modalStyle from '../styles/modal';
 import { loadPayments } from '../actions/payments';
 import {
   start as startPaymentWatcher,
   stop as stopPaymentWatcher
 } from '../lib/paymentWatcher';
 import MainScreenHeader from '../components/MainScreenHeader';
+import UnseenPaymentModal from '../components/UnseenPaymentModal';
 import Send from '../components/Send';
 import Receive from '../components/Receive';
 
 export class MainScreen extends Component {
   constructor(props) {
     super(props);
+
+    this.hideUnseenPayments = this.hideUnseenPayments.bind(this);
+
     this.loadAccount();
   }
 
@@ -51,19 +57,26 @@ export class MainScreen extends Component {
     this.props.stopPaymentWatcher();
   }
 
+  hideUnseenPayments() {}
+
   render() {
     return (
       <Container>
         <MainScreenHeader />
         <Tabs initialPage={0}>
           <Tab heading="Send">
-            <Text>See {this.props.unseenPaymentIds.join('')}</Text>
             <Send />
           </Tab>
           <Tab heading="Receive">
             <Receive />
           </Tab>
         </Tabs>
+        <Modal isVisible={this.props.unseenPayment} style={modalStyle.modal}>
+          <UnseenPaymentModal
+            payment={this.props.unseenPayment}
+            onCancel={this.hideUnseenPayments}
+          />
+        </Modal>
       </Container>
     );
   }
@@ -74,10 +87,22 @@ MainScreen.propTypes = {
   loadAccount: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => ({
-  keypair: state.keypair.keypair,
-  unseenPaymentIds: state.payments.unseenPaymentIds
-});
+const mapStateToProps = state => {
+  let unseenPaymentId = state.payments.unseenPaymentIds[0];
+  let unseenPayment;
+
+  // TODO: remove fake
+  unseenPayment = state.payments.payments[0];
+
+  if (unseenPaymentId) {
+    unseenPayment = find(state.payments.payments, { id: unseenPaymentId });
+  }
+
+  return {
+    keypair: state.keypair.keypair,
+    unseenPayment: unseenPayment
+  };
+};
 
 const mapDispatchToProps = dispatch => ({
   loadAccount: publicKey => dispatch(loadAccount(publicKey)),

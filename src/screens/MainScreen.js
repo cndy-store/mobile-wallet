@@ -21,7 +21,7 @@ import { find } from 'lodash';
 
 import { loadAccount } from '../actions/account';
 import modalStyle from '../styles/modal';
-import { loadPayments } from '../actions/payments';
+import { loadPayments, markPaymentAsSeen } from '../actions/payments';
 import {
   start as startPaymentWatcher,
   stop as stopPaymentWatcher
@@ -57,7 +57,20 @@ export class MainScreen extends Component {
     this.props.stopPaymentWatcher();
   }
 
-  hideUnseenPayments() {}
+  hideUnseenPayments() {
+    this.props.markPaymentAsSeen(this.props.unseenPayment.id);
+  }
+
+  renderModalContent() {
+    if (!this.props.unseenPayment) return null;
+
+    return (
+      <UnseenPaymentModal
+        payment={this.props.unseenPayment}
+        onCancel={this.hideUnseenPayments}
+      />
+    );
+  }
 
   render() {
     return (
@@ -72,10 +85,7 @@ export class MainScreen extends Component {
           </Tab>
         </Tabs>
         <Modal isVisible={!!this.props.unseenPayment} style={modalStyle.modal}>
-          <UnseenPaymentModal
-            payment={this.props.unseenPayment}
-            onCancel={this.hideUnseenPayments}
-          />
+          {this.renderModalContent()}
         </Modal>
       </Container>
     );
@@ -91,9 +101,6 @@ const mapStateToProps = state => {
   let unseenPaymentId = state.payments.unseenPaymentIds[0];
   let unseenPayment;
 
-  // TODO: remove fake
-  unseenPayment = state.payments.payments[0];
-
   if (unseenPaymentId) {
     unseenPayment = find(state.payments.payments, { id: unseenPaymentId });
   }
@@ -106,6 +113,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   loadAccount: publicKey => dispatch(loadAccount(publicKey)),
+  markPaymentAsSeen: paymentId => dispatch(markPaymentAsSeen({ paymentId })),
   startPaymentWatcher: publicKey =>
     startPaymentWatcher(dispatch, loadPayments, publicKey),
   stopPaymentWatcher: stopPaymentWatcher

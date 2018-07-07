@@ -23,16 +23,20 @@ const extractLastPagingToken = payments => {
   return payments[0].paging_token;
 };
 
-const unseenPaymentIds = (
+const unseenPaymentIds = ({
+  publicKey,
   existingUnseenIds,
   wasFirstPageLoaded,
   oldPayments,
   newPayments
-) => {
+}) => {
   if (!wasFirstPageLoaded) return [];
 
+  // Only payments from somebody else can be unseen
+  const newPaymentsWhereCredited = newPayments.filter(p => p.to === publicKey);
+
   const oldPaymentIds = map(oldPayments, 'id');
-  const newPaymentIds = map(newPayments, 'id');
+  const newPaymentIds = map(newPaymentsWhereCredited, 'id');
   const newUnseenIds = without(newPaymentIds, ...oldPaymentIds);
 
   return uniq([...existingUnseenIds, ...newUnseenIds]);
@@ -63,12 +67,13 @@ export default function payments(state = defaultState, action) {
         error: action.error,
         isProcessing: action.isProcessing,
         lastPagingToken: extractLastPagingToken(action.payments),
-        unseenPaymentIds: unseenPaymentIds(
-          state.unseenPaymentIds,
-          state.firstPageLoaded,
-          state.payments,
-          action.payments
-        )
+        unseenPaymentIds: unseenPaymentIds({
+          publicKey: action.publicKey,
+          existingUnseenIds: state.unseenPaymentIds,
+          wasFirstPageLoaded: state.firstPageLoaded,
+          oldPayments: state.payments,
+          newPayments: action.payments
+        })
       };
     default:
       return state;

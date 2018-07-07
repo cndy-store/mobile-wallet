@@ -4,7 +4,7 @@ import {
   PAYMENTS_LOAD,
   PAYMENTS_MARK_AS_SEEN
 } from '../actions/payments';
-
+import { publicKey } from '../__tests__/fixtures/keypair';
 import reducer from './payments';
 
 const defaultState = {
@@ -76,7 +76,8 @@ describe('PAYMENTS_LOAD', () => {
         firstPageLoaded: true,
         hasNextPage: true,
         error: null,
-        isProcessing: false
+        isProcessing: false,
+        publicKey
       })
     ).toEqual(
       buildState({
@@ -96,28 +97,75 @@ describe('PAYMENTS_LOAD', () => {
     expect(
       reducer(
         buildState({
-          payments: [{ id: 'OLD_PAYMENT_ID', paging_token: '122' }],
+          payments: [
+            { id: 'OLD_PAYMENT_ID', paging_token: '122', to: publicKey }
+          ],
           lastPagingToken: '122',
           firstPageLoaded: true,
           unseenPaymentIds: []
         }),
         {
           type: PAYMENTS_LOAD,
-          payments: [{ id: 'NEW_PAYMENT_ID', paging_token: '123' }],
+          payments: [
+            { id: 'NEW_PAYMENT_ID', paging_token: '123', to: publicKey }
+          ],
           data: 'DATA',
           hasNextPage: true,
           error: null,
-          isProcessing: false
+          isProcessing: false,
+          publicKey
         }
       )
     ).toEqual({
       isProcessing: false,
       error: null,
-      payments: [{ id: 'NEW_PAYMENT_ID', paging_token: '123' }],
+      payments: [{ id: 'NEW_PAYMENT_ID', paging_token: '123', to: publicKey }],
       data: 'DATA',
       hasNextPage: true,
       lastPagingToken: '123',
       unseenPaymentIds: ['NEW_PAYMENT_ID']
+    });
+  });
+
+  it('does not add new payments to unseed, if user is not credited', () => {
+    expect(
+      reducer(
+        buildState({
+          payments: [],
+          lastPagingToken: '122',
+          firstPageLoaded: true,
+          unseenPaymentIds: []
+        }),
+        {
+          type: PAYMENTS_LOAD,
+          payments: [
+            {
+              id: 'NEW_PAYMENT_ID',
+              paging_token: '123',
+              to: 'SOME_OTHER_PUBLIC_KEY'
+            }
+          ],
+          data: 'DATA',
+          hasNextPage: true,
+          error: null,
+          isProcessing: false,
+          publicKey
+        }
+      )
+    ).toEqual({
+      isProcessing: false,
+      error: null,
+      payments: [
+        {
+          id: 'NEW_PAYMENT_ID',
+          paging_token: '123',
+          to: 'SOME_OTHER_PUBLIC_KEY'
+        }
+      ],
+      data: 'DATA',
+      hasNextPage: true,
+      lastPagingToken: '123',
+      unseenPaymentIds: []
     });
   });
 

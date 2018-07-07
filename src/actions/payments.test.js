@@ -12,7 +12,8 @@ const mockStore = configureMockStore(middlewares);
 const paymentsFixture = {
   payments: 'DUMMY_PAYMENTS',
   data: 'DUMMY_DATA',
-  hasNextPage: true
+  hasNextPage: true,
+  publicKey
 };
 
 describe('loadPayments', () => {

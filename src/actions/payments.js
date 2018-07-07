@@ -16,11 +16,17 @@ export const paymentsErrored = ({ error }) => ({
   error
 });
 
-export const paymentsLoadSucceded = ({ payments, data, hasNextPage }) => ({
+export const paymentsLoadSucceded = ({
+  publicKey,
+  payments,
+  data,
+  hasNextPage
+}) => ({
   type: PAYMENTS_LOAD,
   isProcessing: false,
   error: null,
   firstPageLoaded: true,
+  publicKey,
   payments,
   hasNextPage,
   data
@@ -44,8 +50,10 @@ export const loadPayments = publicKey => {
     try {
       const response = await api.loadPayments({ publicKey });
       const { payments, data, hasNextPage } = response;
-      dispatch(paymentsLoadSucceded({ payments, data, hasNextPage }));
-      return Promise.resolve({ payments, data, hasNextPage });
+      dispatch(
+        paymentsLoadSucceded({ publicKey, payments, data, hasNextPage })
+      );
+      return Promise.resolve({ publicKey, payments, data, hasNextPage });
     } catch (error) {
       dispatch(paymentsErrored({ error }));
       return Promise.reject(error);

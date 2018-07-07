@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
+import LottieView from 'lottie-react-native';
 import {
   Icon,
   H1,
@@ -23,11 +24,19 @@ import {
 import { styles as s } from 'react-native-style-tachyons';
 import ShortenedPublicKey from '../../components/ShortenedPublicKey';
 
+import animationSource from '../../../assets/lottie/checked_done_.json';
+
+const animationSize = 200;
+
 class TransactionSuccess extends Component {
   constructor(props) {
     super(props);
 
     this.handleAcknowledge = this.handleAcknowledge.bind(this);
+  }
+
+  componentDidMount() {
+    this.animation.play();
   }
 
   handleAcknowledge() {
@@ -40,6 +49,20 @@ class TransactionSuccess extends Component {
         <Card>
           <CardItem header>
             <Text>Transaction was Successful!</Text>
+          </CardItem>
+          <CardItem>
+            <View style={[styles.animationContainer]}>
+              <View style={[styles.lottieWrapper]}>
+                <LottieView
+                  style={[styles.lottieAnimation]}
+                  ref={animation => {
+                    this.animation = animation;
+                  }}
+                  loop={false}
+                  source={animationSource}
+                />
+              </View>
+            </View>
           </CardItem>
           <CardItem>
             <Text>Receiver</Text>
@@ -65,6 +88,24 @@ class TransactionSuccess extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  animationContainer: {
+    flex: 1,
+    width: '100%',
+    height: animationSize,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  lottieWrapper: {
+    flex: 1,
+    width: '100%',
+    height: animationSize
+  },
+  lottieAnimation: {
+    height: animationSize
+  }
+});
 
 TransactionSuccess.propTypes = {
   receiver: PropTypes.string.isRequired,

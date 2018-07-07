@@ -71,7 +71,7 @@ export class MainScreen extends Component {
             <Receive />
           </Tab>
         </Tabs>
-        <Modal isVisible={this.props.unseenPayment} style={modalStyle.modal}>
+        <Modal isVisible={!!this.props.unseenPayment} style={modalStyle.modal}>
           <UnseenPaymentModal
             payment={this.props.unseenPayment}
             onCancel={this.hideUnseenPayments}

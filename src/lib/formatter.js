@@ -57,8 +57,9 @@ const optimizeScale = scale => {
   return neededNumbers.reverse().join('');
 };
 
+// this method is to be used with normalized amount strings
 const shortFormat = input => {
-  const [precision, scale] = input.split(delimiter);
+  const [precision, scale] = input.split(finalDelimiter);
   const optimizedScale = optimizeScale(scale);
   const paddedScale = padEnd(optimizedScale, 2, '0');
 

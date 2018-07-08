@@ -24,6 +24,7 @@ import { loadAccount } from '../actions/account';
 import BarCodeScanner from '../components/BarCodeScanner';
 import TransactionSender from '../components/TransactionSender';
 import { decodePublicKey } from '../lib/keypairHelpers';
+import { parseTransactionAmount } from '../lib/formatter';
 import modalStyle from '../styles/modal';
 import image from '../../assets/img/qr-code.png';
 
@@ -35,7 +36,8 @@ export class SendScreen extends Component {
       isModalVisible: false,
       showScanner: false,
       showTransactionSender: false,
-      receiver: null
+      receiver: null,
+      amount: null
     };
 
     this.openSenderModal = this.openSenderModal.bind(this);
@@ -55,7 +57,8 @@ export class SendScreen extends Component {
     this.setState({
       isModalVisible: false,
       showTransactionSender: false,
-      receiver: null
+      receiver: null,
+      amount: null
     });
   }
 
@@ -77,17 +80,28 @@ export class SendScreen extends Component {
     this.setState({
       isModalVisible: false,
       showScanner: false,
-      receiver: null
+      receiver: null,
+      amount: null
     });
   }
 
-  handleScannedCode({ publicKey }) {
-    this.setState({
+  handleScannedCode({ publicKey, options }) {
+    const newState = {
       receiver: publicKey,
       isModalVisible: true,
       showScanner: false,
       showTransactionSender: true
-    });
+    };
+
+    if (options.amount) {
+      const amount = parseTransactionAmount(options.amount.toString());
+
+      if (amount) {
+        newState.amount = amount;
+      }
+    }
+
+    this.setState(newState);
   }
 
   renderScanner() {
@@ -107,6 +121,7 @@ export class SendScreen extends Component {
 
     return (
       <TransactionSender
+        amount={this.state.amount}
         receiver={this.state.receiver}
         onCancel={this.closeSenderModal}
         onSuccess={this.handleTransactionSuccess}

@@ -5,7 +5,7 @@ StellarSdk.Network.useTestNetwork();
 
 const assetCode = 'CNDY';
 const issuerPublicKey =
-  'GCJKC2MI63KSQ6MLE6GBSXPDKTDAK43WR522ZYR3F34NPM7Z5UEPIZNX';
+  'GCJXUXAY4UQYPYVKRMQJJW3IG4AFBMT7RLA7DVB6UZDMJNMGEMFSCVRY';
 
 const asset = new StellarSdk.Asset(assetCode, issuerPublicKey);
 

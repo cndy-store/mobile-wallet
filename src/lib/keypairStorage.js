@@ -1,9 +1,16 @@
-import { AsyncStorage } from 'react-native';
+import * as Keychain from 'react-native-keychain';
 
-const getItem = key => AsyncStorage.getItem(key);
+const getItem = async _key => {
+  const credentials = await Keychain.getGenericPassword();
+  return Promise.resolve(credentials.password);
+};
 
-const setItem = (key, value) => AsyncStorage.setItem(key, value);
+const setItem = (key, value) => {
+  return Keychain.setGenericPassword(key, value);
+};
 
-const removeItem = key => AsyncStorage.removeItem(key);
+const removeItem = _key => {
+  return Keychain.resetGenericPassword();
+};
 
 export { getItem, setItem, removeItem };

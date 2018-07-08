@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -38,6 +39,7 @@
 		2D16E6881FA4F8E400B85C8A /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6891FA4F8E400B85C8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* cndywalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* cndywalletTests.m */; };
 		2F962CABF28C4F5490E25A34 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 842F875E686D469EA11DCFB5 /* MaterialCommunityIcons.ttf */; };
+		3B4E322AA55D440AA89F34D3 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A010F3E3607542419699C414 /* libRNKeychain.a */; };
 		43F580E34A714606AAE4B579 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85971D61A8114473A97CCE96 /* Octicons.ttf */; };
 		5776B55BD30B4A3F9BC7FFB7 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 202520077F8847619C901C1D /* Zocial.ttf */; };
 		7A53B58A20F0CBBC00E1D129 /* Lottie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A53B58320F0CB5700E1D129 /* Lottie.framework */; };
@@ -55,7 +57,6 @@
 		BC46CF15CB014BDB91FE149C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7CE0392EE3CD4E82B1B9FCF8 /* Entypo.ttf */; };
 		BD35CC270BB9471C9454AEB3 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 58699735D2654E4085C5EF2A /* Feather.ttf */; };
 		DE443D58605242A6A1E94162 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 062D3472AF10468F919DF113 /* FontAwesome.ttf */; };
-		3B4E322AA55D440AA89F34D3 /* libRNKeychain.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A010F3E3607542419699C414 /* libRNKeychain.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -374,6 +375,20 @@
 			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
 			remoteInfo = RNCamera;
 		};
+		7A905B7B20F209AB00E09F0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3B9A573CD4F4373978DC4BE /* RNKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5D82366F1B0CE05B005A9EF3;
+			remoteInfo = RNKeychain;
+		};
+		7A905B7D20F209AB00E09F0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D3B9A573CD4F4373978DC4BE /* RNKeychain.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6478985F1F38BF9100DA1C12;
+			remoteInfo = "RNKeychain-tvOS";
+		};
 		7AD1C39820665EE700127F66 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7AD1C36D20665EE700127F66 /* RNSVG.xcodeproj */;
@@ -466,14 +481,14 @@
 		842F875E686D469EA11DCFB5 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		85971D61A8114473A97CCE96 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		9CD158D4C8B244C6B0824B4A /* libLottie.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libLottie.a; sourceTree = "<group>"; };
+		A010F3E3607542419699C414 /* libRNKeychain.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNKeychain.a; sourceTree = "<group>"; };
 		A4CDB5CB870A4D0F930A05E2 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		D3B9A573CD4F4373978DC4BE /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNKeychain.xcodeproj; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; };
 		D7A530F97E324B848EA6CAB4 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		EADAA1F315394F08808E048F /* LottieReactNative.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = LottieReactNative.xcodeproj; path = "../node_modules/lottie-react-native/src/ios/LottieReactNative.xcodeproj"; sourceTree = "<group>"; };
 		F70D63FCC6894444AE2633AD /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		F8EE7A8294554607BA37369A /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
-		D3B9A573CD4F4373978DC4BE /* RNKeychain.xcodeproj */ = {isa = PBXFileReference; name = "RNKeychain.xcodeproj"; path = "../node_modules/react-native-keychain/RNKeychain.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		A010F3E3607542419699C414 /* libRNKeychain.a */ = {isa = PBXFileReference; name = "libRNKeychain.a"; path = "libRNKeychain.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -704,6 +719,7 @@
 				A4CDB5CB870A4D0F930A05E2 /* libRNVectorIcons.a */,
 				9CD158D4C8B244C6B0824B4A /* libLottie.a */,
 				691FA457C9FF46C289D803BD /* libLottieReactNative.a */,
+				A010F3E3607542419699C414 /* libRNKeychain.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -720,6 +736,15 @@
 			isa = PBXGroup;
 			children = (
 				7A6D970B2053FC4700CE7278 /* libRNCamera.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7A905B7720F209AB00E09F0B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7A905B7C20F209AB00E09F0B /* libRNKeychain.a */,
+				7A905B7E20F209AB00E09F0B /* libRNKeychain.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -923,6 +948,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = E593K6ZVUC;
+						ProvisioningStyle = Automatic;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1010,6 +1036,10 @@
 				{
 					ProductGroup = 7A6D96D22053FC4700CE7278 /* Products */;
 					ProjectRef = 7A6D96D12053FC4700CE7278 /* RNCamera.xcodeproj */;
+				},
+				{
+					ProductGroup = 7A905B7720F209AB00E09F0B /* Products */;
+					ProjectRef = D3B9A573CD4F4373978DC4BE /* RNKeychain.xcodeproj */;
 				},
 				{
 					ProductGroup = 7AD1C36E20665EE700127F66 /* Products */;
@@ -1325,6 +1355,20 @@
 			remoteRef = 7A6D970A2053FC4700CE7278 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		7A905B7C20F209AB00E09F0B /* libRNKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeychain.a;
+			remoteRef = 7A905B7B20F209AB00E09F0B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7A905B7E20F209AB00E09F0B /* libRNKeychain.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNKeychain.a;
+			remoteRef = 7A905B7D20F209AB00E09F0B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		7AD1C39920665EE700127F66 /* libRNSVG.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1580,6 +1624,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = E593K6ZVUC;
@@ -1597,8 +1643,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cndy.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cndywallet;
 				PRODUCT_NAME = cndywallet;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1608,6 +1655,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = E593K6ZVUC;
 				HEADER_SEARCH_PATHS = (
@@ -1624,8 +1673,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cndy.wallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cndywallet;
 				PRODUCT_NAME = cndywallet;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -49,6 +49,11 @@ describe('sanitizeOngoingAmountInput', () => {
     const result = sanitizeOngoingAmountInput('123.12345678');
     expect(result).toEqual('123.1234567');
   });
+
+  it('returns something that is already valid', () => {
+    const result = sanitizeOngoingAmountInput('123.456');
+    expect(result).toEqual('123.456');
+  });
 });
 
 describe('parseTransactionAmount', () => {

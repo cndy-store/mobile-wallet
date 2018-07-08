@@ -5,8 +5,8 @@ const delimiter = localeSettings.decimalSeparator;
 const finalDelimiter = '.';
 const maxPrecisionLength = 7;
 
-const allowedChars = new RegExp(`^[0-9${delimiter}]+`);
-const delimiterSplit = new RegExp(`[${delimiter}]+`);
+const allowedChars = new RegExp(`^[0-9${delimiter}${finalDelimiter}]+`);
+const delimiterSplit = new RegExp(`[${delimiter}${finalDelimiter}]+`);
 
 const sanitizeOngoingAmountInput = input => {
   const onlyAllowedChars = input.match(allowedChars);

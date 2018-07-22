@@ -5206,14 +5206,15 @@ native-base-shoutem-theme@0.2.2:
     lodash "^4.10.1"
     prop-types "^15.5.10"
 
-native-base@^2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/native-base/-/native-base-2.4.2.tgz#6a93157439f402753260263eac9190c9b65c1035"
+native-base@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/native-base/-/native-base-2.6.1.tgz#119a4152ffdb36d01055a75f370f6c19011e1970"
   dependencies:
     blueimp-md5 "^2.5.0"
     clamp "^1.0.1"
     color "~1.0.3"
     fs-extra "^2.0.0"
+    jest-react-native "^18.0.0"
     lodash "~4.11.1"
     native-base-shoutem-theme "0.2.2"
     print-message "^2.1.0"

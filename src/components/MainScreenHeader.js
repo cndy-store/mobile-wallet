@@ -37,7 +37,7 @@ export class MainScreenHeader extends Component {
             <Icon name="menu" />
           </Button>
         </Left>
-        <Body>
+        <Body style={{ flex: 2 }}>
           <HeaderTitleWithBalance />
         </Body>
         <Right />

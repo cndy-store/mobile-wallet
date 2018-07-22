@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View>
+<View
+  onLayout={[Function]}
+>
   <View
     hasTabs={true}
     style={
@@ -14,9 +16,9 @@ exports[`renders correctly 1`] = `
         "height": 64,
         "justifyContent": "center",
         "left": 0,
-        "paddingLeft": 10,
+        "paddingLeft": 6,
         "paddingRight": 10,
-        "paddingTop": 15,
+        "paddingTop": 18,
         "right": 0,
         "shadowColor": null,
         "shadowOffset": null,
@@ -72,7 +74,7 @@ exports[`renders correctly 1`] = `
             "marginLeft": -3,
             "opacity": 1,
             "paddingBottom": 6,
-            "paddingLeft": 6,
+            "paddingLeft": 4,
             "paddingRight": 6,
             "paddingTop": 6,
             "shadowColor": null,
@@ -101,11 +103,11 @@ exports[`renders correctly 1`] = `
                 },
                 Object {
                   "color": "#007aff",
-                  "fontSize": 30,
-                  "marginLeft": 2,
+                  "fontSize": 34,
+                  "marginLeft": 1,
                   "marginRight": 2,
                   "marginTop": 0,
-                  "paddingTop": 2,
+                  "paddingTop": 1,
                 },
               ],
               Object {
@@ -123,11 +125,16 @@ exports[`renders correctly 1`] = `
     </View>
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "center",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "flex": 1,
+          },
+          Object {
+            "flex": 2,
+          },
+        ]
       }
       virtual={undefined}
     />
@@ -148,7 +155,9 @@ exports[`renders correctly 1`] = `
 `;
 
 exports[`renders correctly when marked with no tabs 1`] = `
-<View>
+<View
+  onLayout={[Function]}
+>
   <View
     hasTabs={false}
     style={
@@ -161,9 +170,9 @@ exports[`renders correctly when marked with no tabs 1`] = `
         "height": 64,
         "justifyContent": "center",
         "left": 0,
-        "paddingLeft": 10,
+        "paddingLeft": 6,
         "paddingRight": 10,
-        "paddingTop": 15,
+        "paddingTop": 18,
         "right": 0,
         "shadowColor": undefined,
         "shadowOffset": undefined,
@@ -219,7 +228,7 @@ exports[`renders correctly when marked with no tabs 1`] = `
             "marginLeft": -3,
             "opacity": 1,
             "paddingBottom": 6,
-            "paddingLeft": 6,
+            "paddingLeft": 4,
             "paddingRight": 6,
             "paddingTop": 6,
             "shadowColor": null,
@@ -248,11 +257,11 @@ exports[`renders correctly when marked with no tabs 1`] = `
                 },
                 Object {
                   "color": "#007aff",
-                  "fontSize": 30,
-                  "marginLeft": 2,
+                  "fontSize": 34,
+                  "marginLeft": 1,
                   "marginRight": 2,
                   "marginTop": 0,
-                  "paddingTop": 2,
+                  "paddingTop": 1,
                 },
               ],
               Object {
@@ -270,11 +279,16 @@ exports[`renders correctly when marked with no tabs 1`] = `
     </View>
     <View
       style={
-        Object {
-          "alignItems": "center",
-          "alignSelf": "center",
-          "flex": 1,
-        }
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "flex": 1,
+          },
+          Object {
+            "flex": 2,
+          },
+        ]
       }
       virtual={undefined}
     />

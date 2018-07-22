@@ -8,17 +8,6 @@ import { asset } from '../lib/stellar';
 const defaultText = '...';
 
 export class HeaderTitleWithBalance extends Component {
-  getPlatform() {
-    return Platform.OS;
-  }
-
-  getAssetPostfix() {
-    if (this.getPlatform() === 'ios') {
-      return '🍭';
-    }
-    return 'CNDY';
-  }
-
   getBalance() {
     if (!this.props.data) return null;
 
@@ -32,7 +21,7 @@ export class HeaderTitleWithBalance extends Component {
 
     const balance = parseFloat(assetToShow.balance, 10);
 
-    return `~${balance.toFixed(2)} ${this.getAssetPostfix()}`;
+    return `~${balance.toFixed(2)} ${asset.getCode()}`;
   }
 
   render() {

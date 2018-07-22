@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly when a balance is given for android 1`] = `
+exports[`renders correctly when a balance is given 1`] = `
 <Text
   accessible={true}
   allowFontScaling={true}
@@ -11,34 +11,16 @@ exports[`renders correctly when a balance is given for android 1`] = `
       "color": "#000",
       "fontFamily": "System",
       "fontSize": 17,
-      "fontWeight": "600",
+      "fontWeight": "700",
+      "marginLeft": undefined,
+      "paddingLeft": 4,
+      "paddingTop": 1,
       "textAlign": "center",
     }
   }
   virtual={undefined}
 >
   ~930.00 CNDY
-</Text>
-`;
-
-exports[`renders correctly when a balance is given for ios 1`] = `
-<Text
-  accessible={true}
-  allowFontScaling={true}
-  ellipsizeMode="tail"
-  numberOfLines={1}
-  style={
-    Object {
-      "color": "#000",
-      "fontFamily": "System",
-      "fontSize": 17,
-      "fontWeight": "600",
-      "textAlign": "center",
-    }
-  }
-  virtual={undefined}
->
-  ~930.00 🍭
 </Text>
 `;
 
@@ -53,7 +35,10 @@ exports[`renders correctly when account data is present, but not for the desired
       "color": "#000",
       "fontFamily": "System",
       "fontSize": 17,
-      "fontWeight": "600",
+      "fontWeight": "700",
+      "marginLeft": undefined,
+      "paddingLeft": 4,
+      "paddingTop": 1,
       "textAlign": "center",
     }
   }
@@ -74,7 +59,10 @@ exports[`renders correctly when no balance is given 1`] = `
       "color": "#000",
       "fontFamily": "System",
       "fontSize": 17,
-      "fontWeight": "600",
+      "fontWeight": "700",
+      "marginLeft": undefined,
+      "paddingLeft": 4,
+      "paddingTop": 1,
       "textAlign": "center",
     }
   }

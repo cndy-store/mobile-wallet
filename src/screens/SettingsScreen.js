@@ -133,7 +133,11 @@ class SettingsScreen extends React.Component {
           </Card>
         </Content>
 
-        <Modal isVisible={this.state.isModalVisible} style={modalStyle.modal}>
+        <Modal
+          isVisible={this.state.isModalVisible}
+          onBackButtonPress={this.handleCloseModal}
+          style={modalStyle.modal}
+        >
           <Container style={modalStyle.container}>
             <Header>
               <Left>

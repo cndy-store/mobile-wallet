@@ -41,22 +41,22 @@ export class SendScreen extends Component {
     };
 
     this.openSenderModal = this.openSenderModal.bind(this);
-    this.closeSenderModal = this.closeSenderModal.bind(this);
     this.handleTransactionSuccess = this.handleTransactionSuccess.bind(this);
     this.handleTransactionFailure = this.handleTransactionFailure.bind(this);
     this.openScannerModal = this.openScannerModal.bind(this);
-    this.closeScannerModal = this.closeScannerModal.bind(this);
     this.handleScannedCode = this.handleScannedCode.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   openSenderModal() {
     this.setState({ isModalVisible: true, showTransactionSender: true });
   }
 
-  closeSenderModal() {
+  closeModal() {
     this.setState({
       isModalVisible: false,
       showTransactionSender: false,
+      showScanner: false,
       receiver: null,
       amount: null
     });
@@ -64,25 +64,16 @@ export class SendScreen extends Component {
 
   handleTransactionSuccess() {
     this.props.loadAccount(this.props.keypair.publicKey());
-    this.closeSenderModal();
+    this.closeModal();
   }
 
   handleTransactionFailure() {
     this.props.loadAccount(this.props.keypair.publicKey());
-    this.closeSenderModal();
+    this.closeModal();
   }
 
   openScannerModal() {
     this.setState({ isModalVisible: true, showScanner: true });
-  }
-
-  closeScannerModal() {
-    this.setState({
-      isModalVisible: false,
-      showScanner: false,
-      receiver: null,
-      amount: null
-    });
   }
 
   handleScannedCode({ publicKey, options }) {
@@ -109,7 +100,7 @@ export class SendScreen extends Component {
 
     return (
       <BarCodeScanner
-        onCancel={this.closeScannerModal}
+        onCancel={this.closeModal}
         onCodeScan={this.handleScannedCode}
         decoder={decodePublicKey}
       />
@@ -123,7 +114,7 @@ export class SendScreen extends Component {
       <TransactionSender
         amount={this.state.amount}
         receiver={this.state.receiver}
-        onCancel={this.closeSenderModal}
+        onCancel={this.closeModal}
         onSuccess={this.handleTransactionSuccess}
         onFailure={this.handleTransactionFailure}
       />
@@ -164,7 +155,11 @@ export class SendScreen extends Component {
           <Text>Manually Enter Receiver</Text>
         </Button>
 
-        <Modal isVisible={this.state.isModalVisible} style={modalStyle.modal}>
+        <Modal
+          isVisible={this.state.isModalVisible}
+          onBackButtonPress={this.closeModal}
+          style={modalStyle.modal}
+        >
           {this.renderScanner()}
           {this.renderTransactionSender()}
         </Modal>

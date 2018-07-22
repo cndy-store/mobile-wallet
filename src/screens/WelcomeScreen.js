@@ -147,6 +147,7 @@ export class WelcomeScreen extends Component {
 
         <Modal
           isVisible={this.state.isScannerModalVisible}
+          onBackButtonPress={this.closeScannerModal}
           style={modalStyle.modal}
         >
           <BarCodeScanner
@@ -157,6 +158,7 @@ export class WelcomeScreen extends Component {
         </Modal>
         <Modal
           isVisible={this.state.isTextInputModalVisible}
+          onBackButtonPress={this.closeTextInputModal}
           style={modalStyle.modal}
         >
           <EnterSecretModal

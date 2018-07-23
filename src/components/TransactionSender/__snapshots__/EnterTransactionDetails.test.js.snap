@@ -182,8 +182,8 @@ exports[`renders correctly with an error 1`] = `
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
                 "flexDirection": null,
-                "height": 65,
                 "marginLeft": 15,
+                "minHeight": 65,
                 "opacity": 1,
               }
             }
@@ -380,7 +380,6 @@ exports[`renders correctly with an error 1`] = `
                 "color": "#fff",
                 "fontFamily": "System",
                 "fontSize": 16.5,
-                "lineHeight": 19,
                 "marginLeft": 0,
                 "marginRight": 0,
                 "paddingLeft": 16,
@@ -581,8 +580,8 @@ exports[`renders correctly without an error 1`] = `
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
                 "flexDirection": null,
-                "height": 65,
                 "marginLeft": 15,
+                "minHeight": 65,
                 "opacity": 1,
               }
             }
@@ -717,7 +716,6 @@ exports[`renders correctly without an error 1`] = `
                 "color": "#fff",
                 "fontFamily": "System",
                 "fontSize": 16.5,
-                "lineHeight": 19,
                 "marginLeft": 0,
                 "marginRight": 0,
                 "paddingLeft": 16,

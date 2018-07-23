@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Alert, View } from 'react-native';
+import { Alert, Clipboard, View } from 'react-native';
 import Modal from 'react-native-modal';
 import {
   Button,
@@ -16,7 +16,8 @@ import {
   Title,
   Content,
   Tab,
-  Tabs
+  Tabs,
+  Toast
 } from 'native-base';
 import { removeKeypair } from '../actions/keypair';
 import modalStyle from '../styles/modal';
@@ -32,10 +33,22 @@ class SettingsScreen extends React.Component {
       isModalVisible: false
     };
 
+    this.copySecretToClipboard = this.copySecretToClipboard.bind(this);
     this.handleShowSecret = this.handleShowSecret.bind(this);
     this.handleDeleteSecret = this.handleDeleteSecret.bind(this);
     this.deleteKeypair = this.deleteKeypair.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  copySecretToClipboard() {
+    const secret = this.props.keypair.secret();
+    Clipboard.setString(`Your CNDY secret: ${secret} (NEVER SHARE IT!)`);
+
+    Toast.show({
+      text: 'Secret copied to clipboard',
+      buttonText: 'Okay',
+      duration: 3000
+    });
   }
 
   handleShowSecret() {
@@ -108,6 +121,25 @@ class SettingsScreen extends React.Component {
               </Body>
             </CardItem>
           </Card>
+
+          <Card>
+            <CardItem header>
+              <Text>Backup Secret</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>Make sure to backup your secret somewhere save!</Text>
+              </Body>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Button block bordered onPress={this.copySecretToClipboard}>
+                  <Text>Copy Secret to Clipboard</Text>
+                </Button>
+              </Body>
+            </CardItem>
+          </Card>
+
           <Card>
             <CardItem header>
               <Text>Delete Secret</Text>
@@ -151,8 +183,8 @@ class SettingsScreen extends React.Component {
             <Content padder>
               <DisplayPublicKey publicKey={this.props.keypair.secret()} />
               <Text>
-                This is your secret. Do not show it to anyone else! Everyone
-                that has your secret, can spend your CNDY and they will be gone
+                This is your secret. Do not show it to anyone else! Anyone that
+                has your secret, can spend your CNDY and they will be gone
                 forever!
               </Text>
               <Text>

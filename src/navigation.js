@@ -11,13 +11,15 @@ import SettingsScreen from './screens/SettingsScreen';
 import WelcomeScreen from './screens/WelcomeScreen';
 import MainScreen from './screens/MainScreen';
 import PaymentsScreen from './screens/PaymentsScreen';
+import AboutScreen from './screens/AboutScreen';
 import SideBar from './components/Sidebar';
 
 const MainStack = DrawerNavigator(
   {
     Main: { screen: MainScreen },
     Settings: { screen: SettingsScreen },
-    Payments: { screen: PaymentsScreen }
+    Payments: { screen: PaymentsScreen },
+    About: { screen: AboutScreen }
   },
   {
     contentComponent: SideBar

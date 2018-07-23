@@ -16,7 +16,8 @@ import drawerImageLogo from '../../assets/img/drawer-image-logo.png';
 const routes = [
   { name: 'Send/Receive', route: 'Main' },
   { name: 'Payments', route: 'Payments' },
-  { name: 'Settings', route: 'Settings' }
+  { name: 'Settings', route: 'Settings' },
+  { name: 'About', route: 'About' }
 ];
 
 export class SideBar extends React.Component {

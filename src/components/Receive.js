@@ -15,7 +15,7 @@ import {
   CardItem,
   Tabs
 } from 'native-base';
-import { Button, StyleSheet, View, Text } from 'react-native';
+import { Share, StyleSheet, View, Text } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { encodePublicKey } from '../lib/keypairHelpers';
 import qrCodeLogo from '../../assets/img/logo-round.png';
@@ -28,12 +28,22 @@ export class Receive extends Component {
     };
 
     this.setQRCodeWidth = this.setQRCodeWidth.bind(this);
+    this.openShareMenu = this.openShareMenu.bind(this);
   }
 
   setQRCodeWidth(event) {
     const { x, y, width, height } = event.nativeEvent.layout;
 
     this.setState({ qrCodeWidth: width });
+  }
+
+  openShareMenu() {
+    const title = 'CNDY public key';
+    const message = `This is my public key on CNDY:
+      ${this.props.keypair.publicKey()}
+    `;
+
+    Share.share({ title, message });
   }
 
   renderQRCode() {
@@ -64,6 +74,10 @@ export class Receive extends Component {
             <Text>
               This is your public key: {this.props.keypair.publicKey()}
             </Text>
+          </CardItem>
+          <CardItem button onPress={this.openShareMenu}>
+            <Icon active name="share" />
+            <Text>Share public key to receive CNDY</Text>
           </CardItem>
         </Card>
       </Content>

@@ -45,6 +45,7 @@ export class AboutScreen extends Component {
             <ListItem itemDivider>
               <Text>About this app</Text>
             </ListItem>
+
             {this.renderLinkedListItem(
               'Official CNDY Homepage',
               'https://cndy.store'

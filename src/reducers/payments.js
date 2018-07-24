@@ -1,4 +1,4 @@
-import { map, uniq, without } from 'lodash';
+import { find, map, uniq, without } from 'lodash';
 import {
   PAYMENTS_STARTS_PROCESSING,
   PAYMENTS_ERROR,
@@ -40,6 +40,15 @@ const unseenPaymentIds = ({
   const newUnseenIds = without(newPaymentIds, ...oldPaymentIds);
 
   return uniq([...existingUnseenIds, ...newUnseenIds]);
+};
+
+export const selectFirstUnseenPayment = state => {
+  if (!state.unseenPaymentIds.length) return null;
+
+  const unseenPaymentId = state.unseenPaymentIds[0];
+  const unseenPayment = find(state.payments, { id: unseenPaymentId });
+
+  return unseenPayment;
 };
 
 export default function payments(state = defaultState, action) {

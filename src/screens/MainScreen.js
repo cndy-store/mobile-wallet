@@ -17,11 +17,11 @@ import {
   Tabs
 } from 'native-base';
 import Modal from 'react-native-modal';
-import { find } from 'lodash';
 
 import { loadAccount } from '../actions/account';
-import modalStyle from '../styles/modal';
 import { loadPayments, markPaymentAsSeen } from '../actions/payments';
+import { selectFirstUnseenPayment } from '../reducers/payments';
+import modalStyle from '../styles/modal';
 import {
   startPaymentsWatcher,
   stopPaymentsWatcher,
@@ -106,19 +106,10 @@ MainScreen.propTypes = {
   stopAccountWatcher: PropTypes.func.isRequired
 };
 
-const mapStateToProps = state => {
-  let unseenPaymentId = state.payments.unseenPaymentIds[0];
-  let unseenPayment;
-
-  if (unseenPaymentId) {
-    unseenPayment = find(state.payments.payments, { id: unseenPaymentId });
-  }
-
-  return {
-    keypair: state.keypair.keypair,
-    unseenPayment: unseenPayment
-  };
-};
+const mapStateToProps = state => ({
+  keypair: state.keypair.keypair,
+  unseenPayment: selectFirstUnseenPayment(state.payments)
+});
 
 const mapDispatchToProps = dispatch => ({
   loadAccount: publicKey => dispatch(loadAccount(publicKey)),

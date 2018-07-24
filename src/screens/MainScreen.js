@@ -23,9 +23,11 @@ import { loadAccount } from '../actions/account';
 import modalStyle from '../styles/modal';
 import { loadPayments, markPaymentAsSeen } from '../actions/payments';
 import {
-  start as startPaymentWatcher,
-  stop as stopPaymentWatcher
-} from '../lib/paymentWatcher';
+  startPaymentsWatcher,
+  stopPaymentsWatcher,
+  startAcccountWatcher,
+  stopAccountWatcher
+} from '../lib/resourceWatcher';
 import MainScreenHeader from '../components/MainScreenHeader';
 import UnseenPaymentModal from '../components/UnseenPaymentModal';
 import Send from '../components/Send';
@@ -37,15 +39,15 @@ export class MainScreen extends Component {
 
     this.hideUnseenPayments = this.hideUnseenPayments.bind(this);
 
-    this.loadAccount();
+    this.startWatchers();
   }
 
-  loadAccount = async () => {
+  startWatchers = async () => {
     const publicKey = this.props.keypair.publicKey();
 
     try {
-      await this.props.loadAccount(publicKey);
-      this.props.startPaymentWatcher(publicKey);
+      await this.props.startAcccountWatcher(publicKey);
+      await this.props.startPaymentsWatcher(publicKey);
     } catch (error) {
       Toast.show({
         text: 'Could not load account data. Please check internet connection.'
@@ -54,7 +56,8 @@ export class MainScreen extends Component {
   };
 
   componentWillUnmount() {
-    this.props.stopPaymentWatcher();
+    this.props.stopPaymentsWatcher();
+    this.props.stopAccountWatcher();
   }
 
   hideUnseenPayments() {
@@ -94,7 +97,13 @@ export class MainScreen extends Component {
 
 MainScreen.propTypes = {
   keypair: PropTypes.object.isRequired,
-  loadAccount: PropTypes.func.isRequired
+  unseenPayment: PropTypes.object,
+  loadAccount: PropTypes.func.isRequired,
+  markPaymentAsSeen: PropTypes.func.isRequired,
+  startPaymentsWatcher: PropTypes.func.isRequired,
+  stopPaymentsWatcher: PropTypes.func.isRequired,
+  startAcccountWatcher: PropTypes.func.isRequired,
+  stopAccountWatcher: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => {
@@ -114,9 +123,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   loadAccount: publicKey => dispatch(loadAccount(publicKey)),
   markPaymentAsSeen: paymentId => dispatch(markPaymentAsSeen({ paymentId })),
-  startPaymentWatcher: publicKey =>
-    startPaymentWatcher(dispatch, loadPayments, publicKey),
-  stopPaymentWatcher: stopPaymentWatcher
+  startPaymentsWatcher: publicKey =>
+    startPaymentsWatcher(dispatch, loadPayments, publicKey),
+  stopPaymentsWatcher: stopPaymentsWatcher,
+  startAcccountWatcher: publicKey =>
+    startAcccountWatcher(dispatch, loadAccount, publicKey),
+  stopAccountWatcher: stopAccountWatcher
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainScreen);

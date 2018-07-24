@@ -15,6 +15,7 @@ import Dimensions from 'Dimensions';
 import Camera from 'react-native-camera';
 import CameraNotAuthorized from '../components/CameraNotAuthorized';
 import CameraAuthorizationPending from '../components/CameraAuthorizationPending';
+import HeaderCancelButton from '../components/HeaderCancelButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -95,9 +96,13 @@ export class BarCodeScanner extends Component {
       <View style={styles.container}>
         {this.renderCamera()}
         <View style={[styles.overlay]}>
-          <Button transparent onPress={this.handleCancel}>
-            <Text>Cancel</Text>
-          </Button>
+          <Header transparent>
+            <Left>
+              <HeaderCancelButton onCancel={this.handleCancel} />
+            </Left>
+            <Body />
+            <Right />
+          </Header>
         </View>
         {this.renderError()}
       </View>
@@ -120,17 +125,10 @@ const styles = StyleSheet.create({
     width
   },
   overlay: {
-    flex: 1,
     position: 'absolute',
     top: 0,
     right: 0,
-    left: 0,
-    paddingTop: 15,
-    paddingRight: 10,
-    paddingLeft: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    left: 0
   },
   error: {
     left: width / 4,

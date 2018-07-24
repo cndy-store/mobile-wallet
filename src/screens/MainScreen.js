@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Text } from 'react-native';
+import { Platform, StyleSheet, View, Text } from 'react-native';
 import {
   Button,
   Icon,
@@ -64,6 +64,10 @@ export class MainScreen extends Component {
     this.props.markPaymentAsSeen(this.props.unseenPayment.id);
   }
 
+  platformSpecificHeader(name) {
+    return Platform.OS == 'ios' ? name : name.toUpperCase();
+  }
+
   renderModalContent() {
     if (!this.props.unseenPayment) return null;
 
@@ -80,10 +84,10 @@ export class MainScreen extends Component {
       <Container>
         <MainScreenHeader />
         <Tabs initialPage={0}>
-          <Tab heading="Send">
+          <Tab heading={this.platformSpecificHeader('Send')}>
             <Send />
           </Tab>
-          <Tab heading="Receive">
+          <Tab heading={this.platformSpecificHeader('Receive')}>
             <Receive />
           </Tab>
         </Tabs>
